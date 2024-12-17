@@ -105,3 +105,32 @@
     margin-top: 10px;
   
 }
+
+/* css nga pjesa e erises*/
+.popular-cases {
+    width: 80%;
+    background-color: lightgreen;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.popular-cases h2 {
+    text-align: center;
+    color: #2e7d59;
+    margin-bottom: 20px;
+}
+.case {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: 280px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case img {
+    width: 100%;
+    height: auto;
+}
