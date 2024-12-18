@@ -1,0 +1,126 @@
+/* css nga pjesa e erises*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: #f9f9f9;
+   
+}
+
+header {
+    background: green;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 1.5em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+nav {
+    background: lightgreen;
+    padding: 5px 0;
+    text-align: center;
+}
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+
+.section {
+    padding: 55px 35px;
+    text-align: center;
+    background: #0f5b2c;
+    margin: 20px auto;
+    max-width: 1000px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    justify-content: center; 
+}
+
+div{
+    justify-content: center; /* Qendër horizontalisht */
+
+}
+
+
+
+.popular-cases {
+    width: 80%;
+    background-color: lightgreen;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    
+}
+
+.popular-cases h2 {
+    text-align: center;
+    color: #2e7d59;
+    margin-bottom: 20px;
+}
+
+.cases-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.case {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: 280px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case img {
+    width: 100%;
+    height: auto;
+}
+
+.case h3 {
+    margin: 15px;
+    font-size: 1.5em;
+    color: #2e7d59;
+}
+
+.case p {
+    margin: 0 15px 15px;
+    color: #666;
+    font-size: 1em;
+}
+
+.case a {
+    display: block;
+    text-align: center;
+    margin: 15px;
+    padding: 10px 0;
+    background-color: #2e7d59;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.case a:hover {
+    background-color: #1e5d3f;
+}
+
+.case:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+/*  */
