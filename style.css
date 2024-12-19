@@ -106,5 +106,52 @@
     margin-top: 10px;
   
 }
+.quotes {
+    padding: 50px;
+    text-align: center;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.quotes h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #0077b6;
+}
+
+.quotes p {
+    font-size: 1.2em;
+    margin: 10px 0;
+    font-style: italic;
+    color: #555;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .hero .hero-text {
+        text-align: center;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .quotes {
+        padding: 30px;
+    }
+}
+
 
 
