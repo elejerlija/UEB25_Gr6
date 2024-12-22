@@ -41,3 +41,20 @@ body {
     font-size: 16px;
     color: #777;
 }
+ header {
+    background-color: #cc0066;
+    color: white;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    margin: 5px 0 0 0;
+    font-size: 1.2em;
+    font-style: italic;
+}
