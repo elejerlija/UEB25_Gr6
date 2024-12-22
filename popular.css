@@ -24,20 +24,63 @@ body {
 .stat-item {
     text-align: center;
 }
-
 .stat-item i {
     font-size: 40px;
     color: #ff6f61;
 }
-
 .stat-number {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-top: 10px;
 }
-
 .stat-label {
     font-size: 16px;
     color: #777;
+}
+ header {
+    background-color: #cc0066;
+    color: white;
+    padding: 20px 10px;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+header p {
+    margin: 5px 0 0 0;
+    font-size: 1.2em;
+    font-style: italic;
+}
+ footer {
+    background-color: #cc0066;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+footer p {
+    margin: 0;
+    font-size: 1em;
+}
+  .horizontal-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 90%;
+    margin: 40px auto;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+ .section {
+    text-align: left;
+    background-color: #ffccdd;
+    padding: 20px;
+    border: 1px solid #ff99bb;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(255, 102, 153, 0.4);
+    flex-shrink: 0;
 }

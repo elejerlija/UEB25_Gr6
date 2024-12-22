@@ -22,16 +22,41 @@
       background-color: #e7ecfe;
       padding: 20px;
     }
-    .form-container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px solid #ddd;
-      max-width: 600px;
-      margin: 0 auto;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+    .dropdown {
+    position: relative;
+  }
 
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:lightgreen;
+    color: #fff;
+    min-width: 160px;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+  }
+
+  .dropdown-content li {
+    list-style: none;
+    margin: 5px 0;
+  }
+
+  .dropdown-content li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+  }
+
+  .dropdown-content li a:hover {
+    background-color: #26a96c;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+   
     .form-group {
       margin-bottom: 20px;
     }
@@ -56,7 +81,7 @@
     input[type="submit"] {
       width: 100%;
       padding: 10px;
-      background-color: #007bff;
+      background-color: #26a96c;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -79,9 +104,14 @@
     }
 
     .charity-info {
-      width: 45%;
-      padding-right: 20px;
-    }
+  width: 100%;
+  max-width: 400px; 
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
     .charity-info h2 {
       font-size: 28px;
@@ -93,10 +123,18 @@
       color: #666;
       line-height: 1.6;
     }
+    .charity-info img {
+  width: 100%;           
+  height: auto;         
+  object-fit: cover;     
+  border-radius: 10px;   
+  max-height: 100%;  
+  padding-left: 120px    
+    }
 
     .join-form {
       width: 45%;
-      background-color: #3e66f3;
+      background-color: #26a96c;
       padding: 20px;
       border-radius: 10px;
       color: white;
@@ -135,7 +173,7 @@
       width: 100%;
       padding: 12px;
       background-color: #fff;
-      color: #3e66f3;
+      color: #26a96c;
       border: none;
       border-radius: 5px;
       font-size: 16px;
@@ -144,19 +182,54 @@
     }
 
     .join-form input[type="submit"]:hover {
-      background-color: #3e66f3;
+      background-color: #26a96c;
       color: white;
     }
   </style>
 </head>
 
 <body>
-  <div class="join-section">
-    <div class="charity-info">
-      <h2>HelpSomeone</h2>
-      <p>We believe in the power of kindness and unity, and we invite you to join our mission to spread love and help
-        others.</p>
+  <header>
+
+    <div class="top-bar">
+        <div class="contact-info">
+            <span>+383 45 333 111</span>
+            <span>charity.kosova@gmail.com</span>
+        </div>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
     </div>
+
+
+    <nav class="nav-links">
+        <div class="logo">HelpSomeone</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a>
+              <li class="dropdown">
+                <a href="#">About Us</a>
+                <ul class="dropdown-content">
+                  <li><a href="#about-us ">Who are we</a></li>
+                  <li><a href="#">Our Schedule</a></li>
+                  <li><a href="#team-container">Our Team</a></li>
+                  <li><a href="#join-section">Join Us</a></li>
+                </ul>
+              </li>
+            <li> <a href="volunteer.html">Volunteer & Updates</a></li>
+                        <li> <a href="popular.html">Popular Cases</a></li>
+                            <li> <a href="donate.html">Donate</a></li>
+                            <li> <a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="make-a-donate">Donate Now</button>
+    </nav>
+</header>
+  
+<div class="join-section" id="join-section">
+  <div class="charity-info">
+<img src="image/helpsomeone.png" style="width: 400px;" > 
+  </div>
     <div class="join-form">
       <h3>Join Us Today</h3>
       <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
