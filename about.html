@@ -113,6 +113,67 @@
       transform: translateY(-2px);
     }
 
+<<<<<<< HEAD
+=======
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+   
+  .about-section {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: url(image/Untitled\ design.png) no-repeat center center/cover;
+      height: 400px;
+      color: white;
+      padding-right: 50px;
+    }
+
+    .about-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right,
+          rgba(0, 0, 0, 0.7) 40%,
+          rgba(0, 0, 0, 0.2) 100%);
+      z-index: 1;
+    }
+
+    .content {
+      margin-left: 20px;
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      text-align: left;
+    }
+
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .button {
+      padding: 12px 25px;
+      background-color: #26a96c;
+      color: black;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 5px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button:hover {
+      background-color: #1a6843;
+      transform: translateY(-2px);
+    }
+>>>>>>> 7787fa663d5a1e44e789bc4c5289a41fdace894f
     .form-group {
       margin-bottom: 20px;
     }
@@ -283,6 +344,7 @@
       </ul>
       <button class="make-a-donate">Donate Now</button>
     </nav>
+<<<<<<< HEAD
   </header>
 
   <div class="about-section" id="about-us">
@@ -305,6 +367,33 @@
         <a href="#join-section" class="button">Join</a>
       </div>
     </div>
+=======
+</header>
+<div class="about-section">
+  <div class="content">
+    <h1 style="   font-size: 2.5em;
+    margin-bottom: 20px;">About Us</h1>
+    <p style=" font-size: 1.2em;
+    margin-bottom: 20px;
+    line-height: 1.6;">
+      We are a non-profit organization dedicated to making the world a better place by helping those in need. Our
+      team works tirelessly to create positive change in communities through outreach programs, fundraising, and
+      charitable events. We believe in the power of kindness and unity, and we invite you to join our mission to
+      spread love and help others.
+    </p>
+    <h3 style="font-size: 1.4pm;
+    margin-bottom: 20px;
+    color: #26a96c;">Become the change!</h3>
+    <div class="buttons">
+      <a href="donate.html" class="button">Donate</a>
+      <a href="#join-section" class="button">Join</a>
+    </div>
+  </div>
+</div>
+<div class="join-section" id="join-section">
+  <div class="charity-info">
+<img src="image/helpsomeone.png" style="width: 400px;" > 
+>>>>>>> 7787fa663d5a1e44e789bc4c5289a41fdace894f
   </div>
   <div class="join-section" id="join-section">
     <div class="charity-info">
