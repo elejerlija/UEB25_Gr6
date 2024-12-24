@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=devive-width, initial-scale=1.0">
+<title>Volunteer & Updates</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    .volunteer-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px auto;
+        max-width: 1200px;
+        padding: 20px;
+    }
+    .volunteer-card{
+        background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .volunteer-card:hover{
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0,0.15);
+    }
+    .volunteer-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid #28a745;
+        }
+
+    .volunteer-card h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+    .volunteer-card p {
+            font-size: 0.9em;
+            color: #555;
+            line-height: 1.5;
+        }
+    .volunteers{
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .container{
+        background:linear-gradient(135deg,#ffffff,#f7f7f7);
+        padding: 50px 50px;
+        border-radius: 10px;
+        box-shadow :0 4px 8px rgba(0, 0, 0, 0.1) ;
+        max-width: 900px;
+        margin: 30px;
+        text-align: center;
+    }
+    .container h2{
+        font-size: 2.5em;
+        font-weight:bold ;
+        color: #1c4e;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    .container p{
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .container ul{
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 600px;
+        text-align: left;
+    }
+    .container ul li{
+        font-size: 1.1em;
+        color: #333;
+        padding: 10px 0;
+        position: relative;
+        padding-left: 30px;
+        line-height: 1.6;
+    }
+    .container ul li::before{
+        content: "✅";
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-size: 1.2em;
+        line-height: 1;
+    }
+</style>
+</head>
+    <body>
+<header>
+    <div class="top-bar">
+        <div class="contact-info">
+            <span>+383 45 333 111</span>
+            <span>charity.kosova@gmail.com</span>
+        </div>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+    </div>
+    <nav class="nav-links">
+    <div class="logo">HelpSomeone</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="volunteer.html">Volunteer & Updates</a></li>
+            <li><a href="popular.html">Popular Cases</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="contact.html">Contact</a></li>  
+        </ul>
+        <button class="make-a-donate">Donate Now</button>
+    </nav>
+</header>
+<div class="container">
+    <section>
+        <h2>Join us in making a difference!</h2>
+        <p>Volunteering with HelpSomeone is a rewarding way to give back to the community. 
+            Whether you have a few hours to spare or want to dedicate long-term support, your contributions can create lasting change.</p><br>
+            <h2>Why volunteer with us ?</h2>
+            <ul>
+                <li>Make a positive impact</li>
+                <li>Meet like-minded individuals</li>
+                <li>Develop new skills</li>
+                <li>Gain work experience and references</li>
+            </ul>
+    </section>
+</div>
+<section class="volunteers">
+    <h1>Meet Our Volunteers</h1>
+    <div class="volunteer-grid">
+        <div class="volunteer-card">
+            <img src="" alt="Emily Carter">
+            <div>
+                <h3>Emily Carter</h3>
+                <p>Emily has been a key 
+                    contributor to our health programs, 
+                    helping organize numerous health camps.</p>
+            </div>
+        </div>
+        <div class="volunteer-card">
+        <img src="" alt="James Bennett">
+        <div>
+            <h3>James Bennett</h3>
+                <p>James supports our education initiatives by 
+                    mentoring students and providing guidance.</p>
+            </div>
+        </div>
+            <div class="volunteer-card">
+                <img src="" alt="Harry Johnson">
+                <div>
+                    <h3>Harry Johnson</h3>
+                    <p>Harry has been active in our environmental projects, 
+                        organizing clean-up drives and tree plantations.</p>
+                </div>
+        </div>
+        <div class="volunteer-card">
+            <img src="" alt="Sophia Anderson">
+            <div>
+                <h3>Sophia Anderson</h3>
+                <p>Sophia is a dedicated charity volunteer who has spent the 
+                last five years working tirelessly 
+                to support underprivileged families.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <p>Copyright &copy; 2024 HelpSomeone. All rights reserved.</p>
+</footer>
+    </body>
+</html>

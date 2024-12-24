@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Donate</title>
+        <style>
+      body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ608gQlV6uZ7uWE-TV0FBe5qlADVDkIjHEQ&s');
+      background-size: cover;
+      background-position:center;
+      background-repeat: no-repeat;
+    }
+
+    header {
+      text-align: center;
+      background-color:green;
+      color: #fff;
+      padding: 1em;
+      width: 100%;
+    }
+
+    main {
+      padding: 20px;
+      background-color:rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+
+     h2 {
+      color: #333;
+    }
+
+    form {
+      background: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #0056b3;
+    }
+
+    /* Stil për anonimitet */
+    #non-anonymous-fields {
+      transition: all 0.3s ease;
+    }
+
+    #non-anonymous-fields[style="display: none;"] {
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    footer {
+      text-align: center;
+      background-color:green;
+      color: #fff;
+      padding: 1em;
+      width: 100%;
+    
+    }  
+        </style>
+</head>
+<body>
+  <header>
+    <h1>Donate</h1>
+  </header>
+
+  <main>
+    <h2>Donate for a good cause</h2>
+    <form>
+      <label for="amount">Value you want to donate (€):</label>
+      <input type="number" id="amount" name="amount" required>
+
+      <label>
+        <input type="checkbox" id="anonymous-checkbox" name="anonymous">
+        I want to stay anonymous
+      </label>
+
+      <div id="non-anonymous-fields">
+        <label for="name">Full name:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="email">Email-i:</label>
+        <input type="email" id="email" name="email">
+      </div>
+
+      <label for="message">Your message (optional):</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <script>
+    // JavaScript për menaxhimin e anonimitetit
+    const anonymousCheckbox = document.getElementById('anonymous-checkbox');
+    const nonAnonymousFields = document.getElementById('non-anonymous-fields');
+
+    anonymousCheckbox.addEventListener('change', () => {
+      if (anonymousCheckbox.checked) {
+        nonAnonymousFields.style.display = 'none';
+      } else {
+        nonAnonymousFields.style.display = 'block';
+      }
+    });
+  </script>
+  <footer>
+    <p>&copy; 2024 Charity Association</p>
+  </footer>
+</body>
+</html>
+
+

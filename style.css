@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+.top-bar {
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+    font-size: 14px;
+}
+
+.contact-info span {
+    margin-right: 20px;
+}
+
+
+.nav-links {
+    background-color: #26a96c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 50px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-links  {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: lightblue;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.make-a-donate {
+    background-color: white;
+    color: #26a96c;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.make-a-donate:hover {
+    background-color: #e5f5e5;
+}
+
+
+.hero {
+    position: relative;
+    height: 500px;
+    background: url('images/homeless.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .hero .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: white;
+  }
+  
+  .hero-text h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .hero-text h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .hero-text p {
+    font-size: 1em;
+    margin-top: 10px;
+  
+}
+.quotes {
+    padding: 50px;
+    text-align: center;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.quotes h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #0077b6;
+}
+
+.quotes p {
+    font-size: 1.2em;
+    margin: 10px 0;
+    font-style: italic;
+    color: #555;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .hero .hero-text {
+        text-align: center;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .quotes {
+        padding: 30px;
+    }
+}
+
+
+
