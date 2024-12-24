@@ -84,3 +84,41 @@ footer p {
     box-shadow: 0 4px 6px rgba(255, 102, 153, 0.4);
     flex-shrink: 0;
 }
+div .cases-container {
+    background-color: #ffccdd;
+    padding: 20px;
+    border: 1px solid #ff99bb;
+    border-radius: 10px;
+    width: auto;
+    box-shadow: 0 4px 6px rgba(255, 102, 153, 0.4);
+    flex-shrink: 0;
+}
+.section h2 {
+    font-size: 1.8em;
+    color: #cc0066;
+    margin-bottom: 10px;
+}
+ .focus-item {
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+.focus-item .icon {
+    font-size: 2em;
+    margin-right: 10px;
+    color: #ff007f;
+}
+.focus-item h3 {
+    margin: 0;
+}
+.focus-item a {
+    text-decoration: none;
+    color: #cc0052;
+    font-weight: bold;
+    cursor: pointer;
+}
+.focus-item a:hover {
+    color: #ff0066;
+}
+
