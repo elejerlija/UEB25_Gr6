@@ -70,7 +70,10 @@
 .hero {
     position: relative;
     height: 500px;
-    background: url('images/homeless.png') no-repeat center center/cover;
+    background: url('images/homeless.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .hero .overlay {

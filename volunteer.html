@@ -50,13 +50,82 @@
             color: #555;
             line-height: 1.5;
         }
+    .volunteers{
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .container{
+        background:linear-gradient(135deg,#ffffff,#f7f7f7);
+        padding: 50px 50px;
+        border-radius: 10px;
+        box-shadow :0 4px 8px rgba(0, 0, 0, 0.1) ;
+        max-width: 900px;
+        margin: 30px;
+        text-align: center;
+    }
+    .container h2{
+        font-size: 2.5em;
+        font-weight:bold ;
+        color: #1c4e;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    .container p{
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 30px;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .container h3{
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 20px;
+    }
+    .container ul{
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 600px;
+        text-align: left;
+    }
+    .container ul li{
+        font-size: 1.1em;
+        color: #333;
+        padding: 10px 0;
+        position: relative;
+        padding-left: 30px;
+        line-height: 1.6;
+    }
+    .container ul li::before{
+        content: "✔️";
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-size: 1.2em;
+        line-height: 1;
+    }
 </style>
 </head>
     <body>
 <header>
+    <div class="top-bar">
+        <div class="contact-info">
+            <span>+383 45 333 111</span>
+            <span>charity.kosova@gmail.com</span>
+        </div>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+    </div>
+    <nav class="nav-links">
     <div class="logo">HelpSomeone</div>
-    <nav>
-        <ul>
+        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="volunteer.html">Volunteer & Updates</a></li>
@@ -64,8 +133,23 @@
             <li><a href="donate.html">Donate</a></li>
             <li><a href="contact.html">Contact</a></li>  
         </ul>
+        <button class="make-a-donate">Donate Now</button>
     </nav>
 </header>
+<div class="container">
+    <section>
+        <h2>Join us in making a difference!</h2>
+        <p>Volunteering with HelpSomeone is a rewarding way to give back to the community. 
+            Whether you have a few hours to spare or want to dedicate long-term support, your contributions can create lasting change.</p><br>
+            <h3>Why volunteer with us ?</h3>
+            <ul>
+                <li>Make a positive impact</li>
+                <li>Meet like-minded individuals</li>
+                <li>Develop new skills</li>
+                <li>Gain work experience and references</li>
+            </ul>
+    </section>
+</div>
 <section class="volunteers">
     <h1>Meet Our Volunteers</h1>
     <div class="volunteer-grid">
@@ -100,7 +184,7 @@
                 <h3>Sophia Anderson</h3>
                 <p>Sophia is a dedicated charity volunteer who has spent the 
                 last five years working tirelessly 
-                to support underprivileged families..</p>
+                to support underprivileged families.</p>
             </div>
         </div>
     </div>
