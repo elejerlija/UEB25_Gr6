@@ -22,42 +22,44 @@
       background-color: #e7ecfe;
       padding: 20px;
     }
+
     .dropdown {
-    position: relative;
-  }
+      position: relative;
+    }
 
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color:lightgreen;
-    color: #fff;
-    min-width: 160px;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 1000;
-  }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: lightgreen;
+      color: #fff;
+      min-width: 160px;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
 
-  .dropdown-content li {
-    list-style: none;
-    margin: 5px 0;
-  }
+    .dropdown-content li {
+      list-style: none;
+      margin: 5px 0;
+    }
 
-  .dropdown-content li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 5px;
-  }
+    .dropdown-content li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 5px;
+    }
 
-  .dropdown-content li a:hover {
-    background-color: #26a96c;
-  }
+    .dropdown-content li a:hover {
+      background-color: #26a96c;
+    }
 
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-   
-  .about-section {
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .about-section {
       position: relative;
       display: flex;
       justify-content: flex-start;
@@ -111,6 +113,69 @@
       background-color: #1a6843;
       transform: translateY(-2px);
     }
+
+
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .about-section {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: url(image/Untitled\ design.png) no-repeat center center/cover;
+      height: 400px;
+      color: white;
+      padding-right: 50px;
+    }
+
+    .about-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right,
+          rgba(0, 0, 0, 0.7) 40%,
+          rgba(0, 0, 0, 0.2) 100%);
+      z-index: 1;
+    }
+
+    .content {
+      margin-left: 20px;
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      text-align: left;
+    }
+
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .button {
+      padding: 12px 25px;
+      background-color: #26a96c;
+      color: black;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 5px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button:hover {
+      background-color: #1a6843;
+      transform: translateY(-2px);
+    }
+
+
     .form-group {
       margin-bottom: 20px;
     }
@@ -158,13 +223,13 @@
     }
 
     .charity-info {
-  width: 100%;
-  max-width: 400px; 
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
 
     .charity-info h2 {
@@ -177,13 +242,14 @@
       color: #666;
       line-height: 1.6;
     }
+
     .charity-info img {
-  width: 100%;           
-  height: auto;         
-  object-fit: cover;     
-  border-radius: 10px;   
-  max-height: 100%;  
-  padding-left: 120px    
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      max-height: 100%;
+      padding-left: 120px
     }
 
     .join-form {
@@ -246,57 +312,132 @@
   <header>
 
     <div class="top-bar">
-        <div class="contact-info">
-            <span>+383 45 333 111</span>
-            <span>charity.kosova@gmail.com</span>
-        </div>
-        <div class="social-links">
-            <a href="https://facebook.com" target="_blank">Facebook</a> |
-            <a href="https://twitter.com" target="_blank">Twitter</a> |
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-        </div>
+      <div class="contact-info">
+        <span>+383 45 333 111</span>
+        <span>charity.kosova@gmail.com</span>
+      </div>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
     </div>
 
 
     <nav class="nav-links">
-        <div class="logo">HelpSomeone</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a>
-              <li class="dropdown">
-                <a href="#">About Us</a>
-                <ul class="dropdown-content">
-                  <li><a href="#about-us ">Who are we</a></li>
-                  <li><a href="#">Our Schedule</a></li>
-                  <li><a href="#team-container">Our Team</a></li>
-                  <li><a href="#join-section">Join Us</a></li>
-                </ul>
-              </li>
-            <li> <a href="volunteer.html">Volunteer & Updates</a></li>
-                        <li> <a href="popular.html">Popular Cases</a></li>
-                            <li> <a href="donate.html">Donate</a></li>
-                            <li> <a href="contact.html">Contact</a></li>
-        </ul>
-        <button class="make-a-donate">Donate Now</button>
+      <div class="logo">HelpSomeone</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a>
+        <li class="dropdown">
+          <a href="#">About Us</a>
+          <ul class="dropdown-content">
+            <li><a href="#about-us ">Who are we</a></li>
+            <li><a href="#">Our Schedule</a></li>
+            <li><a href="#team-container">Our Team</a></li>
+            <li><a href="#join-section">Join Us</a></li>
+          </ul>
+        </li>
+        <li> <a href="volunteer.html">Volunteer & Updates</a></li>
+        <li> <a href="popular.html">Popular Cases</a></li>
+        <li> <a href="donate.html">Donate</a></li>
+        <li> <a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="make-a-donate">Donate Now</button>
     </nav>
-</header>
-<div class="about-section">
-  <div class="content">
-    <h1 style="   font-size: 2.5em;
+  </header>
+  <div class="about-section">
+    <div class="content">
+      <h1 style="   font-size: 2.5em;
     margin-bottom: 20px;">About Us</h1>
-    <p style=" font-size: 1.2em;
+      <p style=" font-size: 1.2em;
     margin-bottom: 20px;
     line-height: 1.6;">
-      We are a non-profit organization dedicated to making the world a better place by helping those in need. Our
-      team works tirelessly to create positive change in communities through outreach programs, fundraising, and
-      charitable events. We believe in the power of kindness and unity, and we invite you to join our mission to
-      spread love and help others.
-    </p>
-    <h3 style="font-size: 1.4pm;
+        We are a non-profit organization dedicated to making the world a better place by helping those in need. Our
+        team works tirelessly to create positive change in communities through outreach programs, fundraising, and
+        charitable events. We believe in the power of kindness and unity, and we invite you to join our mission to
+        spread love and help others.
+      </p>
+      <h3 style="font-size: 1.4pm;
     margin-bottom: 20px;
     color: #26a96c;">Become the change!</h3>
-    <div class="buttons">
-      <a href="donate.html" class="button">Donate</a>
-      <a href="#join-section" class="button">Join</a>
+      <div class="buttons">
+        <a href="donate.html" class="button">Donate</a>
+        <a href="#join-section" class="button">Join</a>
+      </div>
+    </div>
+  </div>
+<<<<<<< HEAD
+  <div class="join-section" id="join-section">
+    <div class="charity-info">
+      <img src="image/helpsomeone.png" style="width: 400px;">
+    </div>
+=======
+</div>
+<div class="team-container" id="team-container">
+  <h1><img src="images/logo-team.png" alt=""> Meet Our Team<img src="images/logo-team.png" alt=""></h1>
+
+</div>
+<div class="cards">
+  <div class="card_wrapper">
+    <div class="team_image">
+      <img src="images/team_1 (2).png" alt="">
+      <div class="social">
+        <a href="https://www.instagram.com" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+    <div class="team_detail">
+      <h2>Niko Johnson </h2>
+      <p>Founder & CEO</p>
+    </div>
+  </div>
+
+  <div class="card_wrapper">
+    <div class="team_image">
+      <img src="images/team_2.png" alt="">
+      <div class="social">
+        <a href="https://www.instagram.com" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+    <div class="team_detail">
+      <h2>Emma Carter</h2>
+      <p>Content Writer</p>
+    </div>
+  </div>
+
+  <div class="card_wrapper">
+    <div class="team_image">
+      <img src="images/team_3.png" alt="">
+      <div class="social">
+        <a href="https://www.instagram.com" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+    <div class="team_detail">
+      <h2>Melissa Mitchell</h2>
+      <p>Web Developer</p>
     </div>
   </div>
 </div>
@@ -304,6 +445,7 @@
   <div class="charity-info">
 <img src="image/helpsomeone.png" style="width: 400px;" > 
   </div>
+>>>>>>> 6210cfb144fcbf479decc7ebee662e0eef18309f
     <div class="join-form">
       <h3>Join Us Today</h3>
       <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
@@ -338,4 +480,5 @@
     </div>
   </div>
 </body>
+
 </html>
