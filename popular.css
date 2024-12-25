@@ -121,4 +121,50 @@ div .cases-container {
 .focus-item a:hover {
     color: #ff0066;
 }
-
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ff99bb;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(255, 102, 153, 0.4);
+    max-width: 400px;
+    width: 90%;
+    z-index: 1000;
+}
+.modal:not(:target) {
+    display: none;
+}
+.modal h2 {
+    color: #cc0066;
+    margin-bottom: 10px;
+}
+.modal p {
+    color: #99004d;
+}
+.modal .close-btn {
+    background-color: #ffccdd;
+    border: none;
+    color: #cc0052;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 900;
+    display: none;
+}
