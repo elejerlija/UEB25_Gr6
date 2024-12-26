@@ -168,3 +168,41 @@ div .cases-container {
     z-index: 900;
     display: none;
 }
+ fieldset {
+    border: 2px solid #cc0066;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    margin: 40px auto;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+legend {
+    font-size: 24px;
+    color: #cc0087;
+    font-weight: bold;
+    padding: 0 10px;
+    background-color: #3f2c35;
+    border-radius: 5px;
+}
+.cases-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.case {
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.case img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
