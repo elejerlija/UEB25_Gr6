@@ -206,3 +206,26 @@ legend {
     border-radius: 10px;
     margin-bottom: 10px;
 }
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #ffe6f2;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.progress-bar span {
+    display: block;
+    height: 100%;
+    background-color: #ff99bb;
+}
+.case h3 {
+    font-size: 18px;
+    color: #cc0066;
+    margin-bottom: 5px;
+}
+.case p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}

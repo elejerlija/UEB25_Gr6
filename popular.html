@@ -311,6 +311,38 @@
         <p>&copy; 2024 Impactful Giving. All Rights Reserved.</p>
     </footer>
 
+    
+</fieldset>
+<footer>
+    <p>&copy; 2024 Impactful Giving. All Rights Reserved.</p>
+</footer>
+<script>
+    document.querySelectorAll('a[href^="#modal"]').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault(); 
+            const modalId = link.getAttribute('href');
+            const modal = document.querySelector(modalId); 
+            const overlay = document.getElementById('modal-overlay'); 
+
+            if (modal) {
+                modal.style.display = 'block'; 
+                overlay.style.display = 'block';
+            }
+        });
+    });
+
+    document.querySelectorAll('.close-btn').forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault(); 
+            const modal = event.target.closest('.modal'); 
+            const overlay = document.getElementById('modal-overlay'); 
+
+            modal.style.display = 'none'; 
+            overlay.style.display = 'none'; 
+        });
+    });
+
+</script>
 
 
 </body>
