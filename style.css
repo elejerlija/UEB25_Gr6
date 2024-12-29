@@ -103,7 +103,7 @@
 .hero {
     position: relative;
     height: 500px;
-    background: url('images/homeless.png');
+    background: url('/Users/Erinaa/Downloads/charity.jpg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -196,6 +196,44 @@
     height: 20px;
     background-color: #4CAF50;
 }
+.slider {
+    position: absolute;
+    width: 100%;
+    margin: 45;
+    padding-bottom: 50%;
+    overflow: hidden;
+}
+.slider img {
+    width: 50%;
+    padding-bottom: 70px;
+    display: none;
+}
+img.displaySlide{
+    display:block;
+    animation-name: fade;
+    animation-duration: 3s;
+}
+.slider button{
+    position: absolute;
+    top: 50%;
+    transform:translateY(-50%) ;
+    font-size: 2rem;
+    padding:10px 15px;
+    background-color: #26a96c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.previous{
+    left:0;
+}
+.next{
+    right:0;
+}
+@keyframes fade {
+    from{opacity: .5;}
+    to {opacity: 1;}
+
 
 
 
