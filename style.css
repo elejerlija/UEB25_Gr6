@@ -328,4 +328,117 @@ img.displaySlide {
 }
 
 
+footer {
+    width: 100%;
+    background: linear-gradient(to right, rgb(46, 119, 46), rgb(0, 0, 0));
+    color: #fff;
+    padding: 100px 0 30px;
+    border-top-left-radius: 125px;
+    font-size: 13px;
+    line-height: 20px;
+    position: relative;
+  }
+
+  .row {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .col {
+    flex-basis: 25%;
+    padding: 10px;
+  }
+
+  .col :nth-child(2) .col:nth-child(3) {
+    flex-basis: 15%;
+  }
+
+  .logo {
+    width: 200px;
+
+
+  }
+
+  .col h3 {
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .email-id {
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+
+  }
+
+  ul li {
+    list-style: none;
+    margin-bottom: 12px;
+  }
+
+  ul li a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  form {
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 50px;
+  }
+
+  form .far {
+    font-size: 18px;
+    margin-right: 10px;
+
+  }
+
+  form input {
+    width: 100%;
+    background: transparent;
+    color: #ccc;
+    border: none;
+    outline: none;
+  }
+
+  form button {
+    background: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+  }
+
+  form button .fas {
+    font-size: 16px;
+    color: #ccc;
+  }
+
+  .social-icons .fa-brands {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    color: #ccc;
+    background: #fff;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  #teamID{
+    margin-top: 100px;
+    margin-bottom: 120px;
+  }
+  #about-2{
+    margin-top: 40px;
+   
+  }
 
