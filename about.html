@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
   <style>
     * {
@@ -23,40 +24,7 @@
       padding: 20px;
     }
 
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: lightgreen;
-      color: #fff;
-      min-width: 160px;
-      padding: 10px;
-      border-radius: 5px;
-      z-index: 1000;
-    }
-
-    .dropdown-content li {
-      list-style: none;
-      margin: 5px 0;
-    }
-
-    .dropdown-content li a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      padding: 5px;
-    }
-
-    .dropdown-content li a:hover {
-      background-color: #26a96c;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+    
 
     .about-section {
       position: relative;
@@ -113,13 +81,13 @@
       transform: translateY(-2px);
     }
 
-<<<<<<< HEAD
-=======
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-   
-  .about-section {
+
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .about-section {
       position: relative;
       display: flex;
       justify-content: flex-start;
@@ -159,7 +127,7 @@
 
     .button {
       padding: 12px 25px;
-      background-color: #26a96c;
+      background-color: #18d17b;
       color: black;
       text-decoration: none;
       font-size: 1em;
@@ -173,140 +141,150 @@
       background-color: #1a6843;
       transform: translateY(-2px);
     }
->>>>>>> 7787fa663d5a1e44e789bc4c5289a41fdace894f
-    .form-group {
-      margin-bottom: 20px;
+    svg {
+      position: relative;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.2;
     }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background-color: #26a96c;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    input[type="submit"]:disabled {
-      background-color: #ccc;
-    }
-
-    .join-section {
+    .card_wrapper {
+      position: relative;
+      width: 300px;
+      height: 390px;
+      border-radius: 300px;
+      background-color: lightgreen;
       display: flex;
-      justify-content: space-between;
-      padding: 40px;
-      background-color: #f7f7f7;
-      margin-top: 60px;
-      margin-bottom: 60px;
-      border-radius: 10px;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      box-shadow: 8px 8px -16px rgba(0, 0, 0, 0.75);
+      transition: height 0.6s ease, box-shadow 0.3s ease;
     }
 
-    .charity-info {
+    .card_wrapper:hover {
+      height: 500px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 50px;
+      margin-bottom: 40px;
+      padding: 20px 0;
+
+    }
+
+    .team_image {
+      position: relative;
+      min-height: 390px;
       width: 100%;
-      max-width: 400px;
-      height: auto;
+      background-color: #fff;
+      border-radius: 300px;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-
-    .charity-info h2 {
-      font-size: 28px;
-      color: #333;
-    }
-
-    .charity-info p {
-      font-size: 16px;
-      color: #666;
-      line-height: 1.6;
-    }
-
-    .charity-info img {
+    .team_image img {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
-      border-radius: 10px;
-      max-height: 100%;
-      padding-left: 120px
     }
 
-    .join-form {
-      width: 45%;
-      background-color: #26a96c;
-      padding: 20px;
-      border-radius: 10px;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .social {
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+
     }
 
-    .join-form h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .join-form p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .join-form .form-group {
-      margin-bottom: 15px;
-    }
-
-    .join-form label {
-      font-size: 14px;
-    }
-
-    .join-form input[type="text"],
-    .join-form input[type="email"],
-    .join-form input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
-
-    .join-form input[type="submit"] {
-      width: 100%;
-      padding: 12px;
+    .social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: #fff;
-      color: #26a96c;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
     }
 
-    .join-form input[type="submit"]:hover {
+    .social a:hover {
       background-color: #26a96c;
-      color: white;
+      transform: scale(1.1);
+    }
+
+    .social i {
+      font-size: 18px;
+      color: #26a96c;
+      transition: color 0.3s;
+    }
+
+    .social a:hover i {
+      color: #fff;
+    }
+
+    .social a {
+      text-decoration: none;
+    }
+
+    .card_wrapper:hover {
+      height: 500px;
+      box-shadow: 12px 12px -20px rgba(0, 0, 0, 0.75);
+    }
+
+    .card_wrapper:hover .social {
+      opacity: 1;
+    }
+
+    .fa-instagram {
+
+      animation-delay: .1s !important;
+    }
+
+    .fa-facebook {
+      animation-delay: .3s !important;
+    }
+
+    .fa-likedin {
+      animation-delay: .5s !important;
+    }
+
+    .team_detail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    @keyframes visible_social {
+      100% {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+    #teamID{
+      margin-top: 100px;
+      margin-bottom: 120px;
     }
   </style>
 </head>
-
-
 
 <body>
   <header>
@@ -332,9 +310,8 @@
           <a href="#">About Us</a>
           <ul class="dropdown-content">
             <li><a href="#about-us ">Who are we</a></li>
-            <li><a href="#">Our Schedule</a></li>
-            <li><a href="#team-container">Our Team</a></li>
-            <li><a href="#join-section">Join Us</a></li>
+            <li><a href="#">IDK</a></li>
+            <li><a href="#teamID">Our Team</a></li>
           </ul>
         </li>
         <li> <a href="volunteer.html">Volunteer & Updates</a></li>
@@ -344,94 +321,153 @@
       </ul>
       <button class="make-a-donate">Donate Now</button>
     </nav>
-<<<<<<< HEAD
   </header>
 
-  <div class="about-section" id="about-us">
+  <section id="aboutID">
+  <div class="about-section">
     <div class="content">
-      <h1 style="   font-size: 2.5em;
+      <h1 style="font-size: 2.5em;
       margin-bottom: 20px;">About Us</h1>
       <p style=" font-size: 1.2em;
-      margin-bottom: 20px;
-      line-height: 1.6;">
+    margin-bottom: 20px;
+    line-height: 1.6;">
         We are a non-profit organization dedicated to making the world a better place by helping those in need. Our
         team works tirelessly to create positive change in communities through outreach programs, fundraising, and
         charitable events. We believe in the power of kindness and unity, and we invite you to join our mission to
         spread love and help others.
       </p>
       <h3 style="font-size: 1.4pm;
-      margin-bottom: 20px;
-      color: #26a96c;">Become the change!</h3>
+    margin-bottom: 20px;
+    color: #26a96c;">Become the change!</h3>
       <div class="buttons">
         <a href="donate.html" class="button">Donate</a>
         <a href="#join-section" class="button">Join</a>
       </div>
     </div>
-=======
-</header>
-<div class="about-section">
-  <div class="content">
-    <h1 style="   font-size: 2.5em;
-    margin-bottom: 20px;">About Us</h1>
-    <p style=" font-size: 1.2em;
-    margin-bottom: 20px;
-    line-height: 1.6;">
-      We are a non-profit organization dedicated to making the world a better place by helping those in need. Our
-      team works tirelessly to create positive change in communities through outreach programs, fundraising, and
-      charitable events. We believe in the power of kindness and unity, and we invite you to join our mission to
-      spread love and help others.
-    </p>
-    <h3 style="font-size: 1.4pm;
-    margin-bottom: 20px;
-    color: #26a96c;">Become the change!</h3>
-    <div class="buttons">
-      <a href="donate.html" class="button">Donate</a>
-      <a href="#join-section" class="button">Join</a>
-    </div>
   </div>
+</section>
+
+
+  <section id="teamID">
+    <div class="team-container" id="team-container">
+      <h1 style="color: #26a96c; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
+    </div>
+    <div class="cards">
+      <div class="card_wrapper">
+        <div class="team_image">
+          <img src="image/team_1 (2).png " alt="">
+          <div class="social">
+            <a href="https://www.instagram.com" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com" target="_blank">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        <div class="team_detail">
+          <h2>Niko Johnson </h2>
+          <p>Founder & CEO</p>
+        </div>
+      </div>
+  
+      <div class="card_wrapper">
+        <div class="team_image">
+          <img src="image/team_2.png" alt="">
+          <div class="social">
+            <a href="https://www.instagram.com" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com" target="_blank">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        <div class="team_detail">
+          <h2>Emma Carter</h2>
+          <p>Content Writer</p>
+        </div>
+      </div>
+  
+      <div class="card_wrapper">
+        <div class="team_image">
+          <img src="image/team_3.png" alt="">
+          <div class="social">
+            <a href="https://www.instagram.com" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com" target="_blank">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        <div class="team_detail">
+          <h2>Melissa Mitchell</h2>
+          <p>Web Developer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="row">
+      <div class="col">
+        <img src="image/logo-helpsomeone.png" class="logo" alt="">
+        <br>
+        <br>
+        <p
+          style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+          Together, we create a world of hope.</p>
+      </div>
+      <div class="col">
+        <h3>Office</h3>
+<p>Mother Teresa Street</p>
+        <br>
+        <p>Gjilan, 60000, Kosov&euml;</p>
+        <br>
+        <p>Phone: +383 45 333 111</p>
+        <br>
+        <a class="class-id" style="color: white;" href="mailto:charity.kosova@gmail.com">charity.kosova@gmail.com</a>
+        <br>
 </div>
-<div class="join-section" id="join-section">
-  <div class="charity-info">
-<img src="image/helpsomeone.png" style="width: 400px;" > 
->>>>>>> 7787fa663d5a1e44e789bc4c5289a41fdace894f
-  </div>
-  <div class="join-section" id="join-section">
-    <div class="charity-info">
-      <img src="image/helpsomeone.png" style="width: 400px;">
+      <div class="col">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="volunteer.html">Volunteer & Updates</a></li>
+          <li><a href="popular.html"> Popular Cases</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>We'd Love to Hear From You</h3>
+        <form>
+          <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+            placeholder="  Leave a message">
+          <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+        </form>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
+          <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
+          <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
+          <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
+        </div>
+      </div>
     </div>
-    <div class="join-form">
-      <h3>Join Us Today</h3>
-      <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
-      <form id="joinForm" onsubmit="showLoading()">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-        </div>
+  </footer>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required>
-          <div id="emailError" class="error"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Choose a Password" required>
-          <div id="passwordError" class="error"></div>
-          <div id="passwordStrength" class="password-strength"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
-            required>
-          <div id="confirmPasswordError" class="error"></div>
-        </div>
-
-        <input type="submit" value="Join Now" id="submitBtn" disabled>
-      </form>
-    </div>
-  </div>
 </body>
 
 </html>

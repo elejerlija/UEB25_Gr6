@@ -36,7 +36,7 @@
             object-fit: cover;
             margin-bottom: 15px;
             border-radius: 50%;
-            border: 3px solid #28a745;
+            border: 3px solid #26a96c;
         }
 
     .volunteer-card h3 {
@@ -61,13 +61,13 @@
         border-radius: 10px;
         box-shadow :0 4px 8px rgba(0, 0, 0, 0.1) ;
         max-width: 900px;
-        margin: 30px;
+        margin: auto;
         text-align: center;
     }
     .container h2{
         font-size: 2.5em;
         font-weight:bold ;
-        color: #1c4e;
+        color:black;
         margin-bottom: 15px;
         line-height: 1.4;
     }
@@ -78,12 +78,6 @@
         line-height: 1.8;
         max-width: 800px;
         margin: 0 auto;
-    }
-    .container h3{
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #28a745;
-        margin-bottom: 20px;
     }
     .container ul{
         list-style: none;
@@ -101,13 +95,84 @@
         line-height: 1.6;
     }
     .container ul li::before{
-        content: "✔️";
+        content: "✅";
         position: absolute;
         left: 0;
         color: #28a745;
         font-size: 1.2em;
         line-height: 1;
     }
+    @media (max-width :768px){
+        .container{
+            padding: 30px 15px;
+        }
+        .container h2{
+            font-size: 2em;
+        }
+        .container ul li{
+            font-size: 1em;
+        }
+    }
+    .update-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+    .update-item {
+            padding: 20px;
+            border-left: 6px solid #26a96c;
+            margin-bottom: 25px;
+            background-color: #fff;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        } 
+    .update-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }      
+    .update-item p {
+            margin: 8px 0;
+            font-size: 1rem;
+        }   
+    .form-group{
+        margin-bottom: 20px;
+    }    
+    label{
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    input[type="text"],input[type="email"],input[type="password"]{
+        width: 100%;
+        padding: 10px;
+        border:1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+    input[type="submit"]{
+        width: 100%;
+        padding: 10px;
+        background-color: #26a96c;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    input[type="submit"]:disabled {
+      background-color: #ccc;
+    }
+    .join-section {
+      display: flex;
+      justify-content: space-between;
+      padding: 40px;
+      background-color: #f7f7f7;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      border-radius: 10px;
+    }
+
 </style>
 </head>
     <body>
@@ -141,7 +206,7 @@
         <h2>Join us in making a difference!</h2>
         <p>Volunteering with HelpSomeone is a rewarding way to give back to the community. 
             Whether you have a few hours to spare or want to dedicate long-term support, your contributions can create lasting change.</p><br>
-            <h3>Why volunteer with us ?</h3>
+            <h2>Why volunteer with us ?</h2>
             <ul>
                 <li>Make a positive impact</li>
                 <li>Meet like-minded individuals</li>
@@ -151,10 +216,10 @@
     </section>
 </div>
 <section class="volunteers">
-    <h1>Meet Our Volunteers</h1>
+    <h1 style="text-align: center; font-size: 2rem;">Meet Our Volunteers</h1>
     <div class="volunteer-grid">
         <div class="volunteer-card">
-            <img src="" alt="Emily Carter">
+            <img src="image/vl1.jpg" alt="Emily Carter">
             <div>
                 <h3>Emily Carter</h3>
                 <p>Emily has been a key 
@@ -163,7 +228,7 @@
             </div>
         </div>
         <div class="volunteer-card">
-        <img src="" alt="James Bennett">
+        <img src="image/vl2.jpg" alt="James Bennett">
         <div>
             <h3>James Bennett</h3>
                 <p>James supports our education initiatives by 
@@ -171,7 +236,7 @@
             </div>
         </div>
             <div class="volunteer-card">
-                <img src="" alt="Harry Johnson">
+                <img src="image/vl3.jpg" alt="Harry Johnson">
                 <div>
                     <h3>Harry Johnson</h3>
                     <p>Harry has been active in our environmental projects, 
@@ -179,18 +244,125 @@
                 </div>
         </div>
         <div class="volunteer-card">
-            <img src="" alt="Sophia Anderson">
+            <img src="image/vl4.jpg" alt="Rine Ademi">
             <div>
-                <h3>Sophia Anderson</h3>
-                <p>Sophia is a dedicated charity volunteer who has spent the 
+                <h3>Rin&euml Ademi</h3>
+                <p>Rin&euml is a dedicated charity volunteer who has spent the 
                 last five years working tirelessly 
                 to support underprivileged families.</p>
             </div>
         </div>
     </div>
 </section>
+<section>
+    <h2 style="color: black; font-size: 2rem; text-align: center; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);">Latest Updates From HelpSomeone</h2><br>
+    <div class="update-item">
+        <h3>Recent Activities</h3>
+        <p>Stay informed about our latest events, programs, and success stories.</p>
+            <p>December 2024: Successfully distributed 1,000 care packages to families in need.</p>
+    </div>
+    <div class="update-item">
+        <h3>Upcoming Events</h3>
+        <p>Don't miss our upcoming events! Mark your calendar and join us.</p>
+            <p>Annual Fundraiser Gala – January 15, 2025</p>
+    </div>
+    <div class="update-item">
+        <h3>Community Clean-Up Drive</h3>
+        <p>Thanks to our volunteers, we successfully conducted a community clean-up drive in Prishtin&euml;.</p>
+        <p>Over 100 volunteers collected 500 pounds of waste to make the community cleaner and greener.</p>
+    </div>
+    <div class="update-item">
+        <h3>Winter Clothing Drive</h3>
+        <p>We recently completed our Winter Clothing Drive, distributing warm clothing to over 300 families.</p>
+        <p>Thank you to all who donated and participated!</p>
+    </div>
+</section>
+<section>
+    <div class="join-section" id="join-section">
+        <div class="charity-info">
+      <img src="image/helpsomeone.png" style="width: 400px;" >
+        </div>
+          <div class="join-form">
+            <h3>Join Us Today</h3>
+            <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
+            <form id="joinForm" onsubmit="showLoading()">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+              </div>
+      
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <div id="emailError" class="error"></div>
+              </div>
+      
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Choose a Password" required>
+                <div id="passwordError" class="error"></div>
+                <div id="passwordStrength" class="password-strength"></div>
+              </div>
+      
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
+                  required>
+                <div id="confirmPasswordError" class="error"></div>
+              </div>
+      
+              <input type="submit" value="Join Now" id="submitBtn" disabled>
+            </form>
+          </div>
+        </div>
+</section>
 <footer>
-    <p>Copyright &copy; 2024 HelpSomeone. All rights reserved.</p>
-</footer>
+    <div class="row">
+      <div class="col">
+        <img src="image/logo-helpsomeone.png" class="logo" alt="">
+        <br>
+        <br>
+        <p
+          style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+          Together, we create a world of hope.</p>
+      </div>
+      <div class="col">
+        <h3>Office</h3>
+<p>Mother Teresa Street</p>
+        <br>
+        <p>Gjilan, 60000, Kosov&euml;</p>
+        <br>
+        <p>Phone: +383 45 333 111</p>
+        <br>
+        <a class="class-id" style="color: white;" href="mailto:charity.kosova@gmail.com">charity.kosova@gmail.com</a>
+        <br>
+</div>
+      <div class="col">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="volunteer.html">Volunteer & Updates</a></li>
+          <li><a href="popular.html"> Popular Cases</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>We'd Love to Hear From You</h3>
+        <form>
+          <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+            placeholder="  Leave a message">
+          <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+        </form>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
+          <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
+          <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
+          <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
     </body>
 </html>
