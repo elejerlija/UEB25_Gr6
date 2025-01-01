@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impactful Giving</title>
 
     <link rel="stylesheet" href="popular.css">
 
@@ -311,38 +314,64 @@
         <p>&copy; 2024 Impactful Giving. All Rights Reserved.</p>
     </footer>
 
-    
-</fieldset>
-<footer>
-    <p>&copy; 2024 Impactful Giving. All Rights Reserved.</p>
-</footer>
-<script>
-    document.querySelectorAll('a[href^="#modal"]').forEach(link => {
-        link.addEventListener('click', event => {
-            event.preventDefault(); 
-            const modalId = link.getAttribute('href');
-            const modal = document.querySelector(modalId); 
-            const overlay = document.getElementById('modal-overlay'); 
 
-            if (modal) {
-                modal.style.display = 'block'; 
-                overlay.style.display = 'block';
-            }
+    </fieldset>
+  
+    <script>
+
+        document.querySelectorAll('a[href^="#modal"]').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const modalId = link.getAttribute('href');
+                const modal = document.querySelector(modalId);
+                const overlay = document.getElementById('modal-overlay');
+
+                if (modal) {
+                    modal.style.display = 'block';
+                    overlay.style.display = 'block';
+                }
+            });
         });
-    });
 
-    document.querySelectorAll('.close-btn').forEach(button => {
-        button.addEventListener('click', event => {
-            event.preventDefault(); 
-            const modal = event.target.closest('.modal'); 
-            const overlay = document.getElementById('modal-overlay'); 
+        document.querySelectorAll('.close-btn').forEach(button => {
+            button.addEventListener('click', event => {
+                event.preventDefault();
+                const modal = event.target.closest('.modal');
+                const overlay = document.getElementById('modal-overlay');
 
-            modal.style.display = 'none'; 
-            overlay.style.display = 'none'; 
+                modal.style.display = 'none';
+                overlay.style.display = 'none';
+            });
         });
-    });
 
-</script>
+        function animateNumber(id, target) {
+            let current = 0;
+            const increment = Math.ceil(target / 100);
+            const element = document.getElementById(id);
+
+            const interval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                }
+                element.textContent = current;
+            }, 20);
+        }
+
+
+        animateNumber('donations', 1250);
+        animateNumber('volunteers', 250);
+        animateNumber('projects', 45);
+
+    </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+    </script>
 
 
 </body>
