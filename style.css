@@ -103,7 +103,7 @@
 .hero {
     position: relative;
     height: 500px;
-    background: url('/Users/Erinaa/Downloads/charity.jpg.webp');
+    background: url();
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -144,7 +144,8 @@
 }
 
 .quotes {
-    padding: 30px;
+    padding-top: 100px; 
+    margin-top: 50px; 
     text-align: center;
     background-color: #f9f9f9;
     color: #333;
@@ -158,7 +159,7 @@
 
 .quotes p {
     font-size: 1.2em;
-    margin: 10px 0;
+    margin: 20px 0;
     font-style: italic;
     color: #555;
 }
@@ -167,8 +168,9 @@
     text-align: center;
     border: 2px solid #ddd;
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     max-width: 700px;
+    margin-top: 30px;
     margin: 0 auto;
     background-color: lightgreen;
     transition: all 0.3s ease-in-out;
@@ -196,45 +198,60 @@
     height: 20px;
     background-color: #4CAF50;
 }
+
+
 .slider {
-    position: absolute;
+    position: relative; 
     width: 100%;
-    margin: 45;
-    padding-bottom: 50%;
-    overflow: hidden;
+    height: 600px; 
+    margin: 0 auto; 
+    overflow: hidden; 
+    background-color: gray; 
 }
+
 .slider img {
-    width: 50%;
-    padding-bottom: 70px;
-    display: none;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    display: none; 
 }
-img.displaySlide{
-    display:block;
+
+img.displaySlide {
+    display: block; 
     animation-name: fade;
-    animation-duration: 3s;
+    animation-duration: 4s;
 }
-.slider button{
+
+
+.slider button {
     position: absolute;
     top: 50%;
-    transform:translateY(-50%) ;
-    font-size: 2rem;
-    padding:10px 15px;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    padding: 10px;
     background-color: #26a96c;
     color: white;
     border: none;
     cursor: pointer;
+    z-index: 10;
 }
-.previous{
-    left:0;
+
+.slider button.previous {
+    left: 10px;
 }
-.next{
-    right:0;
+
+.slider button.next {
+    right: 10px;
 }
+
 @keyframes fade {
-    from{opacity: .5;}
-    to {opacity: 1;}
-
-
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 
 
