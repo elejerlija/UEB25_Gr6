@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=devive-width, initial-scale=1.0">
 <title>Volunteer & Updates</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
     .volunteer-grid{
         display: grid;
@@ -134,31 +137,36 @@
             margin: 8px 0;
             font-size: 1rem;
         }   
-    .form-group{
-        margin-bottom: 20px;
-    }    
-    label{
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 500;
+    .form-group {
+      margin-bottom: 20px;
     }
-    input[type="text"],input[type="email"],input[type="password"]{
-        width: 100%;
-        padding: 10px;
-        border:1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-        box-sizing: border-box;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
     }
-    input[type="submit"]{
-        width: 100%;
-        padding: 10px;
-        background-color: #26a96c;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #26a96c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
     }
     input[type="submit"]:disabled {
       background-color: #ccc;
@@ -172,35 +180,132 @@
       margin-bottom: 60px;
       border-radius: 10px;
     }
+    .charity-info {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .charity-info h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    .charity-info p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .charity-info img {
+      width: 100%;          
+      height: auto;        
+      object-fit: cover;    
+      border-radius: 10px;  
+      max-height: 100%;  
+      padding-left: 120px    
+    }
+
+    .join-form {
+      width: 70%;
+      background-color: #26a96c;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .join-form h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .join-form p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .join-form .form-group {
+      margin-bottom: 15px;
+    }
+
+    .join-form label {
+      font-size: 14px;
+    }
+
+    .join-form input[type="text"],
+    .join-form input[type="email"],
+    .join-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .join-form input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #fff;
+      color: #26a96c;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .join-form input[type="submit"]:hover {
+      background-color: #26a96c;
+      color: white;
+    }
+        .fa-instagram {
+          animation-delay: .1s !important;
+        }
+        .fa-facebook {
+        animation-delay: .3s !important;
+        }
+        .fa-likedin {
+        animation-delay: .5s !important;
+        }
 
 </style>
 </head>
     <body>
-<header>
-    <div class="top-bar">
-        <div class="contact-info">
-            <span>+383 45 333 111</span>
-            <span>charity.kosova@gmail.com</span>
-        </div>
-        <div class="social-links">
-            <a href="https://facebook.com" target="_blank">Facebook</a> |
-            <a href="https://twitter.com" target="_blank">Twitter</a> |
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-        </div>
-    </div>
-    <nav class="nav-links">
-    <div class="logo">HelpSomeone</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="volunteer.html">Volunteer & Updates</a></li>
-            <li><a href="popular.html">Popular Cases</a></li>
-            <li><a href="donate.html">Donate</a></li>
-            <li><a href="contact.html">Contact</a></li>  
-        </ul>
-        <button class="make-a-donate">Donate Now</button>
-    </nav>
-</header>
+        <header>
+            <div class="top-bar">
+                <div class="contact-info">
+                    <span>+383 45 333 111</span>
+                    <span>charity.kosova@gmail.com</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank">Facebook</a> |
+                    <a href="https://twitter.com" target="_blank">Twitter</a> |
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <div class="logo">HelpSomeone</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a>
+                            <li class="dropdown">
+                              <a href="about.html" >About Us</a>
+                              <ul class="dropdown-content">
+                                <li><a href="about.html#about-us ">Who are we</a></li>
+                                <li><a href="#">Our Schedule</a></li>
+                                <li><a href="about.html#team-container">Our Team</a></li>
+                                <li><a href="about.html#join-section">Join Us</a></li>
+                              </ul>
+                            </li>
+                            <li> <a href="volunteer.html">Volunteer & Updates</a></li>
+                                <li> <a href="popular.html">Popular Cases</a></li>
+                                <li> <a href="contact.html">Contact</a></li>
+                                <li> <a href="donate.html"></a></li>
+                                    
+                </ul>
+                <button class="make-a-donate">Donate Now</button>
+            </nav>
+        </header>
 <div class="container">
     <section>
         <h2>Join us in making a difference!</h2>
@@ -222,24 +327,24 @@
             <img src="image/vl1.jpg" alt="Emily Carter">
             <div>
                 <h3>Emily Carter</h3>
-                <p>Emily has been a key 
+                <p><i>Emily</i> has been a key 
                     contributor to our health programs, 
                     helping organize numerous health camps.</p>
             </div>
         </div>
         <div class="volunteer-card">
-        <img src="image/vl2.jpg" alt="James Bennett">
+        <img src="image/vl2.jpg" alt="James Park">
         <div>
-            <h3>James Bennett</h3>
-                <p>James supports our education initiatives by 
+            <h3>James Park</h3>
+                <p><i>James</i> supports our education initiatives by 
                     mentoring students and providing guidance.</p>
             </div>
         </div>
             <div class="volunteer-card">
-                <img src="image/vl3.jpg" alt="Harry Johnson">
+                <img src="image/vl3.jpg" alt="Harry Williams">
                 <div>
-                    <h3>Harry Johnson</h3>
-                    <p>Harry has been active in our environmental projects, 
+                    <h3>Harry Williams</h3>
+                    <p><i>Harry</i> has been active in our environmental projects, 
                         organizing clean-up drives and tree plantations.</p>
                 </div>
         </div>
@@ -247,7 +352,7 @@
             <img src="image/vl4.jpg" alt="Rine Ademi">
             <div>
                 <h3>Rin&euml Ademi</h3>
-                <p>Rin&euml is a dedicated charity volunteer who has spent the 
+                <p><i>Rin&euml</i> is a dedicated charity volunteer who has spent the 
                 last five years working tirelessly 
                 to support underprivileged families.</p>
             </div>
@@ -278,43 +383,43 @@
     </div>
 </section>
 <section>
-    <div class="join-section" id="join-section">
-        <div class="charity-info">
-      <img src="image/helpsomeone.png" style="width: 400px;" >
-        </div>
-          <div class="join-form">
-            <h3>Join Us Today</h3>
-            <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
-            <form id="joinForm" onsubmit="showLoading()">
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-              </div>
-      
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <div id="emailError" class="error"></div>
-              </div>
-      
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Choose a Password" required>
-                <div id="passwordError" class="error"></div>
-                <div id="passwordStrength" class="password-strength"></div>
-              </div>
-      
-              <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
-                  required>
-                <div id="confirmPasswordError" class="error"></div>
-              </div>
-      
-              <input type="submit" value="Join Now" id="submitBtn" disabled>
-            </form>
+  <div class="join-section" id="join-section">
+    <div class="charity-info">
+  <img src="image/helpsomeone.png" style="width: 400px;" >
+    </div>
+      <div class="join-form">
+        <h3>Join Us Today</h3>
+        <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
+        <form id="joinForm" onsubmit="showLoading()">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Full Name" required>
           </div>
-        </div>
+  
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <div id="emailError" class="error"></div>
+          </div>
+  
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Choose a Password" required>
+            <div id="passwordError" class="error"></div>
+            <div id="passwordStrength" class="password-strength"></div>
+          </div>
+  
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
+              required>
+            <div id="confirmPasswordError" class="error"></div>
+          </div>
+  
+          <input type="submit" value="Join Now" id="submitBtn" disabled>
+        </form>
+      </div>
+    </div>
 </section>
 <footer>
     <div class="row">
@@ -351,7 +456,7 @@
       <div class="col">
         <h3>We'd Love to Hear From You</h3>
         <form>
-          <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+          <i class="fa-regular fa-envelope " style="color: #ffffff;"></i> <input type="text"
             placeholder="  Leave a message">
           <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
         </form>
