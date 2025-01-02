@@ -386,113 +386,83 @@
 <section>
   <div class="join-section" id="join-section">
     <div class="charity-info">
-  <img src="image/helpsomeone.png" style="width: 400px;" >
+      <img src="image/helpsomeone.png" style="width: 400px;">
     </div>
-      <div class="join-form">
-        <h3>Join Us Today</h3>
-        <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
-        <form id="joinForm" onsubmit="showLoading()">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-          </div>
-  
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-            <div id="emailError" class="error"></div>
-          </div>
-  
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Choose a Password" required>
-            <div id="passwordError" class="error"></div>
-            <div id="passwordStrength" class="password-strength"></div>
-          </div>
-  
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
-              required>
-            <div id="confirmPasswordError" class="error"></div>
-          </div>
-  
-          <input type="submit" value="Join Now" id="submitBtn" disabled>
-        </form>
-      </div>
+    <div class="join-form">
+      <h3>Join Us Today</h3>
+      <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
+      <form id="joinForm" onsubmit="return validate()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <div id="emailError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Choose a Password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password" required>
+        </div>
+        <div id="message" style="display: none;"></div>
+        <input type="submit" value="Join Now" id="submitBtn">
+      </form>
     </div>
+  </div>
 </section>
+
 <script>
-const joinForm = document.getElementById("joinForm");
-const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirmPassword");
-const submitBtn = document.getElementById("submitBtn");
-const emailError = document.getElementById("emailError");
-const confirmPasswordError = document.getElementById("confirmPasswordError");
+  function validate() {
+    let isValid = true;
+    let message = "";
 
+    const nameInput = document.getElementById("name").value.trim();
+    const emailInput = document.getElementById("email").value.trim();
+    const passwordInput = document.getElementById("password").value.trim();
+    const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
+    const messageElement = document.getElementById("message");
 
-function validateEmail(email) {
-  return email.includes("@") && email.includes(".");
-}
+    // Validation checks
+    if (!nameInput) {
+      isValid = false;
+      message = "Full Name is required!";
+    } else if (!emailInput) {
+      isValid = false;
+      message = "Email is required!";
+    } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
+      isValid = false;
+      message = "Invalid email format!";
+    } else if (!passwordInput) {
+      isValid = false;
+      message = "Password is required!";
+    } else if (!confirmPasswordInput) {
+      isValid = false;
+      message = "Confirm Password is required!";
+    } else if (passwordInput !== confirmPasswordInput) {
+      isValid = false;
+      message = "Passwords do not match!";
+    }
 
-function validateForm() {
-  const isEmailValid = validateEmail(emailInput.value);
-  const passwordsMatch =
-    passwordInput.value && passwordInput.value === confirmPasswordInput.value;
+    
+    if (isValid) {
+      messageElement.style.color = "green";
+      messageElement.textContent = "Form submitted successfully!";
+    } else {
+      messageElement.style.color = "black";
+      messageElement.textContent = message;
+    }
 
-  emailError.textContent = isEmailValid ? "" : "Invalid email format.";
-  confirmPasswordError.textContent = passwordsMatch
-    ? ""
-    : "Passwords do not match.";
+    messageElement.style.display = "block";
 
-  submitBtn.disabled =
-    !nameInput.value || !isEmailValid || !passwordsMatch;
-}
-
-joinForm.addEventListener("input", validateForm);
-
-joinForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
- 
-  if (!nameInput.value) {
-    alert("Please enter your full name.");
-    return;
+    return isValid; 
   }
-  if (!emailInput.value) {
-    alert("Please enter your email.");
-    return;
-  }
-  if (!passwordInput.value) {
-    alert("Please enter your password.");
-    return;
-  }
-  if (!confirmPasswordInput.value) {
-    alert("Please confirm your password.");
-    return;
-  }
-
- 
-  if (!validateEmail(emailInput.value)) {
-    alert("Invalid email format.");
-    return;
-  }
-
- 
-  if (passwordInput.value !== confirmPasswordInput.value) {
-    alert("Passwords do not match.");
-    return;
-  }
-
-  
-  alert("Thank you for signing up!");
-  joinForm.reset();
-  validateForm(); 
-});
-
 </script>
+
 <footer>
     <div class="row">
       <div class="col">
