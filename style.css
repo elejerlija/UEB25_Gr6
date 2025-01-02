@@ -395,7 +395,7 @@ footer {
     color: #fff;
   }
 
-  form {
+  .footer-form {
     padding-bottom: 15px;
     display: flex;
     align-items: center;
@@ -404,13 +404,13 @@ footer {
     margin-bottom: 50px;
   }
 
-  form .far {
+  .footer-form .far {
     font-size: 18px;
     margin-right: 10px;
 
   }
 
-  form input {
+  .footer-form input {
     width: 100%;
     background: transparent;
     color: #ccc;
@@ -418,14 +418,14 @@ footer {
     outline: none;
   }
 
-  form button {
+  .footer-form button {
     background: transparent;
     border: 0;
     outline: none;
     cursor: pointer;
   }
 
-  form button .fas {
+  .footer-form button .fas {
     font-size: 16px;
     color: #ccc;
   }
@@ -442,12 +442,5 @@ footer {
     margin-right: 15px;
     cursor: pointer;
   }
-  #teamID{
-    margin-top: 100px;
-    margin-bottom: 120px;
-  }
-  #about-2{
-    margin-top: 40px;
-   
-  }
+
 

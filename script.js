@@ -48,3 +48,14 @@ function nextSlide(){
 slideIndex++;
 showSlide(slideIndex);
 }
+
+
+
+const clickButtons = document.querySelectorAll('a, button');
+const clickSound = document.getElementById('click-sound');
+
+clickButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    clickSound.play();
+  });
+});
