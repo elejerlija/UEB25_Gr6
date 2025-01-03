@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     
@@ -48,3 +50,6 @@ function nextSlide(){
 slideIndex++;
 showSlide(slideIndex);
 }
+
+
+   
