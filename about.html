@@ -188,6 +188,62 @@ abbr:hover {
       margin-top: 80px;
 
     }
+    .impact-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.impact-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px;
+  margin-top: 20px;
+}
+
+.impact-table th, .impact-table td {
+  padding: 15px;
+  text-align: left;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.impact-table th {
+  background-color: #26a96c;
+  color: white;
+  font-size: 16px;
+}
+
+.impact-table td {
+  font-size: 14px;
+  color: #333;
+}
+
+.impact-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.impact-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.impact-table tr:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.impact-table td:hover {
+  background-color: #e7f5e7;
+}
+.impact-section {
+      margin-top: 120px;
+      margin-bottom: 120px;
+    }
+	
 
 
     svg {
@@ -359,8 +415,8 @@ abbr:hover {
         <li class="dropdown">
           <a href="#">About Us</a>
           <ul class="dropdown-content">
-            <li><a href="#about-us ">Who are we</a></li>
-            <li><a href="#">IDK</a></li>
+            <li><a href="#aboutID">Who are we</a></li>
+            <li><a href="#impactID">Our Impact</a></li>
             <li><a href="#teamID">Our Team</a></li>
           </ul>
         </li>
@@ -458,6 +514,46 @@ abbr:hover {
         </video>
       </div>
     </div>
+  </section>
+
+  <section class="impact-section" id="impactID">
+    <h1  style="  text-align: center;font-size: 32px;margin-bottom: 20px; color: #26a96c;">Our Impact</h1>
+    <table class="impact-table">
+      <thead>
+        <tr>
+          <th>Area of Impact</th>
+          <th>Main Results</th>
+          <th>Numbers & Statistics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Education</td>
+          <td>Schools built and equipped for children in need.</td>
+          <td>50+ schools, 10,000+ children helped.</td>
+        </tr>
+        <tr>
+          <td>Healthcare</td>
+          <td>Medical equipment and support for healthcare centers.</td>
+          <td>20 clinics, 5,000+ patients treated.</td>
+        </tr>
+        <tr>
+          <td>Housing</td>
+          <td>Building and renovating homes for homeless families.</td>
+          <td>1,000+ homes built or repaired.</td>
+        </tr>
+        <tr>
+          <td>Food Aid</td>
+          <td>Food distribution for emergency communities.</td>
+          <td>1 million meals distributed.</td>
+        </tr>
+        <tr>
+          <td>Environmental Care</td>
+          <td>Tree planting and waste management projects.</td>
+          <td>100,000 trees planted.</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
 
