@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="popular.css">
     <link rel="stylesheet" href="style.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        a.visited {
+            color: rgb(9, 161, 148); /* Ngjyra që do të tregojë që është vizituar */
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -107,25 +116,25 @@
             <p class="focus-question"> → To have the biggest impact</p>
 
             <div class="focus-item" style="padding: 15px;">
-                <span class="icon">&#10010;</span>
+                <span class="icon" style="margin-right: 30px; margin-top: 15px;">&#10010;</span>
                 <div>
-                    <h3>Global health and wellbeing</h3>
+                    <h3>Global health and wellbeing</h3><BR>
                     <a href="#modal1">See charities →</a>
                 </div>
             </div>
 
             <div class="focus-item" style="padding: 15px;">
-                <span class="icon">&#128062;</span>
+                <span class="icon" style="margin-right: 20px; margin-left: -7px; margin-top: 10px;">&#128062;</span>
                 <div>
-                    <h3>Animal welfare</h3>
+                    <h3>Animal welfare</h3><BR>
                     <a href="#modal2">See charities →</a>
                 </div>
             </div>
 
             <div class="focus-item" style="padding: 15px;">
-                <span class="icon">&#127748;</span>
+                <span class="icon" style="margin-right: 20px; margin-left: -7px; margin-top: 10px;">&#127748;</span>
                 <div>
-                    <h3>Reducing global catastrophic risks</h3>
+                    <h3>Reducing global catastrophic risks</h3><BR>
                     <a href="#modal3">See charities →</a>
                 </div>
             </div>
@@ -212,15 +221,14 @@
 
                 <div class="case">
                     <img src="image/popular-1.jpg" alt="Case 1">
-                    <div class="progress-bar"><span style="width: 30%;" ></span></div>
+                    <div class="progress-bar"><span style="width: 30%;"></span></div>
                     <h3 style="padding: 15px;">Help us to Send Food</h3>
                     <p>Raised: $5000 | Goal: $9000</p>
                     <a href="#modal4">Read More</a>
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-2.jpg"
-                        alt="Case 2">
+                    <img src="image/popular-2.jpg" alt="Case 2">
                     <div class="progress-bar"><span style="width: 50%;"></span></div>
                     <h3 style="padding: 15px;">Clothes For Everyone</h3>
                     <p>Raised: $6000 | Goal: $12000</p>
@@ -244,8 +252,7 @@
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-5.jpg"
-                        alt="Case 5">
+                    <img src="image/popular-5.jpg" alt="Case 5">
                     <div class="progress-bar"><span style="width: 50%;"></span></div>
                     <h3 style="padding: 15px;">Medical Support</h3>
                     <p>Raised: $8000 | Goal: $15000</p>
@@ -407,19 +414,25 @@
 
     <script>
 
-        document.querySelectorAll('a[href^="#modal"]').forEach(link => {
-            link.addEventListener('click', event => {
-                event.preventDefault();
-                const modalId = link.getAttribute('href');
-                const modal = document.querySelector(modalId);
-                const overlay = document.getElementById('modal-overlay');
+        $('a[href^="#modal"]').on('click', function (event) {
+            event.preventDefault();
+            const modalId = $(this).attr('href');
+            const $modal = $(modalId);
+            const $overlay = $('#modal-overlay');
 
-                if (modal) {
-                    modal.style.display = 'block';
-                    overlay.style.display = 'block';
-                }
+            if ($modal.length) {
+                $modal.css('display', 'block');
+                $overlay.css('display', 'block');
+            }
+        });
+
+        
+        $(document).ready(function () {
+            $('a').on('click', function () {
+                $(this).addClass('visited');
             });
         });
+
 
         document.querySelectorAll('.close-btn').forEach(button => {
             button.addEventListener('click', event => {

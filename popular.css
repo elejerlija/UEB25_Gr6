@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #e6ffe6;
-
 }
 
 .stats-board {
@@ -21,6 +20,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 200px;
+    border: 1px solid #399339;  
+    box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
 }
 
 .stat-item {
@@ -41,7 +42,8 @@ body {
 
 .stat-label {
     font-size: 16px;
-    color: #777;
+    color: #0d3525;
+    padding: 5px;
 }
 
 header {
@@ -83,6 +85,9 @@ header p {
     box-shadow: 0 4px 6px rgba(255, 102, 153, 0.4);
     flex-shrink: 0;
     height: 470px;
+    border: 1px solid #399339;
+    box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
+
 }
 
 div .cases-container {
@@ -91,8 +96,9 @@ div .cases-container {
     border: 1px solid #99ff99;
     border-radius: 10px;
     width: auto;
-    box-shadow: 0 4px 6px rgba(102, 255, 153, 0.4);
+    box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
     flex-shrink: 0;
+    
 }
 
 .section h2 {
