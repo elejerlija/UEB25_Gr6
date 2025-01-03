@@ -172,39 +172,14 @@
       background-color: #ccc;
     }
     .join-section {
+      align-items: center;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       padding: 40px;
       background-color: #f7f7f7;
       margin-top: 60px;
       margin-bottom: 60px;
       border-radius: 10px;
-    }
-    .charity-info {
-      width: 100%;
-      max-width: 400px;
-      height: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .charity-info h2 {
-      font-size: 28px;
-      color: #333;
-    }
-
-    .charity-info p {
-      font-size: 16px;
-      color: #666;
-      line-height: 1.6;
-    }
-    .charity-info img {
-      width: 100%;          
-      height: auto;        
-      object-fit: cover;    
-      border-radius: 10px;  
-      max-height: 100%;  
-      padding-left: 120px    
     }
 
     .join-form {
@@ -244,8 +219,8 @@
       border: 1px solid #ddd;
     }
 
-    .join-form input[type="submit"] {
-      width: 100%;
+    .join-form input[type="submit"],input[type="reset"] {
+      width: 49%;
       padding: 12px;
       background-color: #fff;
       color: #26a96c;
@@ -255,19 +230,42 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .join-form input[type="submit"]:hover {
+    .join-form input[type="submit"]:hover,input[type="reset"]:hover {
       background-color: #26a96c;
       color: white;
     }
-        .fa-instagram {
-          animation-delay: .1s !important;
-        }
-        .fa-facebook {
-        animation-delay: .3s !important;
-        }
-        .fa-likedin {
-        animation-delay: .5s !important;
-        }
+    .gender-options {
+      display: flex;
+      justify-content: space-around; 
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: white;
+      width: 100%;
+    }
+
+    .gender-options label {
+      font-size: 16px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    input[type="radio"] {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .fa-instagram {
+      animation-delay: .1s !important;
+    }
+    .fa-facebook {
+      animation-delay: .3s !important;
+    }
+    .fa-likedin {
+      animation-delay: .5s !important;
+    }        
 
 </style>
 </head>
@@ -384,43 +382,96 @@
 </section>
 <section>
   <div class="join-section" id="join-section">
-    <div class="charity-info">
-  <img src="image/helpsomeone.png" style="width: 400px;" >
+    <div class="join-form">
+      <h3>Join Us Today</h3>
+      <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
+      <form id="joinForm" onsubmit="return validate()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <div id="emailError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="gender">Choose Gender</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Choose a Password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password" required>
+        </div>
+        <div id="message" style="display: none;"></div>
+        <input type="submit" value="Join Now" id="submitBtn" >
+        <input type="reset" value="Reset">
+      </form>
     </div>
-      <div class="join-form">
-        <h3>Join Us Today</h3>
-        <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
-        <form id="joinForm" onsubmit="showLoading()">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-          </div>
-  
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-            <div id="emailError" class="error"></div>
-          </div>
-  
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Choose a Password" required>
-            <div id="passwordError" class="error"></div>
-            <div id="passwordStrength" class="password-strength"></div>
-          </div>
-  
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
-              required>
-            <div id="confirmPasswordError" class="error"></div>
-          </div>
-  
-          <input type="submit" value="Join Now" id="submitBtn" disabled>
-        </form>
-      </div>
-    </div>
+  </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded",function(){
+    const form=document.querySelector(".join-form");
+    const messageElement=document.getElementById("message");
+    form.addEventListener("submit",function(event){
+    event.preventDefault();
+    let isValid = true;
+    let message = "";
+
+    const nameInput = document.getElementById("name").value.trim();
+    const emailInput = document.getElementById("email").value.trim();
+    const passwordInput = document.getElementById("password").value.trim();
+    const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
+    const genderInput=document.querySelector('input[name="gender"]:checked');
+
+
+    if (!nameInput) {
+      isValid = false;
+      message = "Full Name is required!";
+    } else if (!emailInput) {
+      isValid = false;
+      message = "Email is required!";
+    } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
+      isValid = false;
+      message = "Invalid email format!";
+    } else if(!genderInput){
+      isValid=false;
+      message="Gender selection is required!";
+    }
+      else if (!passwordInput) {
+      isValid = false;
+      message = "Password is required!";
+    } else if (!confirmPasswordInput) {
+      isValid = false;
+      message = "Confirm Password is required!";
+    } else if (passwordInput !== confirmPasswordInput) {
+      isValid = false;
+      message = "Passwords do not match!";
+    }
+     if (isValid) {
+      alert("Thank you for joining!");      
+    } else {
+      messageElement.style.color = "black";
+      messageElement.textContent = message;
+    }
+    messageElement.style.display = "block";
+    
+    return isValid; 
+    });
+  });
+
+</script>
+
 <footer>
     <div class="row">
       <div class="col">
@@ -469,5 +520,6 @@
       </div>
     </div>
   </footer>
+  <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
     </body>
 </html>

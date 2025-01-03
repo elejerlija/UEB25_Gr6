@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #e6ffe6;
-
 }
 
 .stats-board {
@@ -21,6 +20,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 200px;
+    border: 1px solid #399339;  
+    box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
 }
 
 .stat-item {
@@ -29,19 +30,20 @@ body {
 
 .stat-item i {
     font-size: 40px;
-    color: #006633; 
+    color: #006633;
 }
 
 .stat-number {
     font-size: 24px;
     font-weight: bold;
-    color: #333; 
+    color: #333;
     margin-top: 10px;
 }
 
 .stat-label {
     font-size: 16px;
-    color: #777;
+    color: #0d3525;
+    padding: 5px;
 }
 
 header {
@@ -60,19 +62,6 @@ header p {
     margin: 5px 0 0 0;
     font-size: 1.2em;
     font-style: italic;
-}
-
-footer {
-    background-color: #006600;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-    font-size: 1em;
 }
 
 .horizontal-container {
@@ -95,16 +84,21 @@ footer p {
     width: 300px;
     box-shadow: 0 4px 6px rgba(255, 102, 153, 0.4);
     flex-shrink: 0;
+    height: 470px;
+    border: 1px solid #399339;
+    box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
+
 }
 
 div .cases-container {
-    background-color: #329a5c;
+    background-color:  #ccffcc;
     padding: 20px;
     border: 1px solid #99ff99;
     border-radius: 10px;
     width: auto;
-    box-shadow: 0 4px 6px rgba(102, 255, 153, 0.4);
+    box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
     flex-shrink: 0;
+    
 }
 
 .section h2 {
@@ -132,13 +126,13 @@ div .cases-container {
 
 .focus-item a {
     text-decoration: none;
-    color: #006633; 
+    color: #006633;
     font-weight: bold;
     cursor: pointer;
 }
 
 .focus-item a:hover {
-    color: #058639; 
+    color: #058639;
 }
 
 .modal {
@@ -147,7 +141,7 @@ div .cases-container {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background-color: #0f722d;
+    background-color: #90ee90;
     padding: 20px;
     border: 1px solid #99ffcc;
     border-radius: 10px;
@@ -194,6 +188,13 @@ div .cases-container {
     display: none;
 }
 
+a:hover {
+    color: #0cce4d;
+}
+a {
+    color: #0c812f; 
+    text-decoration: none; 
+}
 fieldset {
     border: 2px solid #17512c;
     border-radius: 10px;
@@ -223,7 +224,7 @@ legend {
 
 .case {
     justify-content: center;
-    background-color: #61c589; 
+    background-color:  #90ee90;
     border-radius: 10px;
     width: 250px;
     text-align: center;
@@ -266,7 +267,7 @@ legend {
 
 
 .case:hover {
-    background-color: #b3f0b3; 
+    background-color: #b3f0b3;
     transform: scale(1.03);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
     animation: hover-scale 0.3s ease-in-out forwards;
@@ -283,101 +284,10 @@ legend {
 }
 
 .case a:hover {
-    background-color: #105c40; 
+    background-color: #27b86d;
 }
 
-/*-------------------------------------------------------*/
-.nav-links {
-    background-color: #18d17b;
-    color: rgb(84, 75, 75);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 50px;
-}
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #18d17b;
-    color: #fff;
-    padding: 10px 0;
-    min-width: 140px;
-    z-index: 1000;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-.top-bar {
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 50px;
-    font-size: 14px;
-    color: black;
-}
-
-.dropdown-content li {
-    list-style: none;
-    margin: 0;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    text-align: left;
-    border-bottom: 0.8px solid #333;
-}
-
-.dropdown-content li:last-child {
-    border-bottom: none;
-}
-
-.dropdown-content li a {
-    color: rgb(37, 37, 37);
-    text-decoration: none !important;
-    display: block;
-}
-
-.dropdown-content li a:hover {
-    transform: scale(1.02);
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-}
-
-.nav-links li {
-    margin: 0 15px;
-}
-
-.nav-links a {
-    color: black;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.nav-links a:hover {
-    text-decoration: underline;
-}
-
-ul li {
-    list-style: none;
-    margin-bottom: 12px;
-}
-
-ul li a {
-    text-decoration: none;
-    color: #fff;
-}
-/*---------------------------------------------------------------------*/
 @keyframes hover-scale {
     0% {
         transform: scale(1);

@@ -7,14 +7,24 @@
     <title>Impactful Giving</title>
 
     <link rel="stylesheet" href="popular.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        a.visited {
+            color: rgb(9, 161, 148); 
+        }
+    </style>
+
 
 </head>
 
 <body>
 
-    
+
     <header>
-        
+
         <div class="top-bar">
             <div class="contact-info">
                 <span>+383 45 333 111</span>
@@ -32,20 +42,20 @@
             <div class="logo">HelpSomeone</div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a>
-                        <li class="dropdown">
-                          <a href="about.html" >About Us</a>
-                          <ul class="dropdown-content">
-                            <li><a href="about.html#about-us ">Who are we</a></li>
-                            <li><a href="#">Our Schedule</a></li>
-                            <li><a href="about.html#team-container">Our Team</a></li>
-                            <li><a href="about.htmljoin-section">Join Us</a></li>
-                          </ul>
-                        </li>
-                        <li> <a href="volunteer.html">Volunteer & Updates</a></li>
-                            <li> <a href="popular.html">Popular Cases</a></li>
-                            <li> <a href="contact.html">Contact</a></li>
-                            <li> <a href="donate.html"></a></li>
-                                
+                <li class="dropdown">
+                    <a href="about.html">About Us</a>
+                    <ul class="dropdown-content">
+                        <li><a href="about.html#about-us ">Who are we</a></li>
+                        <li><a href="#">Our Schedule</a></li>
+                        <li><a href="about.html#team-container">Our Team</a></li>
+                        <li><a href="about.htmljoin-section">Join Us</a></li>
+                    </ul>
+                </li>
+                <li> <a href="volunteer.html">Volunteer & Updates</a></li>
+                <li> <a href="popular.html">Popular Cases</a></li>
+                <li> <a href="contact.html">Contact</a></li>
+                <li> <a href="donate.html"></a></li>
+
             </ul>
             <button class="make-a-donate">Donate Now</button>
         </nav>
@@ -77,7 +87,7 @@
         <div class="section">
             <h2>What we look for</h2>
             <div class="criteria">
-                <div class="focus-item">
+                <div class="focus-item" style="padding: 9px;">
                     <div class="icon">⚡</div>
                     <div>
                         <h3>Extreme effectiveness</h3>
@@ -102,38 +112,37 @@
             </div>
         </div>
         <div class="section">
-            <h2>Where we focus</h2>
-            <p class="subtitle">(to have the biggest impact)</p>
-            <p class="focus-question">Why focus on these areas?</p>
+            <h2>Where we focus</h2><br><br>
+            <p class="focus-question"> → To have the biggest impact</p>
 
-            <div class="focus-item">
-                <span class="icon">&#10010;</span>
+            <div class="focus-item" style="padding: 15px;">
+                <span class="icon" style="margin-right: 30px; margin-top: 15px;">&#10010;</span>
                 <div>
-                    <h3>Global health and wellbeing</h3>
+                    <h3>Global health and wellbeing</h3><BR>
                     <a href="#modal1">See charities →</a>
                 </div>
             </div>
 
-            <div class="focus-item">
-                <span class="icon">&#128062;</span>
+            <div class="focus-item" style="padding: 15px;">
+                <span class="icon" style="margin-right: 20px; margin-left: -7px; margin-top: 10px;">&#128062;</span>
                 <div>
-                    <h3>Animal welfare</h3>
+                    <h3>Animal welfare</h3><BR>
                     <a href="#modal2">See charities →</a>
                 </div>
             </div>
 
-            <div class="focus-item">
-                <span class="icon">&#127748;</span>
+            <div class="focus-item" style="padding: 15px;">
+                <span class="icon" style="margin-right: 20px; margin-left: -7px; margin-top: 10px;">&#127748;</span>
                 <div>
-                    <h3>Reducing global catastrophic risks</h3>
+                    <h3>Reducing global catastrophic risks</h3><BR>
                     <a href="#modal3">See charities →</a>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h2>Who we look to</h2>
-            <p>(for the best charities)</p>
+            <h2>Who we look to</h2><br>
+            <p> → For the best Charities</p><br>
             <p>
                 Trusted, transparent, third-party evaluators play a critical role in our recommendations.<BR> And we
                 don’t
@@ -141,6 +150,7 @@
                 <a href="#modal-evaluators" class="modal-link">which evaluators can best help donors maximise their
                     impact</a>.
             </p>
+            <br>
             <div class="focus-item">
                 <span class="icon">&#9733;</span>
                 <p>Innovative ideas and tools.</p>
@@ -210,52 +220,49 @@
             <div class="cases-container">
 
                 <div class="case">
-                    <img src="https://fundraisingconsultants.co.uk/wp-content/uploads/2020/12/homepage-1739x869.jpg"
-                        alt="Case 1">
+                    <img src="image/popular-1.jpg" alt="Case 1">
                     <div class="progress-bar"><span style="width: 30%;"></span></div>
-                    <h3>Help us to Send Food</h3>
+                    <h3 style="padding: 15px;">Help us to Send Food</h3>
                     <p>Raised: $5000 | Goal: $9000</p>
                     <a href="#modal4">Read More</a>
                 </div>
 
                 <div class="case">
-                    <img src="https://media.licdn.com/dms/image/D5612AQHZIqhF64VUQw/article-cover_image-shrink_720_1280/0/1718287838721?e=2147483647&v=beta&t=CynfD-OyGJAOo8dzHpfH_a4Z-kJaC1gTXSITeawzuPQ"
-                        alt="Case 2">
+                    <img src="image/popular-2.jpg" alt="Case 2">
                     <div class="progress-bar"><span style="width: 50%;"></span></div>
-                    <h3>Clothes For Everyone</h3>
+                    <h3 style="padding: 15px;">Clothes For Everyone</h3>
                     <p>Raised: $6000 | Goal: $12000</p>
                     <a href="#modal5">Read More</a>
                 </div>
 
                 <div class="case">
-                    <img src="file:///C:/Users/HP/Desktop/website/web2.jpg" alt="Case 3">
+                    <img src="image/popular-3.jpg" alt="Case 3" height="120">
                     <div class="progress-bar"><span style="width: 70%;"></span></div>
-                    <h3>Water For All Children</h3>
+                    <h3 style="padding: 15px;">Water For All Children</h3>
                     <p>Raised: $7000 | Goal: $10000</p>
                     <a href="#modal6">Read More</a>
                 </div>
 
                 <div class="case">
-                    <img src="file:///C:/Users/HP/Desktop/website/web1.jpg" height="200" alt="Case 4">
+                    <img src="image/popular-4.jpg" height="145" alt="Case 4">
                     <div class="progress-bar"><span style="width: 40%;"></span></div>
-                    <h3>Education For Everyone</h3>
+                    <h3 style="padding: 7px;">Education For Everyone</h3>
                     <p>Raised: $4000 | Goal: $8000</p>
                     <a href="#modal7">Read More</a>
                 </div>
 
                 <div class="case">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ0WiE4EnPO47Wf0ysmyjSatmDKIOimdBP7MLzvd9Om6btVUlXcg0XbnEgxWN71WnFlnw&usqp=CAU"
-                        alt="Case 5">
+                    <img src="image/popular-5.jpg" alt="Case 5">
                     <div class="progress-bar"><span style="width: 50%;"></span></div>
-                    <h3>Medical Support</h3>
+                    <h3 style="padding: 15px;">Medical Support</h3>
                     <p>Raised: $8000 | Goal: $15000</p>
                     <a href="#modal8">Read More</a>
                 </div>
 
                 <div class="case">
-                    <img src="file:///C:/Users/HP/Desktop/website/web3.jpg" alt="Case 6">
+                    <img src="image/popular-6.jpg" alt="Case 6">
                     <div class="progress-bar"><span style="width: 25%;"></span></div>
-                    <h3>Homes for Everyone</h3>
+                    <h3 style="padding: 15px;">Homes for Everyone</h3>
                     <p>Raised: $2500 | Goal: $10000</p>
                     <a href="#modal9">Read More</a>
                 </div>
@@ -349,27 +356,83 @@
         </div>
     </fieldset>
     <footer>
-        <p>&copy; 2024 Impactful Giving. All Rights Reserved.</p>
+        <div class="row">
+            <div class="col">
+                <img src="image/logo-helpsomeone.png" class="logo" alt="">
+                <br>
+                <br>
+                <p
+                    style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+                    Together, we create a world of hope.</p>
+            </div>
+            <div class="col">
+                <h3>Office</h3>
+                <p>Mother Teresa Street</p>
+                <br>
+                <p>Gjilan, 60000, Kosov&euml;</p>
+                <br>
+                <p>Phone: +383 45 333 111</p>
+                <br>
+                <a class="class-id" style="color: white;"
+                    href="mailto:charity.kosova@gmail.com">charity.kosova@gmail.com</a>
+                <br>
+            </div>
+            <div class="col">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="volunteer.html">Volunteer & Updates</a></li>
+                    <li><a href="popular.html"> Popular Cases</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>We'd Love to Hear From You</h3>
+                <form>
+                    <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+                        placeholder="  Leave a message">
+                    <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+                </form>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
+                            style="color: #0a7011;"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"
+                            style="color: #0a7011;"></i></i></a>
+                    <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter"
+                            style="color: #0a7011;"></i></i></a>
+                    <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp"
+                            style="color: #0a7011;"></i></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
 
 
     </fieldset>
-  
+
     <script>
 
-        document.querySelectorAll('a[href^="#modal"]').forEach(link => {
-            link.addEventListener('click', event => {
-                event.preventDefault();
-                const modalId = link.getAttribute('href');
-                const modal = document.querySelector(modalId);
-                const overlay = document.getElementById('modal-overlay');
+        $('a[href^="#modal"]').on('click', function (event) {
+            event.preventDefault();
+            const modalId = $(this).attr('href');
+            const $modal = $(modalId);
+            const $overlay = $('#modal-overlay');
 
-                if (modal) {
-                    modal.style.display = 'block';
-                    overlay.style.display = 'block';
-                }
+            if ($modal.length) {
+                $modal.css('display', 'block');
+                $overlay.css('display', 'block');
+            }
+        });
+
+        
+        $(document).ready(function () {
+            $('a').on('click', function () {
+                $(this).addClass('visited');
             });
         });
+
 
         document.querySelectorAll('.close-btn').forEach(button => {
             button.addEventListener('click', event => {

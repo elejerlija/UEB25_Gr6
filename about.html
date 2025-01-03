@@ -87,6 +87,98 @@
       text-align: left;
     }
 
+    .our-story {
+      max-width: 1200px;
+      margin: 40px auto;
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .story-heading {
+      margin-bottom: 20px;
+    }
+
+    .story-heading h1 {
+      font-size: 32px;
+      color: #26a96c;
+      margin-bottom: 10px;
+    }
+
+    .story-heading p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .story-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+
+    .story-left-content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .story-table {
+      width: 100%;
+      max-width: 500px;
+      border-collapse: collapse;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .story-table th,
+    .story-table td {
+      text-align: left;
+      padding: 12px 15px;
+    }
+
+    .story-table th {
+      background-color: #26a96c;
+      color: white;
+      font-size: 16px;
+    }
+
+    .story-table td {
+      background-color: #fdfdfd;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .story-table tr:nth-child(even) td {
+      background-color: #f3f3f3;
+    }
+
+    .story-table tr:hover td {
+      background-color: #eaf5ff;
+    }
+
+    .story-right-content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .story-right-content video {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .our-story {
+      margin-top: 80px;
+
+    }
+
+
     svg {
       position: relative;
       top: 0;
@@ -263,7 +355,7 @@
         </li>
         <li> <a href="volunteer.html">Volunteer & Updates</a></li>
         <li> <a href="popular.html">Popular Cases</a></li>
-        <li> <a href="donate.html">Donate</a></li>
+        <li> <a href="donate.html"></a></li>
         <li> <a href="contact.html">Contact</a></li>
       </ul>
       <button class="make-a-donate">Donate Now</button>
@@ -296,6 +388,64 @@
             Your browser does not support the audio element.
           </audio>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="our-story" id="aboutID">
+    <div class="story-heading">
+      <h1>Our Story</h1>
+      <p>
+        A timeline of events that define who we are and where we come from. From humble beginnings to impactful
+        milestones, here's our journey.
+      </p>
+    </div>
+    <div class="story-content">
+      <div class="story-left-content">
+        <table class="story-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2008</td>
+              <td>Founded</td>
+              <td>Our organization was established by a group of passionate individuals aiming to bring change.</td>
+            </tr>
+            <tr>
+              <td>2010</td>
+              <td>First Office</td>
+              <td>Opened our first office in a small community to provide direct support and assistance.</td>
+            </tr>
+            <tr>
+              <td>2014</td>
+              <td>Community Engagement</td>
+              <td>Hosted our first volunteer-driven event with over 500 participants.</td>
+            </tr>
+            <tr>
+              <td>2017</td>
+              <td>National Recognition</td>
+              <td>Received recognition as a leading non-profit organization in the country.</td>
+            </tr>
+            <tr>
+              <td>2021</td>
+              <td>Digital Expansion</td>
+              <td>Launched a new website and mobile app to reach more people and streamline support.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="story-right-content">
+        <video controls>
+          <source src="video/ourstory.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </section>
@@ -406,7 +556,7 @@
       </div>
       <div class="col">
         <h3>We'd Love to Hear From You</h3>
-        <form>
+        <form class="footer-form">
           <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
             placeholder="  Leave a message">
           <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
@@ -420,6 +570,7 @@
       </div>
     </div>
   </footer>
+  <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 
 </body>
 <script>
@@ -439,9 +590,9 @@
     }
   });
   audioElement.addEventListener('ended', function () {
-  playButton.innerHTML = '<i class="fa-solid fa-play-circle" style="font-size: 3em;"></i>';
-  tooltip.textContent = "Click to play";
-});
+    playButton.innerHTML = '<i class="fa-solid fa-play-circle" style="font-size: 3em;"></i>';
+    tooltip.textContent = "Click to play";
+  });
 </script>
 
 </html>
