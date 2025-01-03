@@ -219,8 +219,8 @@
       border: 1px solid #ddd;
     }
 
-    .join-form input[type="submit"] {
-      width: 100%;
+    .join-form input[type="submit"],input[type="reset"] {
+      width: 49%;
       padding: 12px;
       background-color: #fff;
       color: #26a96c;
@@ -230,7 +230,7 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .join-form input[type="submit"]:hover {
+    .join-form input[type="submit"]:hover,input[type="reset"]:hover {
       background-color: #26a96c;
       color: white;
     }
@@ -413,13 +413,18 @@
         </div>
         <div id="message" style="display: none;"></div>
         <input type="submit" value="Join Now" id="submitBtn" >
+        <input type="reset" value="Reset">
       </form>
     </div>
   </div>
 </section>
 
 <script>
-  function validate() {
+  document.addEventListener("DOMContentLoaded",function(){
+    const form=document.querySelector(".join-form");
+    const messageElement=document.getElementById("message");
+    form.addEventListener("submit",function(event){
+    event.preventDefault();
     let isValid = true;
     let message = "";
 
@@ -427,10 +432,9 @@
     const emailInput = document.getElementById("email").value.trim();
     const passwordInput = document.getElementById("password").value.trim();
     const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
-    const messageElement = document.getElementById("message");
     const genderInput=document.querySelector('input[name="gender"]:checked');
 
-    
+
     if (!nameInput) {
       isValid = false;
       message = "Full Name is required!";
@@ -454,26 +458,18 @@
       isValid = false;
       message = "Passwords do not match!";
     }
-
-    
-    if (isValid) {
-      messageElement.style.color = "green";
-      messageElement.textContent = "Form submitted successfully!";
+     if (isValid) {
+      alert("Thank you for joining!");      
     } else {
       messageElement.style.color = "black";
       messageElement.textContent = message;
     }
-
     messageElement.style.display = "block";
-
+    
     return isValid; 
-  }
-  document.addEventListener("DOMContentLoaded",function(){
-    const joinButton=document.querySelector('#submitBtn');
-    joinButton.addEventListener('click',function(){
-      alert('Thank you for joining!');
-    })
-  })
+    });
+  });
+
 </script>
 
 <footer>
