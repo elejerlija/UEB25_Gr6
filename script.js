@@ -52,16 +52,17 @@ showSlide(slideIndex);
 }
 
 
-<<<<<<< HEAD
-   
-=======
-
 const clickButtons = document.querySelectorAll('a, button');
 const clickSound = document.getElementById('click-sound');
 
-clickButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    clickSound.play();
+if (clickSound) { 
+  clickButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (clickSound.paused) {
+        clickSound.play();
+      }
+    });
   });
-});
->>>>>>> 7e21f458e932cc0a0f18b2d2f8931c7c7e43bd00
+} else {
+  console.error('Elementi i tingullit me id-në "click-sound" nuk u gjet.');
+}
