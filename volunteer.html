@@ -172,39 +172,14 @@
       background-color: #ccc;
     }
     .join-section {
+      align-items: center;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       padding: 40px;
       background-color: #f7f7f7;
       margin-top: 60px;
       margin-bottom: 60px;
       border-radius: 10px;
-    }
-    .charity-info {
-      width: 100%;
-      max-width: 400px;
-      height: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .charity-info h2 {
-      font-size: 28px;
-      color: #333;
-    }
-
-    .charity-info p {
-      font-size: 16px;
-      color: #666;
-      line-height: 1.6;
-    }
-    .charity-info img {
-      width: 100%;          
-      height: auto;        
-      object-fit: cover;    
-      border-radius: 10px;  
-      max-height: 100%;  
-      padding-left: 120px    
     }
 
     .join-form {
@@ -260,39 +235,37 @@
       color: white;
     }
     .gender-options {
-  display: flex;
-  justify-content: space-around; 
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: white;
-  width: 100%;
-}
+      display: flex;
+      justify-content: space-around; 
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: white;
+      width: 100%;
+    }
 
-.gender-options label {
-  font-size: 16px;
-  color: #666;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
+    .gender-options label {
+      font-size: 16px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-input[type="radio"] {
-  cursor: pointer;
-  margin-right: 10px;
-}
+    input[type="radio"] {
+      cursor: pointer;
+      margin-right: 10px;
+    }
 
-
-        .fa-instagram {
-          animation-delay: .1s !important;
-        }
-        .fa-facebook {
-        animation-delay: .3s !important;
-        }
-        .fa-likedin {
-        animation-delay: .5s !important;
-        }
-        
+    .fa-instagram {
+      animation-delay: .1s !important;
+    }
+    .fa-facebook {
+      animation-delay: .3s !important;
+    }
+    .fa-likedin {
+      animation-delay: .5s !important;
+    }        
 
 </style>
 </head>
@@ -409,9 +382,6 @@ input[type="radio"] {
 </section>
 <section>
   <div class="join-section" id="join-section">
-    <div class="charity-info">
-      <img src="image/helpsomeone.png" style="width: 400px;">
-    </div>
     <div class="join-form">
       <h3>Join Us Today</h3>
       <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
@@ -442,7 +412,7 @@ input[type="radio"] {
           <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password" required>
         </div>
         <div id="message" style="display: none;"></div>
-        <input type="submit" value="Join Now" id="submitBtn">
+        <input type="submit" value="Join Now" id="submitBtn" >
       </form>
     </div>
   </div>
@@ -498,6 +468,12 @@ input[type="radio"] {
 
     return isValid; 
   }
+  document.addEventListener("DOMContentLoaded",function(){
+    const joinButton=document.querySelector('#submitBtn');
+    joinButton.addEventListener('click',function(){
+      alert('Thank you for joining!');
+    })
+  })
 </script>
 
 <footer>
