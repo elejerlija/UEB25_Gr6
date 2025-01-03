@@ -259,6 +259,30 @@
       background-color: #26a96c;
       color: white;
     }
+    .gender-options {
+  display: flex;
+  justify-content: space-around; 
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  width: 100%;
+}
+
+.gender-options label {
+  font-size: 16px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
         .fa-instagram {
           animation-delay: .1s !important;
         }
@@ -402,6 +426,14 @@
           <div id="emailError" class="error"></div>
         </div>
         <div class="form-group">
+          <label for="gender">Choose Gender</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Choose a Password" required>
         </div>
@@ -426,8 +458,9 @@
     const passwordInput = document.getElementById("password").value.trim();
     const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
     const messageElement = document.getElementById("message");
+    const genderInput=document.querySelector('input[name="gender"]:checked');
 
-    // Validation checks
+    
     if (!nameInput) {
       isValid = false;
       message = "Full Name is required!";
@@ -437,7 +470,11 @@
     } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
       isValid = false;
       message = "Invalid email format!";
-    } else if (!passwordInput) {
+    } else if(!genderInput){
+      isValid=false;
+      message="Gender selection is required!";
+    }
+      else if (!passwordInput) {
       isValid = false;
       message = "Password is required!";
     } else if (!confirmPasswordInput) {
