@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <title>Donate</title>
     <style>
    body {
@@ -32,6 +34,9 @@
             text-align: center;
         }
 
+        #amount, #message, #name, #email {
+        color: black;
+        }
         form {
             display: flex;
             flex-direction: column;
@@ -59,18 +64,14 @@
         }
 
         form button {
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            align-self: center;
-            padding: 10px 20px;
-        }
+         background: linear-gradient(45deg, #007BFF, #28a745);
+         transition: transform 0.3s, background 0.3s;
+       }
 
         form button:hover {
-            background: #0056b3;
+         transform: scale(1.1);
+         background: linear-gradient(45deg, #28a745, #007BFF);
         }
-
         #non-anonymous-fields {
             visibility: visible;
             opacity: 1;
@@ -172,7 +173,14 @@
     <h2>Donate for a good cause</h2>
     <form>
         <label for="amount">Value you want to donate (€):</label>
-        <input type="number" id="amount" name="amount" required>
+        <input list="donation-suggestions" id="amount" name="amount" required placeholder="Shkruani një shumë">
+        <datalist id="donation-suggestions">
+          <option value="10">
+          <option value="20">
+          <option value="50">
+          <option value="100">
+         <option value="200">
+        </datalist>
 
         <label for="anonymous-checkbox">
             <input type="checkbox" id="anonymous-checkbox" name="anonymous">
@@ -190,6 +198,11 @@
         <label for="message">Your message (optional):</label>
         <textarea id="message" name="message" rows="4"></textarea>
 
+        <section>
+          <h3>Shuma e mbledhur deri tani:</h3>
+          <output id="total-raised">5000€</output>
+       </section>
+
         <button type="submit">Submit</button>
     </form>
 </main>
@@ -204,6 +217,24 @@
         } else {
             nonAnonymousFields.classList.remove('hidden');
         }
+    });
+
+   
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Parandalon dërgimin e formularit
+      
+        const amount = parseFloat(document.getElementById('amount').value) || 0;
+
+        const totalOutput = document.getElementById('total-raised');
+        const currentTotal = parseFloat(totalOutput.textContent.replace('€', '')) || 0;
+
+        const newTotal = currentTotal + amount;
+
+        totalOutput.textContent = `${newTotal}€`;
+
+        alert('Thank you for your donation!');
+
+        e.target.reset();
     });
 </script>
 
@@ -241,7 +272,7 @@
         </div>
         <div class="col">
           <h3>We'd Love to Hear From You</h3>
-          <form>
+          <form class="footer-form">
             <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
               placeholder="  Leave a message">
             <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
