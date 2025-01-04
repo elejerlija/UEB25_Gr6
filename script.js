@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
     
@@ -52,9 +50,7 @@ showSlide(slideIndex);
 }
 
 
-<<<<<<< HEAD
-   
-=======
+
 
 const clickButtons = document.querySelectorAll('a, button');
 const clickSound = document.getElementById('click-sound');
@@ -64,4 +60,3 @@ clickButtons.forEach(button => {
     clickSound.play();
   });
 });
->>>>>>> 7e21f458e932cc0a0f18b2d2f8931c7c7e43bd00
