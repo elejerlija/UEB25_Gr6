@@ -533,37 +533,50 @@
 document.addEventListener("DOMContentLoaded", function () {
     const events = [
         { date: "2025-01-10", name: "Community Cleanup Drive" },
-        { date: "2025-01-25", name: "Health Awareness Workshop" }
+        { date: "2025-01-15", name: "Annual Fundraiser Gala" }
     ];
     const calendarDiv = document.getElementById("event-calendar");
 
     const today = new Date();
-    const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-   
     const monthNames = [
         "January", "February", "March", "April", "May", "June", 
         "July", "August", "September", "October", "November", "December"
     ];
+
+    
     const headerDiv = document.createElement("div");
     headerDiv.className = "calendar-header";
-    headerDiv.textContent = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
+    headerDiv.textContent = `${monthNames[month]} ${year}`;
     calendarDiv.appendChild(headerDiv);
 
     
     for (let day = 1; day <= daysInMonth; day++) {
-        const currentDay = new Date(today.getFullYear(), today.getMonth(), day).toISOString().split("T")[0];
-        const event = events.find(e => e.date === currentDay);
+        
+        const currentDayString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+       
+        const event = events.find(e => e.date === currentDayString);
 
         const dayDiv = document.createElement("div");
         dayDiv.textContent = day;
 
-        if (currentDay === today.toISOString().split("T")[0]) {
+        
+        if (
+            today.getFullYear() === year &&
+            today.getMonth() === month &&
+            today.getDate() === day
+        ) {
             dayDiv.classList.add("today");
         }
+
+        
         if (event) {
             dayDiv.classList.add("event");
-            dayDiv.title = event.name; 
+            dayDiv.title = event.name;
             dayDiv.addEventListener("click", () => {
                 alert(`Event: ${event.name} on ${event.date}`);
             });
@@ -572,8 +585,6 @@ document.addEventListener("DOMContentLoaded", function () {
         calendarDiv.appendChild(dayDiv);
     }
 });
-
-
 
   document.addEventListener("DOMContentLoaded",function(){
     const form=document.querySelector(".join-form");
