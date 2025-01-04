@@ -263,7 +263,8 @@ img.displaySlide {
 }
 .cta {
     text-align: center;
-    padding: 50px 20px;
+    margin: 40px;
+    padding: 40px 20px;
     background-color: #18d17b;
     color: white;
 }
