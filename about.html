@@ -21,126 +21,231 @@
     body {
       font-family: sans-serif;
       background-color: #e7ecfe;
+    }
+
+    .audio-player {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      position: relative;
+      width: 368px;
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: -38px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.2s;
+      width: 110px;
+      height: 24px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .audio-player:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .about-section {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: url(image/Untitled\ design.png) no-repeat center center/cover;
+      height: 400px;
+      color: white;
+      padding-right: 50px;
+    }
+
+    .about-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right,
+          rgba(0, 0, 0, 0.7) 40%,
+          rgba(0, 0, 0, 0.2) 100%);
+      z-index: 1;
+    }
+    abbr {
+    text-decoration: underline dotted; 
+    cursor: help; 
+}
+
+abbr:hover {
+    color: #26a96c; 
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+
+    .content {
+      margin-left: 20px;
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      text-align: left;
+    }
+
+    .our-story {
+      max-width: 1200px;
+      margin: 40px auto;
+      text-align: center;
       padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    
-
-    .about-section {
-      position: relative;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      background: url(image/Untitled\ design.png) no-repeat center center/cover;
-      height: 400px;
-      color: white;
-      padding-right: 50px;
+    .story-heading {
+      margin-bottom: 20px;
     }
 
-    .about-section::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right,
-          rgba(0, 0, 0, 0.7) 40%,
-          rgba(0, 0, 0, 0.2) 100%);
-      z-index: 1;
+    .story-heading h1 {
+      font-size: 32px;
+      color: #26a96c;
+      margin-bottom: 10px;
     }
 
-    .content {
-      margin-left: 20px;
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      text-align: left;
+    .story-heading p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
     }
 
-
-    .buttons {
-      display: flex;
+    .story-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 20px;
+      align-items: start;
     }
 
-    .button {
-      padding: 12px 25px;
+
+    .story-left-content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .story-table {
+      width: 100%;
+      max-width: 500px;
+      border-collapse: collapse;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .story-table th,
+    .story-table td {
+      text-align: left;
+      padding: 12px 15px;
+    }
+
+    .story-table th {
       background-color: #26a96c;
-      color: black;
-      text-decoration: none;
-      font-size: 1em;
-      font-weight: bold;
-      border-radius: 5px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .button:hover {
-      background-color: #1a6843;
-      transform: translateY(-2px);
-    }
-
-
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .about-section {
-      position: relative;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      background: url(image/Untitled\ design.png) no-repeat center center/cover;
-      height: 400px;
       color: white;
-      padding-right: 50px;
+      font-size: 16px;
     }
 
-    .about-section::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right,
-          rgba(0, 0, 0, 0.7) 40%,
-          rgba(0, 0, 0, 0.2) 100%);
-      z-index: 1;
+    .story-table td {
+      background-color: #fdfdfd;
+      color: #333;
+      font-size: 14px;
     }
 
-    .content {
-      margin-left: 20px;
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      text-align: left;
+    .story-table tr:nth-child(even) td {
+      background-color: #f3f3f3;
     }
 
+    .story-table tr:hover td {
+      background-color: #eaf5ff;
+    }
 
-    .buttons {
+    .story-right-content {
       display: flex;
-      gap: 20px;
+      justify-content: center;
     }
 
-    .button {
-      padding: 12px 25px;
-      background-color: #18d17b;
-      color: black;
-      text-decoration: none;
-      font-size: 1em;
-      font-weight: bold;
-      border-radius: 5px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s, transform 0.2s;
+    .story-right-content video {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .button:hover {
-      background-color: #1a6843;
-      transform: translateY(-2px);
+    .our-story {
+      margin-top: 80px;
+
     }
+    .impact-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.impact-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px;
+  margin-top: 20px;
+}
+
+.impact-table th, .impact-table td {
+  padding: 15px;
+  text-align: left;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.impact-table th {
+  background-color: #26a96c;
+  color: white;
+  font-size: 16px;
+}
+
+.impact-table td {
+  font-size: 14px;
+  color: #333;
+}
+
+.impact-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.impact-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.impact-table tr:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.impact-table td:hover {
+  background-color: #e7f5e7;
+}
+.impact-section {
+      margin-top: 120px;
+      margin-bottom: 120px;
+    }
+	
+
+
     svg {
       position: relative;
       top: 0;
@@ -154,7 +259,7 @@
       width: 300px;
       height: 390px;
       border-radius: 300px;
-      background-color: lightgreen;
+      background-color: #26a96c;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -178,6 +283,12 @@
 
     }
 
+    .team-section {
+  max-width: 100%;
+  padding: 25px;
+  background-color: #dafcde;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
     .team_image {
       position: relative;
       min-height: 390px;
@@ -279,7 +390,8 @@
         transform: translateY(20px);
       }
     }
-    #teamID{
+
+    #teamID {
       margin-top: 100px;
       margin-bottom: 120px;
     }
@@ -309,14 +421,13 @@
         <li class="dropdown">
           <a href="#">About Us</a>
           <ul class="dropdown-content">
-            <li><a href="#about-us ">Who are we</a></li>
-            <li><a href="#">IDK</a></li>
+            <li><a href="#aboutID">Who are we</a></li>
+            <li><a href="#impactID">Our Impact</a></li>
             <li><a href="#teamID">Our Team</a></li>
           </ul>
         </li>
         <li> <a href="volunteer.html">Volunteer & Updates</a></li>
         <li> <a href="popular.html">Popular Cases</a></li>
-        <li> <a href="donate.html">Donate</a></li>
         <li> <a href="contact.html">Contact</a></li>
       </ul>
       <button class="make-a-donate">Donate Now</button>
@@ -324,31 +435,135 @@
   </header>
 
   <section id="aboutID">
-  <div class="about-section">
-    <div class="content">
-      <h1 style="font-size: 2.5em;
+    <div class="about-section">
+      <div class="content">
+        <h1 style="font-size: 2.5em;
       margin-bottom: 20px;">About Us</h1>
-      <p style=" font-size: 1.2em;
+        <p style=" font-size: 1.2em;
     margin-bottom: 20px;
     line-height: 1.6;">
-        We are a non-profit organization dedicated to making the world a better place by helping those in need. Our
-        team works tirelessly to create positive change in communities through outreach programs, fundraising, and
-        charitable events. We believe in the power of kindness and unity, and we invite you to join our mission to
-        spread love and help others.
-      </p>
-      <h3 style="font-size: 1.4pm;
+          HelpSomeone is a non-profit organization committed to making the world a better place by empowering those in
+          need. Our team works relentlessly to drive positive change through outreach programs, fundraising, and
+          charitable events. We believe in the transformative power of <abbr title="Kindness, Unity, Love">KUL</abbr>  and we invite you to be part
+          of our mission to spread love and help others.
+        </p>
+        <h3 style="font-size: 1.4pm;
     margin-bottom: 20px;
-    color: #26a96c;">Become the change!</h3>
-      <div class="buttons">
-        <a href="donate.html" class="button">Donate</a>
-        <a href="#join-section" class="button">Join</a>
+    color: #3acc88;">Become the change that shapes the future!</h3>
+        <div class="audio-player">
+          <button id="playAudio" style="background: transparent; color: white; border: none; cursor: pointer;">
+            <i class="fa-solid fa-play-circle" style="font-size: 3em;"></i>
+          </button>
+          <span class="tooltip">Click to play</span>
+          <audio id="audio" style="display: none;">
+            <source src="audio/about_us.mp4" type="audio/mp4" preload="auto">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-  <section id="teamID">
+
+  <section class="our-story" id="aboutID">
+    <div class="story-heading">
+      <h1>Our Story</h1>
+      <p>
+        A timeline of events that define who we are and where we come from. From humble beginnings to impactful
+        milestones, here's our journey.
+      </p>
+    </div>
+    <div class="story-content">
+      <div class="story-left-content">
+        <table class="story-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2008</td>
+              <td>Founded</td>
+              <td>Our organization was established by a group of passionate individuals aiming to bring change.</td>
+            </tr>
+            <tr>
+              <td>2010</td>
+              <td>First Office</td>
+              <td>Opened our first office in a small community to provide direct support and assistance.</td>
+            </tr>
+            <tr>
+              <td>2014</td>
+              <td>Community Engagement</td>
+              <td>Hosted our first volunteer-driven event with over 500 participants.</td>
+            </tr>
+            <tr>
+              <td>2017</td>
+              <td>National Recognition</td>
+              <td>Received recognition as a leading non-profit organization in the country.</td>
+            </tr>
+            <tr>
+              <td>2021</td>
+              <td>Digital Expansion</td>
+              <td>Launched a new website and mobile app to reach more people and streamline support.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="story-right-content">
+        <video controls>
+          <source src="video/ourstory.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="impact-section" id="impactID">
+    <h1  style="  text-align: center;font-size: 32px;margin-bottom: 20px; color: #26a96c;">Our Impact</h1>
+    <table class="impact-table">
+      <thead>
+        <tr>
+          <th>Area of Impact</th>
+          <th>Main Results</th>
+          <th>Numbers & Statistics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Education</td>
+          <td>Schools built and equipped for children in need.</td>
+          <td>50+ schools, 10,000+ children helped.</td>
+        </tr>
+        <tr>
+          <td>Healthcare</td>
+          <td>Medical equipment and support for healthcare centers.</td>
+          <td>20 clinics, 5,000+ patients treated.</td>
+        </tr>
+        <tr>
+          <td>Housing</td>
+          <td>Building and renovating homes for homeless families.</td>
+          <td>1,000+ homes built or repaired.</td>
+        </tr>
+        <tr>
+          <td>Food Aid</td>
+          <td>Food distribution for emergency communities.</td>
+          <td>1 million meals distributed.</td>
+        </tr>
+        <tr>
+          <td>Environmental Care</td>
+          <td>Tree planting and waste management projects.</td>
+          <td>100,000 trees planted.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section id="teamID" class="team-section">
     <div class="team-container" id="team-container">
       <h1 style="color: #26a96c; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
     </div>
@@ -373,7 +588,7 @@
           <p>Founder & CEO</p>
         </div>
       </div>
-  
+
       <div class="card_wrapper">
         <div class="team_image">
           <img src="image/team_2.png" alt="">
@@ -394,7 +609,7 @@
           <p>Content Writer</p>
         </div>
       </div>
-  
+
       <div class="card_wrapper">
         <div class="team_image">
           <img src="image/team_3.png" alt="">
@@ -431,15 +646,16 @@
       </div>
       <div class="col">
         <h3>Office</h3>
-<p>Mother Teresa Street</p>
-        <br>
-        <p>Gjilan, 60000, Kosov&euml;</p>
-        <br>
-        <p>Phone: +383 45 333 111</p>
-        <br>
-        <a class="class-id" style="color: white;" href="mailto:charity.kosova@gmail.com">charity.kosova@gmail.com</a>
-        <br>
-</div>
+        <address>
+          <p>Mother Teresa Street</p>
+          <br>
+          <p>Gjilan, 60000, Kosov&euml;</p>
+          <br>
+          <p>Phone: +383 45 333 111</p>
+          <br>
+          <a class="class-id" href="mailto:charity.kosova@gmail.com" style="color: white;">charity.kosova@gmail.com</a>
+        </address>
+      </div>
       <div class="col">
         <h3>Links</h3>
         <ul>
@@ -453,7 +669,7 @@
       </div>
       <div class="col">
         <h3>We'd Love to Hear From You</h3>
-        <form>
+        <form class="footer-form">
           <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
             placeholder="  Leave a message">
           <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
@@ -467,7 +683,29 @@
       </div>
     </div>
   </footer>
+  <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 
 </body>
+<script>
+  const playButton = document.getElementById('playAudio');
+  const audioElement = document.getElementById('audio');
+  const tooltip = document.querySelector('.tooltip');
+
+  playButton.addEventListener('click', function () {
+    if (audioElement.paused) {
+      audioElement.play();
+      playButton.innerHTML = '<i class="fas fa-pause-circle" style="font-size: 3em;"></i>';
+      tooltip.textContent = "Click to pause";
+    } else {
+      audioElement.pause();
+      playButton.innerHTML = '<i class="fa-solid fa-play-circle" style="font-size: 3em;"></i>';
+      tooltip.textContent = "Click to play";
+    }
+  });
+  audioElement.addEventListener('ended', function () {
+    playButton.innerHTML = '<i class="fa-solid fa-play-circle" style="font-size: 3em;"></i>';
+    tooltip.textContent = "Click to play";
+  });
+</script>
 
 </html>

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=devive-width, initial-scale=1.0">
 <title>Volunteer & Updates</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
     .volunteer-grid{
         display: grid;
@@ -134,38 +137,44 @@
             margin: 8px 0;
             font-size: 1rem;
         }   
-    .form-group{
-        margin-bottom: 20px;
-    }    
-    label{
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 500;
+    .form-group {
+      margin-bottom: 20px;
     }
-    input[type="text"],input[type="email"],input[type="password"]{
-        width: 100%;
-        padding: 10px;
-        border:1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-        box-sizing: border-box;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
     }
-    input[type="submit"]{
-        width: 100%;
-        padding: 10px;
-        background-color: #26a96c;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #26a96c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
     }
     input[type="submit"]:disabled {
       background-color: #ccc;
     }
     .join-section {
+      align-items: center;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       padding: 40px;
       background-color: #f7f7f7;
       margin-top: 60px;
@@ -173,34 +182,179 @@
       border-radius: 10px;
     }
 
+    .join-form {
+      width: 70%;
+      background-color: #26a96c;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .join-form h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .join-form p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .join-form .form-group {
+      margin-bottom: 15px;
+    }
+
+    .join-form label {
+      font-size: 14px;
+    }
+
+    .join-form input[type="text"],
+    .join-form input[type="email"],
+    .join-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .join-form input[type="submit"],input[type="reset"] {
+      width: 49%;
+      padding: 12px;
+      background-color: #fff;
+      color: #26a96c;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .join-form input[type="submit"]:hover,input[type="reset"]:hover {
+      background-color: #26a96c;
+      color: white;
+    }
+    .gender-options {
+      display: flex;
+      justify-content: space-around; 
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: white;
+      width: 100%;
+    }
+
+    .gender-options label {
+      font-size: 16px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    input[type="radio"] {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .fa-instagram {
+      animation-delay: .1s !important;
+    }
+    .fa-facebook {
+      animation-delay: .3s !important;
+    }
+    .fa-likedin {
+      animation-delay: .5s !important;
+    }     
+    .partnership {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .title {
+      font-size: 24px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .partner-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .partner-item:hover{
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0,0.15);
+    }
+    .partner-item {
+      background-color: #eef2f3;
+      color: white;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.3 ease;
+    }
+    .partner-item h2 {
+      font-size: 18px;
+      color: #0a7011;
+      margin: 0;
+    }
+    .partner-item p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+    .partner-item a {
+      font-size: 14px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    .partner-item a:hover {
+      text-decoration: underline;
+    }   
+
 </style>
 </head>
     <body>
-<header>
-    <div class="top-bar">
-        <div class="contact-info">
-            <span>+383 45 333 111</span>
-            <span>charity.kosova@gmail.com</span>
-        </div>
-        <div class="social-links">
-            <a href="https://facebook.com" target="_blank">Facebook</a> |
-            <a href="https://twitter.com" target="_blank">Twitter</a> |
-            <a href="https://instagram.com" target="_blank">Instagram</a>
-        </div>
-    </div>
-    <nav class="nav-links">
-    <div class="logo">HelpSomeone</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="volunteer.html">Volunteer & Updates</a></li>
-            <li><a href="popular.html">Popular Cases</a></li>
-            <li><a href="donate.html">Donate</a></li>
-            <li><a href="contact.html">Contact</a></li>  
-        </ul>
-        <button class="make-a-donate">Donate Now</button>
-    </nav>
-</header>
+        <header>
+            <div class="top-bar">
+                <div class="contact-info">
+                    <span>+383 45 333 111</span>
+                    <span>charity.kosova@gmail.com</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank">Facebook</a> |
+                    <a href="https://twitter.com" target="_blank">Twitter</a> |
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <div class="logo">HelpSomeone</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a>
+                            <li class="dropdown">
+                              <a href="about.html" >About Us</a>
+                              <ul class="dropdown-content">
+                                <li><a href="about.html#about-us ">Who are we</a></li>
+                                <li><a href="#">Our Schedule</a></li>
+                                <li><a href="about.html#team-container">Our Team</a></li>
+                                <li><a href="about.html#join-section">Join Us</a></li>
+                              </ul>
+                            </li>
+                            <li> <a href="volunteer.html">Volunteer & Updates</a></li>
+                                <li> <a href="popular.html">Popular Cases</a></li>
+                                <li> <a href="contact.html">Contact</a></li>
+                                <li> <a href="donate.html"></a></li>
+                                    
+                </ul>
+                <button class="make-a-donate">Donate Now</button>
+            </nav>
+        </header>
 <div class="container">
     <section>
         <h2>Join us in making a difference!</h2>
@@ -222,24 +376,24 @@
             <img src="image/vl1.jpg" alt="Emily Carter">
             <div>
                 <h3>Emily Carter</h3>
-                <p>Emily has been a key 
+                <p><i>Emily</i> has been a key 
                     contributor to our health programs, 
                     helping organize numerous health camps.</p>
             </div>
         </div>
         <div class="volunteer-card">
-        <img src="image/vl2.jpg" alt="James Bennett">
+        <img src="image/vl2.jpg" alt="James Park">
         <div>
-            <h3>James Bennett</h3>
-                <p>James supports our education initiatives by 
+            <h3>James Park</h3>
+                <p><i>James</i> supports our education initiatives by 
                     mentoring students and providing guidance.</p>
             </div>
         </div>
             <div class="volunteer-card">
-                <img src="image/vl3.jpg" alt="Harry Johnson">
+                <img src="image/vl3.jpg" alt="Harry Williams">
                 <div>
-                    <h3>Harry Johnson</h3>
-                    <p>Harry has been active in our environmental projects, 
+                    <h3>Harry Williams</h3>
+                    <p><i>Harry</i> has been active in our environmental projects, 
                         organizing clean-up drives and tree plantations.</p>
                 </div>
         </div>
@@ -247,7 +401,7 @@
             <img src="image/vl4.jpg" alt="Rine Ademi">
             <div>
                 <h3>Rin&euml Ademi</h3>
-                <p>Rin&euml is a dedicated charity volunteer who has spent the 
+                <p><i>Rin&euml</i> is a dedicated charity volunteer who has spent the 
                 last five years working tirelessly 
                 to support underprivileged families.</p>
             </div>
@@ -278,91 +432,188 @@
     </div>
 </section>
 <section>
-    <div class="join-section" id="join-section">
-        <div class="charity-info">
-      <img src="image/helpsomeone.png" style="width: 400px;" >
+  <div class="partnership">
+    <h1 class="title">Our Charity Partners</h1>
+    <ul class="partner-list" id="partner-list"></ul>
+</div>
+</section>
+<section>
+  <div class="join-section" id="join-section">
+    <div class="join-form">
+      <h3>Join Us Today</h3>
+      <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
+      <form id="joinForm" onsubmit="return validate()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Full Name" required>
         </div>
-          <div class="join-form">
-            <h3>Join Us Today</h3>
-            <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
-            <form id="joinForm" onsubmit="showLoading()">
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-              </div>
-      
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <div id="emailError" class="error"></div>
-              </div>
-      
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Choose a Password" required>
-                <div id="passwordError" class="error"></div>
-                <div id="passwordStrength" class="password-strength"></div>
-              </div>
-      
-              <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password"
-                  required>
-                <div id="confirmPasswordError" class="error"></div>
-              </div>
-      
-              <input type="submit" value="Join Now" id="submitBtn" disabled>
-            </form>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <div id="emailError" class="error"></div>
+        </div>
+        <div class="form-group">
+          <label for="gender">Choose Gender</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
           </div>
         </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Choose a Password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password" required>
+        </div>
+        <div id="message" style="display: none;"></div>
+        <input type="submit" value="Join Now" id="submitBtn" >
+        <input type="reset" value="Reset">
+      </form>
+    </div>
+  </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded",function(){
+    const form=document.querySelector(".join-form");
+    const messageElement=document.getElementById("message");
+    form.addEventListener("submit",function(event){
+    event.preventDefault();
+    let isValid = true;
+    let message = "";
+
+    const nameInput = document.getElementById("name").value.trim();
+    const emailInput = document.getElementById("email").value.trim();
+    const passwordInput = document.getElementById("password").value.trim();
+    const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
+    const genderInput=document.querySelector('input[name="gender"]:checked');
+
+
+    if (!nameInput) {
+      isValid = false;
+      message = "Full Name is required!";
+    } else if (!emailInput) {
+      isValid = false;
+      message = "Email is required!";
+    } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
+      isValid = false;
+      message = "Invalid email format!";
+    } else if(!genderInput){
+      isValid=false;
+      message="Gender selection is required!";
+    }
+      else if (!passwordInput) {
+      isValid = false;
+      message = "Password is required!";
+    } else if (!confirmPasswordInput) {
+      isValid = false;
+      message = "Confirm Password is required!";
+    } else if (passwordInput !== confirmPasswordInput) {
+      isValid = false;
+      message = "Passwords do not match!";
+    }
+     if (isValid) {
+      alert("Thank you for joining!");      
+    } else {
+      messageElement.style.color = "black";
+      messageElement.textContent = message;
+    }
+    messageElement.style.display = "block";
+    
+    return isValid; 
+    });
+  });
+
+
+  const partners = [
+            { 
+                name: "United Nations Children's Fund",
+                description: "Focuses on providing humanitarian aid, education, and protection to children worldwide", 
+                website: "https://www.unicef.org/" 
+            },
+            { 
+                name: "The Red Cross", 
+                description: "Provides emergency assistance, disaster relief, and education in communities affected by crises and conflicts.", 
+                website: "https://www.redcross.org/" 
+            },
+            { 
+                name: "Save the Children", 
+                description: "Works to improve the lives of children around the world by providing education, healthcare, and emergency relief.", 
+                website: "https://www.savethechildren.net/" 
+            },
+            { 
+                name: "Oxfam", 
+                description: "Works on global poverty alleviation, social justice, and humanitarian issues.", 
+                website: "https://www.oxfam.org/" 
+            },
+        ];
+
+        
+        const partnerItems = partners.map(partner => `
+            <li class="partner-item">
+                <h2>${partner.name}</h2>
+                <p>${partner.description}</p>
+                <a href="${partner.website}" target="_blank">Visit Website</a>
+            </li>
+        `);
+
+        
+        const partnerList = document.getElementById("partner-list");
+        partnerList.innerHTML = partnerItems.join('');
+</script>
+
 <footer>
-    <div class="row">
-      <div class="col">
-        <img src="image/logo-helpsomeone.png" class="logo" alt="">
-        <br>
-        <br>
-        <p
-          style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
-          Together, we create a world of hope.</p>
-      </div>
-      <div class="col">
-        <h3>Office</h3>
-<p>Mother Teresa Street</p>
+  <div class="row">
+    <div class="col">
+      <img src="image/logo-helpsomeone.png" class="logo" alt="">
+      <br>
+      <br>
+      <p
+        style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+        Together, we create a world of hope.</p>
+    </div>
+    <div class="col">
+      <h3>Office</h3>
+      <address>
+        <p>Mother Teresa Street</p>
         <br>
         <p>Gjilan, 60000, Kosov&euml;</p>
         <br>
         <p>Phone: +383 45 333 111</p>
         <br>
-        <a class="class-id" style="color: white;" href="mailto:charity.kosova@gmail.com">charity.kosova@gmail.com</a>
-        <br>
-</div>
-      <div class="col">
-        <h3>Links</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="volunteer.html">Volunteer & Updates</a></li>
-          <li><a href="popular.html"> Popular Cases</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-      <div class="col">
-        <h3>We'd Love to Hear From You</h3>
-        <form>
-          <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-            placeholder="  Leave a message">
-          <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-        </form>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
-          <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
-          <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
-          <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
-        </div>
+        <a class="class-id" href="mailto:charity.kosova@gmail.com" style="color: white;">charity.kosova@gmail.com</a>
+      </address>
+    </div>
+    <div class="col">
+      <h3>Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="volunteer.html">Volunteer & Updates</a></li>
+        <li><a href="popular.html"> Popular Cases</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>We'd Love to Hear From You</h3>
+      <form class="footer-form">
+        <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+          placeholder="  Leave a message">
+        <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+      </form>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
+        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
+        <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
+        <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
+  <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
     </body>
 </html>
