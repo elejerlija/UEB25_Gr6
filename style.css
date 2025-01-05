@@ -20,7 +20,7 @@
 
 
 .nav-links {
-    background-color: #18d17b;
+    background-color: rgb(46, 119, 46);
     color: white;
     display: flex;
     align-items: center;
@@ -41,7 +41,7 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #18d17b;
+  background-color:rgb(61, 133, 61);
   color: #fff;
   padding: 10px 0;
   min-width: 140px;
