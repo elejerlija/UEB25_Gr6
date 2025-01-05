@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins',Arial, sans-serif;
 }
 
 
@@ -44,7 +44,7 @@
   background-color:rgb(61, 133, 61);
   color: #fff;
   padding: 10px 0;
-  min-width: 140px;
+  min-width: 180px;
   z-index: 1000;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
