@@ -465,6 +465,55 @@ abbr:hover {
       margin-top: 100px;
       margin-bottom: 120px;
     }
+    @font-face {
+font-family:"playwrite-cc-au-qld";
+src:url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+font-display:auto;
+font-style:normal;
+font-stretch:normal;
+}
+
+.drag-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.drag-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.drag-container p {
+    font-size: 1em;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.draggable {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f7fbff;
+    border: 2px solid #2d6a4f;
+    border-radius: 5px;
+    cursor: grab;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.draggable:active {
+    background-color: #d0e7ff;
+    transform: scale(1.05);
+    cursor: grabbing;
+}
+
+.draggable:hover {
+    background-color: #e8efff;
+    transform: translateY(-2px);
+}
   </style>
 </head>
 
@@ -659,6 +708,19 @@ abbr:hover {
       </tbody>
     </table>
   </section>
+  <section id="priorityID">
+    <div id="priority-game" class="drag-container" style="font-family: action;" >
+  <h2 style="color: #2d6a4f;">Arrange by Priority</h2>
+  <p>Drag and drop the values below to rank them from most to least important.</p>
+  <div class="draggable" draggable="true">Compassion</div>
+  <div class="draggable" draggable="true">Generosity</div>
+  <div class="draggable" draggable="true">Kindness</div>
+  <div class="draggable" draggable="true">Community Support</div>
+  <div class="draggable" draggable="true">Empathy</div>
+ 
+ 
+</div>
+</section>
 
   
   <section id="teamID" class="team-section">
@@ -804,6 +866,40 @@ abbr:hover {
     playButton.innerHTML = '<i class="fa-solid fa-play-circle" style="font-size: 3em;"></i>';
     tooltip.textContent = "Click to play";
   });
+  const draggables = document.querySelectorAll('.draggable');
+  const container = document.getElementById('priority-game');
+  
+  draggables.forEach(draggable => {
+      draggable.addEventListener('dragstart', () => {
+          draggable.classList.add('dragging');
+      });
+  
+      draggable.addEventListener('dragend', () => {
+          draggable.classList.remove('dragging');
+      });
+  });
+  container.addEventListener('dragover', e => {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(container, e.clientY);
+      const dragging = document.querySelector('.dragging');
+      if (afterElement == null) {
+          container.appendChild(dragging);
+      } else {
+          container.insertBefore(dragging, afterElement);
+      }
+  });
+  function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+      return draggableElements.reduce((closest, child) => {
+          const box = child.getBoundingClientRect();
+          const offset = y - box.top - box.height / 2;
+          if (offset < 0 && offset > closest.offset) {
+              return { offset: offset, element: child };
+          } else {
+              return closest;
+          }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
 </script>
 
 </html>
