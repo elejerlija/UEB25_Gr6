@@ -370,17 +370,17 @@
 </head>
     <body>
         <header>
-          <div class="top-bar">
-            <div class="contact-info">
+            <div class="top-bar">
+                <div class="contact-info">
              <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone" style="color: #000; font-size: 12px;">   </i>  +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
              <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;"> <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>      charity.kosova@gmail.com</a>
-            </div>
-            <div class="social-links">
+                </div>
+                <div class="social-links">
               <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
               <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
               <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram" style=" color:  #DD2A7B; font-size: 16px;"></i></a>
+                </div>
             </div>
-          </div>
             <nav class="nav-links">
                 <div class="logo">HelpSomeone</div>
                 <ul class="nav-links">
@@ -590,24 +590,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const form=document.querySelector(".join-form");
     const messageElement=document.getElementById("message");
     form.addEventListener("submit",function(event){
-    event.preventDefault();
-    let isValid = true;
-    let message = "";
+        event.preventDefault();
+        let isValid = true;
+        let message = "";
 
-    const nameInput = document.getElementById("name").value.trim();
-    const emailInput = document.getElementById("email").value.trim();
-    const passwordInput = document.getElementById("password").value.trim();
-    const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
+            const nameInput = document.getElementById("name").value.trim();
+            const emailInput = document.getElementById("email").value.trim();
+            const passwordInput = document.getElementById("password").value.trim();
+            const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
     const genderInput=document.querySelector('input[name="gender"]:checked');
 
-
-    if (!nameInput) {
+            
+            if (!nameInput) {
       isValid = false;
       message = "Full Name is required!";
-    } else if (!emailInput) {
+            } else if (!emailInput) {
       isValid = false;
       message = "Email is required!";
-    } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
+            } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
       isValid = false;
       message = "Invalid email format!";
     } else if(!genderInput){
@@ -617,24 +617,24 @@ document.addEventListener("DOMContentLoaded", function () {
       else if (!passwordInput) {
       isValid = false;
       message = "Password is required!";
-    } else if (!confirmPasswordInput) {
+            } else if (!confirmPasswordInput) {
       isValid = false;
       message = "Confirm Password is required!";
-    } else if (passwordInput !== confirmPasswordInput) {
+            } else if (passwordInput !== confirmPasswordInput) {
       isValid = false;
       message = "Passwords do not match!";
-    }
+            }
      if (isValid) {
-      alert("Thank you for joining!");      
+            alert("Thank you for joining!");
     } else {
-      messageElement.style.color = "black";
-      messageElement.textContent = message;
-    }
+            messageElement.style.color = "black";
+            messageElement.textContent = message;
+        }
     messageElement.style.display = "block";
-    
-    return isValid; 
+
+        return isValid;
     });
-  });
+});
 
       
         const partners= [
