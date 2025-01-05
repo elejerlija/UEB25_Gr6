@@ -85,6 +85,39 @@
             visibility: hidden;
             opacity: 0;
         }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #28a745;
+            padding: 10px 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
         footer {
             background: #1e7c34;
             color: white;
@@ -107,15 +140,15 @@
 
     <div class="top-bar">
         <div class="contact-info">
-            <span>+383 45 333 111</span>
-            <span>charity.kosova@gmail.com</span>
+         <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone" style="color: #000; font-size: 12px;">   </i>  +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
+         <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;"> <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>      charity.kosova@gmail.com</a>
         </div>
         <div class="social-links">
-            <a href="https://facebook.com" target="_blank">Facebook</a> |
-            <a href="https://twitter.com" target="_blank">Twitter</a> |
-            <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+          <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
+          <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram" style=" color:  #DD2A7B; font-size: 16px;"></i></a>
         </div>
-    </div>
+      </div>
 
 
     <nav class="nav-links">
@@ -125,10 +158,10 @@
                     <li class="dropdown">
                       <a href="about.html" >About Us</a>
                       <ul class="dropdown-content">
-                        <li><a href="about.html#about-us ">Who are we</a></li>
-                        <li><a href="#">Our Schedule</a></li>
-                        <li><a href="about.html#team-container">Our Team</a></li>
-                        <li><a href="about.htmljoin-section">Join Us</a></li>
+                        <li><a href="#aboutID">Who are we</a></li>
+                        <li><a href="#impactID">Our Impact</a></li>
+                        <li><a href="#priorityID">Arrange by Priority</a></li>
+                        <li><a href="#teamID">Our Team</a></li>
                       </ul>
                     </li>
                     <li> <a href="volunteer.html">Volunteer & Updates</a></li>
@@ -141,6 +174,7 @@
     </nav>
 </header>
   <main>
+    <section class="donate-class">
     <h2>Donate for a good cause</h2>
     <form>
         <label for="amount">Value you want to donate (€):</label>
@@ -192,7 +226,7 @@
 
    
     document.querySelector('form').addEventListener('submit', function (e) {
-        e.preventDefault(); // Parandalon dërgimin e formularit
+        e.preventDefault(); 
       
         const amount = parseFloat(document.getElementById('amount').value) || 0;
 
