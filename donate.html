@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,13 @@
     <script src="script.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
     <title>Donate</title>
     <style>
-   body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -36,10 +39,14 @@
             text-align: center;
         }
 
-        #amount, #message, #name, #email {
-        color: black;
+        #amount,
+        #message,
+        #name,
+        #email {
+            color: black;
         }
-        .donate-class  {
+
+        .donate-class {
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -51,13 +58,15 @@
             margin: 0 auto;
         }
 
-        .donate-class  label {
+        .donate-class label {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .donate-class  input,   .donate-class  textarea,   .donate-class  button {
+        .donate-class input,
+        .donate-class textarea,
+        .donate-class button {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -66,14 +75,15 @@
         }
 
         .donate-class button {
-         background: linear-gradient(45deg, #007BFF, #28a745);
-         transition: transform 0.3s, background 0.3s;
-       }
+            background: linear-gradient(45deg, #007BFF, #28a745);
+            transition: transform 0.3s, background 0.3s;
+        }
 
         form button:hover {
-         transform: scale(1.1);
-         background: linear-gradient(45deg, #28a745, #007BFF);
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #28a745, #007BFF);
         }
+
         #non-anonymous-fields {
             visibility: visible;
             opacity: 1;
@@ -84,166 +94,181 @@
             visibility: hidden;
             opacity: 0;
         }
-
-
     </style>
 </head>
+
 <body>
-  <header>
+    <header>
 
-    <div class="top-bar">
-        <div class="contact-info">
-         <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone" style="color: #000; font-size: 12px;">   </i>  +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
-         <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;"> <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>      charity.kosova@gmail.com</a>
+        <div class="top-bar">
+            <div class="contact-info">
+                <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone"
+                        style="color: #000; font-size: 12px;"> </i> +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
+                <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;">
+                    <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>
+                    charity.kosova@gmail.com</a>
+            </div>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"
+                        style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"
+                        style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
+                <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram"
+                        style=" color:  #DD2A7B; font-size: 16px;"></i></a>
+            </div>
         </div>
-        <div class="social-links">
-          <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-          <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
-          <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram" style=" color:  #DD2A7B; font-size: 16px;"></i></a>
-        </div>
-      </div>
 
 
-    <nav class="nav-links">
-        <div class="logo">HelpSomeone</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a>
-                    <li class="dropdown">
-                      <a href="about.html" >About Us</a>
-                      <ul class="dropdown-content">
+        <nav class="nav-links">
+            <div class="logo">HelpSomeone</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a>
+                <li class="dropdown">
+                    <a href="about.html">About Us</a>
+                    <ul class="dropdown-content">
                         <li><a href="#aboutID">Who are we</a></li>
                         <li><a href="#impactID">Our Impact</a></li>
                         <li><a href="#priorityID">Arrange by Priority</a></li>
                         <li><a href="#teamID">Our Team</a></li>
-                      </ul>
-                    </li>
-                    <li> <a href="volunteer.html">Volunteer & Updates</a></li>
-                        <li> <a href="popular.html">Popular Cases</a></li>
-                        <li> <a href="contact.html">Contact</a></li>
-                        <li> <a href="donate.html"></a></li>
-                            
-        </ul>
-        <button class="make-a-donate">Donate Now</button>
-    </nav>
-</header>
-  <main>
-    <section class="donate-class">
-    <h2>Donate for a good cause</h2>
-    <form>
-        <label for="amount">Value you want to donate (€):</label>
-        <input list="donation-suggestions" id="amount" name="amount" required placeholder="Write a sum of money.">
-        <datalist id="donation-suggestions">
-          <option value="10">
-          <option value="20">
-          <option value="50">
-          <option value="100">
-         <option value="200">
-        </datalist>
+                    </ul>
+                </li>
+                <li> <a href="volunteer.html">Volunteer & Updates</a></li>
+                <li> <a href="popular.html">Popular Cases</a></li>
+                <li> <a href="contact.html">Contact</a></li>
+                <li> <a href="donate.html"></a></li>
 
-        <label for="anonymous-checkbox">
-            <input type="checkbox" id="anonymous-checkbox" name="anonymous">
-            I want to stay anonymous
-        </label>
+            </ul>
+            <button class="make-a-donate">Donate Now</button>
+        </nav>
+    </header>
 
-        <div id="non-anonymous-fields">
-            <label for="name">Full name:</label>
-            <input type="text" id="name" name="name">
+    <main>
+        <section class="donate-class">
+            <h2>Donate for a good cause</h2>
+            <form>
+                <label for="amount">Value you want to donate (€):</label>
+                <input list="donation-suggestions" id="amount" name="amount" required
+                    placeholder="Write a sum of money.">
+                <datalist id="donation-suggestions">
+                    <option value="10">
+                    <option value="20">
+                    <option value="50">
+                    <option value="100">
+                    <option value="200">
+                </datalist>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-        </div>
+                <label for="anonymous-checkbox">
+                    <input type="checkbox" id="anonymous-checkbox" name="anonymous">
+                    I want to stay anonymous
+                </label>
 
-        <label for="message">Your message (optional):</label>
-        <textarea id="message" name="message" rows="4"></textarea>
+                <div id="non-anonymous-fields">
+                    <label for="name">Full name:</label>
+                    <input type="text" id="name" name="name">
 
-        <section>
-          <h3>Total Raised:</h3>
-          <output id="total-raised">5000€</output>
-       </section>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
 
-        <button type="submit">Submit</button>
-    </form>
-</main>
+                <label for="message">Your message (optional):</label>
+                <textarea id="message" name="message" rows="4"></textarea>
 
-<script>
-    const anonymousCheckbox = document.getElementById('anonymous-checkbox');
-    const nonAnonymousFields = document.getElementById('non-anonymous-fields');
+                <section>
+                    <h3>Total Raised:</h3>
+                    <output id="total-raised">5000€</output>
+                </section>
 
-    anonymousCheckbox.addEventListener('change', () => {
-        if (anonymousCheckbox.checked) {
-            nonAnonymousFields.classList.add('hidden');
-        } else {
-            nonAnonymousFields.classList.remove('hidden');
-        }
-    });
+                <button type="submit">Submit</button>
+            </form>
+    </main>
 
-   
-    document.querySelector('form').addEventListener('submit', function (e) {
-        e.preventDefault(); 
-      
-        const amount = parseFloat(document.getElementById('amount').value) || 0;
+    <script>
+        const anonymousCheckbox = document.getElementById('anonymous-checkbox');
+        const nonAnonymousFields = document.getElementById('non-anonymous-fields');
 
-        const totalOutput = document.getElementById('total-raised');
-        const currentTotal = parseFloat(totalOutput.textContent.replace('€', '')) || 0;
+        anonymousCheckbox.addEventListener('change', () => {
+            if (anonymousCheckbox.checked) {
+                nonAnonymousFields.classList.add('hidden');
+            } else {
+                nonAnonymousFields.classList.remove('hidden');
+            }
+        });
 
-        const newTotal = currentTotal + amount;
 
-        totalOutput.textContent = `${newTotal}€`;
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        alert('Thank you for your donation!');
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
 
-        e.target.reset();
-    });
-</script>
+            const totalOutput = document.getElementById('total-raised');
+            const currentTotal = parseFloat(totalOutput.textContent.replace('€', '')) || 0;
+
+            const newTotal = currentTotal + amount;
+
+            totalOutput.textContent = `${newTotal}€`;
+
+            alert('Thank you for your donation!');
+
+            e.target.reset();
+        });
+    </script>
 
     <footer>
-      <div class="row">
-        <div class="col">
-          <img src="image/logo-helpsomeone.png" class="logo" alt="">
-          <br>
-          <br>
-          <p
-            style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
-            Together, we create a world of hope.</p>
+        <div class="row">
+            <div class="col">
+                <img src="image/logo-helpsomeone.png" class="logo" alt="">
+                <br>
+                <br>
+                <p
+                    style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+                    Together, we create a world of hope.</p>
+            </div>
+            <div class="col">
+                <h3>Office</h3>
+                <address>
+                    <p>Mother Teresa Street</p>
+                    <br>
+                    <p>Gjilan, 60000, Kosov&euml;</p>
+                    <br>
+                    <p>Phone: +383 45 333 111</p>
+                    <br>
+                    <a class="class-id" href="mailto:charity.kosova@gmail.com"
+                        style="color: white;">charity.kosova@gmail.com</a>
+                </address>
+            </div>
+            <div class="col">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="volunteer.html">Volunteer & Updates</a></li>
+                    <li><a href="popular.html"> Popular Cases</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>We'd Love to Hear From You</h3>
+                <form class="footer-form">
+                    <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+                        placeholder="  Leave a message">
+                    <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+                </form>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
+                            style="color: #0a7011;"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"
+                            style="color: #0a7011;"></i></i></a>
+                    <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter"
+                            style="color: #0a7011;"></i></i></a>
+                    <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp"
+                            style="color: #0a7011;"></i></i></a>
+                </div>
+            </div>
         </div>
-        <div class="col">
-          <h3>Office</h3>
-          <address>
-            <p>Mother Teresa Street</p>
-            <br>
-            <p>Gjilan, 60000, Kosov&euml;</p>
-            <br>
-            <p>Phone: +383 45 333 111</p>
-            <br>
-            <a class="class-id" href="mailto:charity.kosova@gmail.com" style="color: white;">charity.kosova@gmail.com</a>
-          </address>
-  </div>
-        <div class="col">
-          <h3>Links</h3>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="volunteer.html">Volunteer & Updates</a></li>
-            <li><a href="popular.html"> Popular Cases</a></li>
-            <li><a href="donate.html">Donate</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="col">
-          <h3>We'd Love to Hear From You</h3>
-          <form class="footer-form">
-            <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-              placeholder="  Leave a message">
-            <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-          </form>
-          <div class="social-icons">
-            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
-            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
-            <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
-            <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
-          </div>
-        </div>
-      </div>
     </footer>
+
+    <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 </body>
+
 </html>
