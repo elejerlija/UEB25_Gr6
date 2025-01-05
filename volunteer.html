@@ -151,7 +151,7 @@
     h2{
       font-size: 2rem;
     }
-    .form-group[type="text"],
+    .form-group input[type="text"],
     input[type="email"],
     input[type="password"] {
       width: 100%;
@@ -215,7 +215,8 @@
 
     .join-form input[type="text"],
     .join-form input[type="email"],
-    .join-form input[type="password"] {
+    .join-form input[type="password"]
+    .join-form input[type="number"] {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -514,6 +515,11 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" placeholder="Your Age"required >
+          <div id="ageError" class="error"></div>
+        </div>
+        <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Choose a Password" required>
         </div>
@@ -586,56 +592,57 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-  document.addEventListener("DOMContentLoaded",function(){
-    const form=document.querySelector(".join-form");
-    const messageElement=document.getElementById("message");
-    form.addEventListener("submit",function(event){
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".join-form");
+    const messageElement = document.getElementById("message");
+    
+    form.addEventListener("submit", function(event) {
         event.preventDefault();
+
         let isValid = true;
         let message = "";
 
+        try {
             const nameInput = document.getElementById("name").value.trim();
             const emailInput = document.getElementById("email").value.trim();
             const passwordInput = document.getElementById("password").value.trim();
             const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
-    const genderInput=document.querySelector('input[name="gender"]:checked');
-
+            const genderInput = document.querySelector('input[name="gender"]:checked');
+            const ageInput = document.getElementById("age").value.trim();
             
             if (!nameInput) {
-      isValid = false;
-      message = "Full Name is required!";
+                throw new Error("Full Name is required!");
             } else if (!emailInput) {
-      isValid = false;
-      message = "Email is required!";
+                throw new Error("Email is required!");
             } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
-      isValid = false;
-      message = "Invalid email format!";
-    } else if(!genderInput){
-      isValid=false;
-      message="Gender selection is required!";
-    }
-      else if (!passwordInput) {
-      isValid = false;
-      message = "Password is required!";
+                throw new Error("Invalid email format!");
+            } else if (!genderInput) {
+                throw new Error("Gender selection is required!");
+            } else if (isNaN(age) || age < 18) {
+                throw new Error("You must be at least 18 years old to join!");
+            } else if (!passwordInput) {
+                throw new Error("Password is required!");
             } else if (!confirmPasswordInput) {
-      isValid = false;
-      message = "Confirm Password is required!";
+                throw new Error("Confirm Password is required!");
             } else if (passwordInput !== confirmPasswordInput) {
-      isValid = false;
-      message = "Passwords do not match!";
+                throw new Error("Passwords do not match!");
             }
-     if (isValid) {
+
+            
             alert("Thank you for joining!");
-    } else {
+
+        } catch (error) {
+            
+            isValid = false;
+            message = error.message;
             messageElement.style.color = "black";
             messageElement.textContent = message;
+            messageElement.style.display = "block";
         }
-    messageElement.style.display = "block";
 
         return isValid;
     });
 });
-
       
         const partners= [
     { 
