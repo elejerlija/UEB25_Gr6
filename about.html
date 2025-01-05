@@ -717,7 +717,9 @@ font-stretch:normal;
   <div class="draggable" draggable="true">Kindness</div>
   <div class="draggable" draggable="true">Community Support</div>
   <div class="draggable" draggable="true">Empathy</div>
- 
+  <button onclick="showOrder()" style="padding: 10px 20px; background-color: #2d6a4f; color: white; border: none; border-radius: 5px; cursor: pointer;">Show Order</button>
+<br>
+    <p id="finalOrder"></p>
  
 </div>
 </section>
@@ -899,6 +901,14 @@ font-stretch:normal;
               return closest;
           }
       }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+  function showOrder() {
+      const items = document.querySelectorAll('.draggable');
+      let order = [];
+      items.forEach(item => {
+          order.push(item.textContent);
+      });
+      document.getElementById('finalOrder').textContent = "The order is: " + order.join(", ");
   }
 </script>
 
