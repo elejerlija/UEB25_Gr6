@@ -465,9 +465,12 @@ abbr:hover {
       margin-top: 100px;
       margin-bottom: 120px;
     }
+
     @font-face {
 font-family:"playwrite-cc-au-qld";
-src:url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+src:url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+url("https://use.typekit.net/af/906336/0000000000000000775845d1/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
 font-display:auto;
 font-style:normal;
 font-stretch:normal;
@@ -484,6 +487,7 @@ font-stretch:normal;
 }
 
 .drag-container h2 {
+  
     font-size: 1.5em;
     margin-bottom: 10px;
 }
@@ -502,6 +506,7 @@ font-stretch:normal;
     border-radius: 5px;
     cursor: grab;
     transition: transform 0.2s, background-color 0.2s;
+    color: #2d6a4f;
 }
 
 .draggable:active {
@@ -542,6 +547,7 @@ font-stretch:normal;
           <ul class="dropdown-content">
             <li><a href="#aboutID">Who are we</a></li>
             <li><a href="#impactID">Our Impact</a></li>
+            <li><a href="#priorityID">Arrange by Priority</a></li>
             <li><a href="#teamID">Our Team</a></li>
           </ul>
         </li>
@@ -709,14 +715,16 @@ font-stretch:normal;
     </table>
   </section>
   <section id="priorityID">
-    <div id="priority-game" class="drag-container" style="font-family: action;" >
+    <div id="priority-game" class="drag-container"  >
   <h2 style="color: #2d6a4f;">Arrange by Priority</h2>
   <p>Drag and drop the values below to rank them from most to least important.</p>
-  <div class="draggable" draggable="true">Compassion</div>
-  <div class="draggable" draggable="true">Generosity</div>
-  <div class="draggable" draggable="true">Kindness</div>
-  <div class="draggable" draggable="true">Community Support</div>
-  <div class="draggable" draggable="true">Empathy</div>
+  
+  <div class="draggable" draggable="true"  style="font-family: 'playwrite-cc-au-qld', sans-serif;" >Compassion</div>
+  <div class="draggable" draggable="true" style="font-family: 'playwrite-cc-au-qld', sans-serif;" >Generosity</div>
+  <div class="draggable" draggable="true" style="font-family: 'playwrite-cc-au-qld', sans-serif;">Kindness</div>
+  <div class="draggable" draggable="true" style="font-family: 'playwrite-cc-au-qld', sans-serif;">Community Support</div>
+  <div class="draggable" draggable="true" style="font-family: 'playwrite-cc-au-qld', sans-serif;">Empathy</div>
+
   <button onclick="showOrder()" style="padding: 10px 20px; background-color: #2d6a4f; color: white; border: none; border-radius: 5px; cursor: pointer;">Show Order</button>
 <br>
     <p id="finalOrder"></p>
