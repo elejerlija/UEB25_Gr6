@@ -33,19 +33,19 @@
       border-radius: 8px;
     }
 
-    form {
+    .contact-form {
       background-color:whitesmoke;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    form label {
+    .contact-form label {
       display: block;
       margin: 10px 0 5px;
     }
 
-    form input, form textarea {
+    .contact-form input,  .contact-form textarea {
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
@@ -53,7 +53,7 @@
       border-radius: 4px;
     }
 
-    form button {
+    .contact-form button {
       background-color:lightgreen;
       color: #0e0000;
       padding: 10px 15px;
@@ -62,7 +62,7 @@
       cursor: pointer;
     }
 
-    form button:hover {
+    .contact-form button:hover {
       background-color: #555;
     }
 
@@ -110,7 +110,7 @@
 </header>
    
     <main>
-        <section>
+        <section class="contact-form" >
         <h2>Get in Touch</h2>
 <p>If you have any questions or would like to reach out to us, please use the form below.</p>
 <form action="process_contact.php" method="POST">
@@ -125,6 +125,7 @@
 
     <button type="submit">Send Message</button>
 </form>
+        </section>
  
 </main>
 
