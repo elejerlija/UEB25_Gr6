@@ -624,11 +624,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector(".join-form");
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form.join-form"); 
     const messageElement = document.getElementById("message");
-    
-    form.addEventListener("submit", function(event) {
+
+    form.addEventListener("submit", function (event) {
         event.preventDefault();
 
         let isValid = true;
@@ -641,7 +641,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
             const genderInput = document.querySelector('input[name="gender"]:checked');
             const ageInput = document.getElementById("age").value.trim();
-            
+            const age = parseInt(ageInput, 10);
+
             if (!nameInput) {
                 throw new Error("Full Name is required!");
             } else if (!emailInput) {
@@ -660,22 +661,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 throw new Error("Passwords do not match!");
             }
 
-            
             alert("Thank you for joining!");
 
+            form.reset(); 
+            messageElement.style.display = "none";
+
         } catch (error) {
-            
+          
             isValid = false;
             message = error.message;
-            messageElement.style.color = "black";
+            messageElement.style.color = "red";
             messageElement.textContent = message;
             messageElement.style.display = "block";
         }
-
-        return isValid;
     });
 });
-      
+
+
         const partners= [
     { 
         name: "United Nations Children's Fund",
@@ -757,10 +759,10 @@ partnerList.innerHTML = partnerItems.join('');
         <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
       </form>
       <div class="social-icons">
-        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
-        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
-        <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
-        <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
+        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #2d6a4f;"></i></a>
+        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #2d6a4f;"></i></i></a>
+        <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #2d6a4f;"></i></i></a>
+        <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #2d6a4f;"></i></i></a>
       </div>
     </div>
   </div>

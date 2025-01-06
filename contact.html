@@ -15,61 +15,90 @@
   <title>Contact</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-image: url('https://annamrita.org/wp-content/uploads/2023/02/Why-should-you-donate-to-the-education-of-impoverished-children_.jpg');
-      background-size: cover;
-      background-position: center;
-      color: black;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(image/contact.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: black;
+}
 
-    h2 {
-      color: black;
-    }
+h2 {
+    color: #333; 
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    main {
-      padding: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 8px;
-    }
+main {
+    padding: 5px;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: rgba(1, 43, 8, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
 
-    .contact-form {
-      background-color: whitesmoke;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+.contact-form {
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+}
 
-    .contact-form label {
-      display: block;
-      margin: 10px 0 5px;
-    }
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold; 
+    color: #333;
+}
 
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd; 
+    border-radius: 6px;
+    font-size: 14px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); 
+}
 
-    .contact-form button {
-      background-color: lightgreen;
-      color: #0e0000;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: lightgreen; 
+    outline: none;
+    box-shadow: 0 0 4px lightgreen;
+}
 
-    .contact-form button:hover {
-      background-color: #555;
-    }
+.contact-form button {
+    background-color: lightgreen;
+    color: #0e0000;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.contact-form button:hover {
+    background-color: #28a745;
+    transform: translateY(-2px);
+}
+
+.contact-form button:active {
+    transform: translateY(0); 
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
   </style>
 </head>
 
@@ -121,17 +150,13 @@
     <section class="contact-form">
       <h2>Get in Touch</h2>
       <p>If you have any questions or would like to reach out to us, please use the form below.</p>
-      <form action="process_contact.php" method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Your Message:</label>
-        <textarea id="message" name="message" required></textarea>
-
-        <button type="submit">Send Message</button>
+   <br>
+      <form id="contactForm">
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="email" id="email" placeholder="Your Email" required>
+          <textarea id="message" placeholder="Your Message" required></textarea>
+          <button type="submit">Contact</button>
+          <p id="feedback" class="message"></p>
       </form>
     </section>
   </main>
@@ -177,15 +202,63 @@
           <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
         </form>
         <div class="social-icons">
-          <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
-          <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
-          <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
-          <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
+          <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #2d6a4f;"></i></a>
+          <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #2d6a4f;"></i></i></a>
+          <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #2d6a4f;"></i></i></a>
+          <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #2d6a4f;"></i></i></a>
         </div>
       </div>
     </div>
   </footer>
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    const feedbackElement = document.getElementById("feedback");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); 
+
+        
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        try {
+           
+            if (!name) {
+                throw new Error("Name is required!");
+            }
+            if (!email) {
+                throw new Error("Email is required!");
+            }
+            if (!email.includes("@") || !email.includes(".")) {
+                throw new Error("Invalid email format!");
+            }
+            if (!message) {
+                throw new Error("Message cannot be empty!");
+            }
+
+          
+            feedbackElement.textContent = "Thank you for contacting us!";
+            feedbackElement.className = "message success";
+            feedbackElement.style.display = "block";
+
+     
+            form.reset();
+
+        } catch (error) {
+          
+            feedbackElement.textContent = error.message;
+            feedbackElement.className = "message error";
+            feedbackElement.style.display = "block";
+        }
+    });
+});
+
+</script>
+
 
 </html>
