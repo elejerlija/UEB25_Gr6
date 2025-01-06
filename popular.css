@@ -98,7 +98,7 @@ div .cases-container {
     width: auto;
     box-shadow: 0 7px 10px rgba(28, 74, 43, 0.4);
     flex-shrink: 0;
-    
+    gap: 50px;
 }
 
 .section h2 {

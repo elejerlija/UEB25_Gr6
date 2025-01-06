@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 
     <style>
         a.visited {
@@ -220,7 +223,7 @@
             <div class="cases-container">
 
                 <div class="case">
-                    <img src="image/popular-1.jpg" alt="Case 1">
+                    <img src="image/popular-5.jpg" alt="Case 1" height="135">
                     <div class="progress-bar"><span style="width: 30%;"></span></div>
                     <h3 style="padding: 15px;">Help us to Send Food</h3>
                     <p>Raised: $5000 | Goal: $9000</p>
@@ -228,7 +231,7 @@
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-2.jpg" alt="Case 2">
+                    <img src="image/popular-2.jpg" alt="Case 2" height="135">
                     <div class="progress-bar"><span style="width: 50%;"></span></div>
                     <h3 style="padding: 15px;">Clothes For Everyone</h3>
                     <p>Raised: $6000 | Goal: $12000</p>
@@ -236,7 +239,7 @@
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-3.jpg" alt="Case 3" height="120">
+                    <img src="image/popular-3.jpg" alt="Case 3" height="135">
                     <div class="progress-bar"><span style="width: 70%;"></span></div>
                     <h3 style="padding: 15px;">Water For All Children</h3>
                     <p>Raised: $7000 | Goal: $10000</p>
@@ -244,7 +247,7 @@
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-4.jpg" height="145" alt="Case 4">
+                    <img src="image/popular-4.jpg" height="135" alt="Case 4">
                     <div class="progress-bar"><span style="width: 40%;"></span></div>
                     <h3 style="padding: 7px;">Education For Everyone</h3>
                     <p>Raised: $4000 | Goal: $8000</p>
@@ -252,7 +255,7 @@
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-5.jpg" alt="Case 5">
+                    <img src="image/popular-1.jpg" alt="Case 5" height="135">
                     <div class="progress-bar"><span style="width: 50%;"></span></div>
                     <h3 style="padding: 15px;">Medical Support</h3>
                     <p>Raised: $8000 | Goal: $15000</p>
@@ -260,7 +263,7 @@
                 </div>
 
                 <div class="case">
-                    <img src="image/popular-6.jpg" alt="Case 6">
+                    <img src="image/popular-6.jpg" alt="Case 6" height="135">
                     <div class="progress-bar"><span style="width: 25%;"></span></div>
                     <h3 style="padding: 15px;">Homes for Everyone</h3>
                     <p>Raised: $2500 | Goal: $10000</p>
@@ -275,7 +278,7 @@
 
         <div id="modal4" class="modal">
             <div class="modal-content">
-                <h3>Help us to Send Food</h3>
+                <h3>Help us to Send Food</h3><br>
                 <p>"Every day, millions of people around the world go to bed hungry, with many
                     struggling to find their next meal. Hunger affects not just physical health
                     but also emotional well-being and the ability to thrive. Our mission is to
@@ -293,7 +296,7 @@
 
         <div id="modal5" class="modal">
             <div class="modal-content">
-                <h3>Clothes For Everyone</h3>
+                <h3>Clothes For Everyone</h3><br>
                 <p>"Access to clean, warm, and suitable clothing is essential for maintaining
                     dignity and resilience, yet many individuals face daily hardships without
                     this basic necessity. Our initiative focuses on collecting, creating, and
@@ -308,7 +311,7 @@
 
         <div id="modal6" class="modal">
             <div class="modal-content">
-                <h3>Water For All Children</h3>
+                <h3>Water For All Children</h3><br>
                 <p>"Clean and safe drinking water is a fundamental right, yet millions of
                     children worldwide lack access to this life-sustaining resource.
                     Contaminated water leads to diseases, malnutrition, and high mortality rates,
@@ -321,7 +324,7 @@
             </div>
         </div>
         <div id="modal7" class="modal">
-            <h2>Education For Everyone</h2>
+            <h2>Education For Everyone</h2><br>
             <p>"Education is the key to breaking the cycle of poverty and unlocking potential,
                 yet millions of children and adults around the world remain without access
                 to quality learning opportunities. Our initiative aims to provide essential
@@ -333,7 +336,7 @@
             <a href="#" class="close-btn">Close</a>
         </div>
         <div id="modal8" class="modal">
-            <h2>Medical Support</h2>
+            <h2>Medical Support</h2><br>
             <p>"In many parts of the world, access to healthcare remains a privilege rather than a basic right
                 . Illness and injury can devastate families without the means to pay for medical treatment.
                 Our medical support programs focus on delivering essential healthcare services, medicines,
@@ -344,7 +347,7 @@
             <a href="#" class="close-btn">Close</a>
         </div>
         <div id="modal9" class="modal">
-            <h2>Homes for Everyone</h2>
+            <h2>Homes for Everyone</h2><br>
             <p>"A safe and secure home is more than just a roof over one’s head—it is a foundation for stability,
                 safety, and a better future. Millions of people around the world live without adequate shelter,
                 exposing them to harsh weather, illness, and insecurity. Our mission is to provide housing solutions,
@@ -408,6 +411,8 @@
             </div>
         </div>
     </footer>
+
+    <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 
 
     </fieldset>
