@@ -238,36 +238,6 @@ ol li:hover {
             </form>
     </main>
 
-    <script>
-        const anonymousCheckbox = document.getElementById('anonymous-checkbox');
-        const nonAnonymousFields = document.getElementById('non-anonymous-fields');
-
-        anonymousCheckbox.addEventListener('change', () => {
-            if (anonymousCheckbox.checked) {
-                nonAnonymousFields.classList.add('hidden');
-            } else {
-                nonAnonymousFields.classList.remove('hidden');
-            }
-        });
-
-
-        document.querySelector('form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const amount = parseFloat(document.getElementById('amount').value) || 0;
-
-            const totalOutput = document.getElementById('total-raised');
-            const currentTotal = parseFloat(totalOutput.textContent.replace('€', '')) || 0;
-
-            const newTotal = currentTotal + amount;
-
-            totalOutput.textContent = `${newTotal}€`;
-
-            alert('Thank you for your donation!');
-
-            e.target.reset();
-        });
-    </script>
 
     <footer>
         <div class="row">
@@ -327,4 +297,50 @@ ol li:hover {
     <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 </body>
 
+<script>
+    const anonymousCheckbox = document.getElementById('anonymous-checkbox');
+    const nonAnonymousFields = document.getElementById('non-anonymous-fields');
+
+    anonymousCheckbox.addEventListener('change', () => {
+        if (anonymousCheckbox.checked) {
+            nonAnonymousFields.classList.add('hidden');
+        } else {
+            nonAnonymousFields.classList.remove('hidden');
+        }
+    });
+
+    let totalRaised = 5000; 
+
+document.querySelector('form').addEventListener('submit', function (e) {
+e.preventDefault();
+
+
+const amount = parseFloat(document.getElementById('amount').value) || 0;
+
+totalRaised += amount;
+
+const totalOutput = document.getElementById('total-raised');
+totalOutput.textContent = `${totalRaised.toLocaleString()}€`;
+
+
+let donorName = document.getElementById('name').value || "Anonymous"; 
+let donationAmount = amount.toFixed(2) + "€"; 
+
+
+let donationMessage = "Thank you, [DonorName]! You have donated [Amount] for our cause.";
+
+
+donationMessage = donationMessage.replace("[DonorName]", donorName).replace("[Amount]", donationAmount);
+
+
+alert(donationMessage);
+
+
+e.target.reset();
+});
+
+
+
+
+</script>
 </html>
