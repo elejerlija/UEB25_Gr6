@@ -193,7 +193,6 @@ ol li:hover {
         <br>
         <ol style="word-wrap: break-word;" >
           <li style="white-space: pre-wrap;">    Select the amount you wish to donate.</li>
-          <li style="white-space: pre-wrap;">    Choose your payment method (PayPal, Credit Card).</li>
           <li style="white-space: pre-wrap;">    Complete the donation and receive a confirmation of your contribution.</li>
         </ol>
       </section>
@@ -304,9 +303,9 @@ ol li:hover {
 
     anonymousCheckbox.change(function() {
         if (anonymousCheckbox.is(':checked')) {
-            nonAnonymousFields.hide();  // Fshihet elementi kur është i kontrolluar
+            nonAnonymousFields.hide(); 
         } else {
-            nonAnonymousFields.show();  // Shfaqet elementi kur nuk është i kontrolluar
+            nonAnonymousFields.show(); 
         }
     });
 });
@@ -319,7 +318,10 @@ e.preventDefault();
 
 
 const amount = parseFloat(document.getElementById('amount').value) || 0;
-
+if(amount<0){
+    alert("You cannot submit this amount.");
+    return;
+}
 totalRaised += amount;
 
 const totalOutput = document.getElementById('total-raised');
