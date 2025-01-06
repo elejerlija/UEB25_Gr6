@@ -67,3 +67,7 @@ if (clickSound) {
 } else {
  console.error('The audio element with ID "click-sound" was not found.');
 }
+
+setTimeout(function() {
+  document.querySelector('.make-a-donate').style.opacity = 1; 
+}, 500);
