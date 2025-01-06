@@ -20,6 +20,7 @@
             padding: 0;
             line-height: 1.6;
             background-image: url('https://annamrita.org/wp-content/uploads/2023/02/Why-should-you-donate-to-the-education-of-impoverished-children_.jpg');
+            background-attachment:scroll;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -76,7 +77,7 @@
 
         .donate-class button {
             background: linear-gradient(45deg, #007BFF, #28a745);
-            transition: transform 0.3s, background 0.3s;
+            transition: transform 0.3s, background-color 0.3s;
         }
 
         form button:hover {
@@ -94,6 +95,49 @@
             visibility: hidden;
             opacity: 0;
         }
+ 
+ol {
+  padding-left: 0; 
+  list-style-type: none;
+  counter-reset: list-counter; 
+  font-size: 18px;
+  line-height: 1.6;
+  font-family: Arial, sans-serif;
+
+}
+
+
+ol li {
+  position: relative;
+  margin-bottom: 15px;
+  padding-left: 30px; 
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  border-left: 4px solid #2d6a4f;
+}
+
+
+ol li::before {
+  content: counter(list-counter) ".  "; 
+  counter-increment: list-counter; 
+  position: absolute;
+  left: 10px; 
+  top: 10px; 
+  color: #2d6a4f;
+  font-weight: bold;
+}
+
+ol li:hover {
+  background-color: #eaf5e7;
+  cursor: pointer;
+}
+.HowToDonate-section{
+    margin-top: 20px;
+
+}
+
+
     </style>
 </head>
 
@@ -142,6 +186,18 @@
         </nav>
     </header>
 
+
+
+    <section class="HowToDonate-section">
+        <h2>How to Make a Donation:</h2>
+        <br>
+        <ol>
+          <li>&nbsp;&nbsp;&nbsp;Select the amount you wish to donate.</li>
+          <li> &nbsp;&nbsp;&nbsp;Choose your payment method (PayPal, Credit Card).</li>
+          <li> &nbsp;&nbsp;&nbsp;Complete the donation and receive a confirmation of your contribution.</li>
+        </ol>
+      </section>
+      
     <main>
         <section class="donate-class">
             <h2>Donate for a good cause</h2>
