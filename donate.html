@@ -298,16 +298,19 @@ ol li:hover {
 </body>
 
 <script>
-    const anonymousCheckbox = document.getElementById('anonymous-checkbox');
-    const nonAnonymousFields = document.getElementById('non-anonymous-fields');
+ $(document).ready(function() {
+    const anonymousCheckbox = $('#anonymous-checkbox');
+    const nonAnonymousFields = $('#non-anonymous-fields');
 
-    anonymousCheckbox.addEventListener('change', () => {
-        if (anonymousCheckbox.checked) {
-            nonAnonymousFields.classList.add('hidden');
+    anonymousCheckbox.change(function() {
+        if (anonymousCheckbox.is(':checked')) {
+            nonAnonymousFields.hide();  // Fshihet elementi kur është i kontrolluar
         } else {
-            nonAnonymousFields.classList.remove('hidden');
+            nonAnonymousFields.show();  // Shfaqet elementi kur nuk është i kontrolluar
         }
     });
+});
+
 
     let totalRaised = 5000; 
 
