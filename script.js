@@ -51,11 +51,23 @@ showSlide(slideIndex);
 
 
 
+
 const clickButtons = document.querySelectorAll('a, button');
 const clickSound = document.getElementById('click-sound');
 
-clickButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    clickSound.play();
+if (clickSound) {
+  clickButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (clickSound.paused) {
+        clickSound.currentTime = 0; 
+        clickSound.play(); 
+      }
+    });
   });
-});
+} else {
+ console.error('The audio element with ID "click-sound" was not found.');
+}
+
+setTimeout(function() {
+  document.querySelector('.make-a-donate').style.opacity = 1; 
+}, 500);

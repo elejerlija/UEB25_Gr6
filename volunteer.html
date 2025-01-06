@@ -8,7 +8,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="script.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
+  
     .volunteer-grid{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -18,7 +20,7 @@
         padding: 20px;
     }
     .volunteer-card{
-        background: #f9f9f9;
+      background: radial-gradient(circle, rgba(123, 212, 123, 0.957), #f7f7f7);
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -58,53 +60,72 @@
         margin: 0 auto;
         padding: 20px;
     }
-    .container{
-        background:linear-gradient(135deg,#ffffff,#f7f7f7);
-        padding: 50px 50px;
-        border-radius: 10px;
-        box-shadow :0 4px 8px rgba(0, 0, 0, 0.1) ;
-        max-width: 900px;
-        margin: auto;
-        text-align: center;
-    }
-    .container h2{
-        font-size: 2.5em;
-        font-weight:bold ;
-        color:black;
-        margin-bottom: 15px;
-        line-height: 1.4;
-    }
-    .container p{
-        font-size: 1.2em;
-        color: #555;
-        margin-bottom: 30px;
-        line-height: 1.8;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    .container ul{
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        max-width: 600px;
-        text-align: left;
-    }
-    .container ul li{
-        font-size: 1.1em;
-        color: #333;
-        padding: 10px 0;
-        position: relative;
-        padding-left: 30px;
-        line-height: 1.6;
-    }
-    .container ul li::before{
-        content: "✅";
-        position: absolute;
-        left: 0;
-        color: #28a745;
-        font-size: 1.2em;
-        line-height: 1;
-    }
+    .container {
+    background: linear-gradient(135deg, rgba(123, 212, 123, 0.957), #f7f7f7);
+    padding: 50px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.container p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: left;
+}
+.container ul li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+
+.container ul ul {
+    padding-left: 20px; 
+    margin-top: 5px;
+}
+
+.container ul ul li::before {
+    content: none; 
+}
+.container ul li {
+    font-size: 1.1em;
+    color: black;
+    padding: 10px 0;
+    position: relative;
+    padding-left: 30px;
+    line-height: 1.6;
+}
+.container ul ul li {
+  margin-bottom: 3px;
+    font-size: 16px;
+    color:black;
+}
+
     @media (max-width :768px){
         .container{
             padding: 30px 15px;
@@ -146,8 +167,10 @@
       margin-bottom: 5px;
       font-weight: 500;
     }
-
-    input[type="text"],
+    h2{
+      font-size: 2rem;
+    }
+    .form-group input[type="text"],
     input[type="email"],
     input[type="password"] {
       width: 100%;
@@ -169,14 +192,14 @@
       cursor: pointer;
     }
     input[type="submit"]:disabled {
-      background-color: #ccc;
+      background-color: white;
     }
     .join-section {
       align-items: center;
       display: flex;
       justify-content: center;
       padding: 40px;
-      background-color: #f7f7f7;
+      background-color: white;
       margin-top: 60px;
       margin-bottom: 60px;
       border-radius: 10px;
@@ -184,7 +207,7 @@
 
     .join-form {
       width: 70%;
-      background-color: #26a96c;
+      background-color: #228929;
       padding: 20px;
       border-radius: 10px;
       color: white;
@@ -211,7 +234,8 @@
 
     .join-form input[type="text"],
     .join-form input[type="email"],
-    .join-form input[type="password"] {
+    .join-form input[type="password"]
+    .join-form input[type="number"] {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -231,7 +255,7 @@
       transition: background-color 0.3s ease;
     }
     .join-form input[type="submit"]:hover,input[type="reset"]:hover {
-      background-color: #26a96c;
+      background-color: #3dae51;
       color: white;
     }
     .gender-options {
@@ -265,21 +289,116 @@
     }
     .fa-likedin {
       animation-delay: .5s !important;
-    }        
+    }     
+    .partnership {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background:linear-gradient(135deg,rgba(123, 212, 123, 0.957),#f7f7f7);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .title {
+      font-size: 24px;
+      color: black;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .partner-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .partner-item:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .partner-item {
+      background-color: #eef2f3;
+      color: white;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.3 ease;
+    }
+    .partner-item h2 {
+      font-size: 18px;
+      color: #0a7011;
+      margin: 0;
+    }
+    .partner-item p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+    .partner-item a {
+      font-size: 14px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    .partner-item a:hover {
+      text-decoration: underline;
+    }   
+    .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 400px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
 
+  .calendar div {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+  }
+
+  .calendar div.today {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+
+  .calendar div.event {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .calendar div.event:hover {
+    background-color: #218838;
+  }
+
+  .calendar-header {
+    grid-column: span 7;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 </style>
 </head>
     <body>
         <header>
             <div class="top-bar">
                 <div class="contact-info">
-                    <span>+383 45 333 111</span>
-                    <span>charity.kosova@gmail.com</span>
+             <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone" style="color: #000; font-size: 12px;">   </i>  +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
+             <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;"> <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>      charity.kosova@gmail.com</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://facebook.com" target="_blank">Facebook</a> |
-                    <a href="https://twitter.com" target="_blank">Twitter</a> |
-                    <a href="https://instagram.com" target="_blank">Instagram</a>
+              <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+              <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
+              <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram" style=" color:  #DD2A7B; font-size: 16px;"></i></a>
                 </div>
             </div>
             <nav class="nav-links">
@@ -289,33 +408,47 @@
                             <li class="dropdown">
                               <a href="about.html" >About Us</a>
                               <ul class="dropdown-content">
-                                <li><a href="about.html#about-us ">Who are we</a></li>
-                                <li><a href="#">Our Schedule</a></li>
-                                <li><a href="about.html#team-container">Our Team</a></li>
-                                <li><a href="about.html#join-section">Join Us</a></li>
+                                <li><a href="about.html#aboutID ">Who are we</a></li>
+                                <li><a href="about.html#impactID">Our Impact</a></li>
+                                <li><a href="about.html#priorityID">Arrange by Priority</a></li>
+                                <li><a href="about.html#teamID">Our Team</a></li>
                               </ul>
                             </li>
                             <li> <a href="volunteer.html">Volunteer & Updates</a></li>
                                 <li> <a href="popular.html">Popular Cases</a></li>
                                 <li> <a href="contact.html">Contact</a></li>
-                                <li> <a href="donate.html"></a></li>
-                                    
+                                <li> <a href="donate.html"></a></li>           
                 </ul>
                 <button class="make-a-donate">Donate Now</button>
             </nav>
         </header>
+        <br><br>
 <div class="container">
     <section>
         <h2>Join us in making a difference!</h2>
-        <p>Volunteering with HelpSomeone is a rewarding way to give back to the community. 
+        <p>Volunteering with <mark style="background-color: rgb(26, 145, 26);border-radius: 5px;">HelpSomeone</mark> is a rewarding way to give back to the community. 
             Whether you have a few hours to spare or want to dedicate long-term support, your contributions can create lasting change.</p><br>
             <h2>Why volunteer with us ?</h2>
             <ul>
-                <li>Make a positive impact</li>
-                <li>Meet like-minded individuals</li>
-                <li>Develop new skills</li>
-                <li>Gain work experience and references</li>
-            </ul>
+              <li>Make a Positive Impact
+                  <ul>
+                      <li style="margin-bottom: 0.02px;">Help improve the lives of those in need</li>
+                      <li >Contribute to meaningful projects in your community</li>
+                  </ul>
+                </li>
+              <li>Develop New Skills
+                  <ul>
+                      <li>Enhance your leadership and communication skills</li>
+                      <li >Learn to work in a team and manage projects</li>
+                  </ul>
+              </li>
+              <li>Gain Work Experience and References
+                  <ul>
+                      <li>Build your resume with valuable volunteer experience</li>
+                      <li >Receive letters of recommendation from our organization</li>
+                  </ul>
+              </li>
+          </ul>
     </section>
 </div>
 <section class="volunteers">
@@ -380,7 +513,17 @@
         <p>Thank you to all who donated and participated!</p>
     </div>
 </section>
+<h2 style="text-align: center; margin: 0 auto;font-size: 2rem;">Event Calendar</h2><br>
 <section>
+  <div id="event-calendar" class="calendar"></div>
+</section>
+<section>
+  <div class="partnership">
+    <h1 class="title" style="font-size: 2rem;">Our Charity Partners</h1>
+    <ul class="partner-list" id="partner-list"></ul>
+</div>
+</section>
+<section style="background-color: white;">
   <div class="join-section" id="join-section">
     <div class="join-form">
       <h3>Join Us Today</h3>
@@ -404,6 +547,11 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" placeholder="Your Age"required >
+          <div id="ageError" class="error"></div>
+        </div>
+        <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Choose a Password" required>
         </div>
@@ -420,106 +568,203 @@
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded",function(){
-    const form=document.querySelector(".join-form");
-    const messageElement=document.getElementById("message");
-    form.addEventListener("submit",function(event){
-    event.preventDefault();
-    let isValid = true;
-    let message = "";
 
-    const nameInput = document.getElementById("name").value.trim();
-    const emailInput = document.getElementById("email").value.trim();
-    const passwordInput = document.getElementById("password").value.trim();
-    const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
-    const genderInput=document.querySelector('input[name="gender"]:checked');
+document.addEventListener("DOMContentLoaded", function () {
+    const events = [
+        { date: "2025-01-10", name: "Community Cleanup Drive" },
+        { date: "2025-01-15", name: "Annual Fundraiser Gala" }
+    ];
+    const calendarDiv = document.getElementById("event-calendar");
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    if (!nameInput) {
-      isValid = false;
-      message = "Full Name is required!";
-    } else if (!emailInput) {
-      isValid = false;
-      message = "Email is required!";
-    } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
-      isValid = false;
-      message = "Invalid email format!";
-    } else if(!genderInput){
-      isValid=false;
-      message="Gender selection is required!";
-    }
-      else if (!passwordInput) {
-      isValid = false;
-      message = "Password is required!";
-    } else if (!confirmPasswordInput) {
-      isValid = false;
-      message = "Confirm Password is required!";
-    } else if (passwordInput !== confirmPasswordInput) {
-      isValid = false;
-      message = "Passwords do not match!";
-    }
-     if (isValid) {
-      alert("Thank you for joining!");      
-    } else {
-      messageElement.style.color = "black";
-      messageElement.textContent = message;
-    }
-    messageElement.style.display = "block";
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"
+    ];
+
     
-    return isValid; 
+    const headerDiv = document.createElement("div");
+    headerDiv.className = "calendar-header";
+    headerDiv.textContent = `${monthNames[month]} ${year}`;
+    calendarDiv.appendChild(headerDiv);
+
+    
+    for (let day = 1; day <= daysInMonth; day++) {
+        
+        const currentDayString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+       
+        const event = events.find(e => e.date === currentDayString);
+
+        const dayDiv = document.createElement("div");
+        dayDiv.textContent = day;
+
+        
+        if (
+            today.getFullYear() === year &&
+            today.getMonth() === month &&
+            today.getDate() === day
+        ) {
+            dayDiv.classList.add("today");
+        }
+
+  
+        if (event) {
+            dayDiv.classList.add("event");
+            dayDiv.title = event.name;
+            dayDiv.addEventListener("click", () => {
+                alert(`Event: ${event.name} on ${event.date}`);
+            });
+        }
+
+        calendarDiv.appendChild(dayDiv);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".join-form");
+    const messageElement = document.getElementById("message");
+    
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let isValid = true;
+        let message = "";
+
+        try {
+            const nameInput = document.getElementById("name").value.trim();
+            const emailInput = document.getElementById("email").value.trim();
+            const passwordInput = document.getElementById("password").value.trim();
+            const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
+            const genderInput = document.querySelector('input[name="gender"]:checked');
+            const ageInput = document.getElementById("age").value.trim();
+            
+            if (!nameInput) {
+                throw new Error("Full Name is required!");
+            } else if (!emailInput) {
+                throw new Error("Email is required!");
+            } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
+                throw new Error("Invalid email format!");
+            } else if (!genderInput) {
+                throw new Error("Gender selection is required!");
+            } else if (isNaN(age) || age < 18) {
+                throw new Error("You must be at least 18 years old to join!");
+            } else if (!passwordInput) {
+                throw new Error("Password is required!");
+            } else if (!confirmPasswordInput) {
+                throw new Error("Confirm Password is required!");
+            } else if (passwordInput !== confirmPasswordInput) {
+                throw new Error("Passwords do not match!");
+            }
+
+            
+            alert("Thank you for joining!");
+
+        } catch (error) {
+            
+            isValid = false;
+            message = error.message;
+            messageElement.style.color = "black";
+            messageElement.textContent = message;
+            messageElement.style.display = "block";
+        }
+
+        return isValid;
     });
-  });
+});
+      
+        const partners= [
+    { 
+        name: "United Nations Children's Fund",
+        description: "Focuses on providing humanitarian aid, education, and protection to children worldwide", 
+        website: "https://www.unicef.org/" 
+    },
+    { 
+        name: "The Red Cross", 
+        description: "Provides emergency assistance, disaster relief, and education in communities affected by crises and conflicts.", 
+        website: "https://www.redcross.org/" 
+    },
+    { 
+        name: "Save the Children", 
+        description: "Works to improve the lives of children around the world by providing education, healthcare, and emergency relief.", 
+        website: "https://www.savethechildren.net/" 
+    },
+    { 
+        name: "Oxfam", 
+        description: "Works on global poverty alleviation, social justice, and humanitarian issues.", 
+        website: "https://www.oxfam.org/" 
+    },
+];
+
+
+const filteredPartners = partners.filter(partner => partner.name.toLowerCase().includes('children'));
+
+const partnerItems = filteredPartners.map(partner => `
+    <li class="partner-item">
+        <h2>${partner.name}</h2>
+        <p>${partner.description}</p>
+        <a href="${partner.website}" target="_blank">Visit Website</a>
+    </li>
+`);
+
+
+const partnerList = document.getElementById("partner-list");
+partnerList.innerHTML = partnerItems.join('');
 
 </script>
 
 <footer>
-    <div class="row">
-      <div class="col">
-        <img src="image/logo-helpsomeone.png" class="logo" alt="">
-        <br>
-        <br>
-        <p
-          style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
-          Together, we create a world of hope.</p>
-      </div>
-      <div class="col">
-        <h3>Office</h3>
-<p>Mother Teresa Street</p>
+  <div class="row">
+    <div class="col">
+      <img src="image/logo-helpsomeone.png" class="logo" alt="">
+      <br>
+      <br>
+      <p
+        style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+        Together, we create a world of hope.</p>
+    </div>
+    <div class="col">
+      <h3>Office</h3>
+      <address>
+        <p>Mother Teresa Street</p>
         <br>
         <p>Gjilan, 60000, Kosov&euml;</p>
         <br>
         <p>Phone: +383 45 333 111</p>
         <br>
-        <a class="class-id" style="color: white;" href="mailto:charity.kosova@gmail.com">charity.kosova@gmail.com</a>
-        <br>
-</div>
-      <div class="col">
-        <h3>Links</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="volunteer.html">Volunteer & Updates</a></li>
-          <li><a href="popular.html"> Popular Cases</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-      <div class="col">
-        <h3>We'd Love to Hear From You</h3>
-        <form>
-          <i class="fa-regular fa-envelope " style="color: #ffffff;"></i> <input type="text"
-            placeholder="  Leave a message">
-          <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-        </form>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
-          <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
-          <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
-          <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
-        </div>
+        <a class="class-id" href="mailto:charity.kosova@gmail.com" style="color: white;">charity.kosova@gmail.com</a>
+      </address>
+    </div>
+    <div class="col">
+      <h3>Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="volunteer.html">Volunteer & Updates</a></li>
+        <li><a href="popular.html"> Popular Cases</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>We'd Love to Hear From You</h3>
+      <form class="footer-form">
+        <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
+          placeholder="  Leave a message">
+        <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+      </form>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #0a7011;"></i></a>
+        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #0a7011;"></i></i></a>
+        <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter" style="color: #0a7011;"></i></i></a>
+        <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp" style="color: #0a7011;"></i></i></a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
     </body>
 </html>
