@@ -20,7 +20,7 @@
         padding: 20px;
     }
     .volunteer-card{
-            background:linear-gradient(135deg,rgba(123, 212, 123, 0.957),#f7f7f7);
+      background: radial-gradient(circle, rgba(123, 212, 123, 0.957), #f7f7f7);
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -60,53 +60,72 @@
         margin: 0 auto;
         padding: 20px;
     }
-    .container{
-        background:linear-gradient(135deg,rgba(123, 212, 123, 0.957),#f7f7f7);
-        padding: 50px 50px;
-        border-radius: 10px;
-        box-shadow :0 4px 8px rgba(0, 0, 0, 0.1) ;
-        max-width: 900px;
-        margin: auto;
-        text-align: center;
-    }
-    .container h2{
-        font-size: 2rem;
-        font-weight:bold ;
-        color:black;
-        margin-bottom: 15px;
-        line-height: 1.4;
-    }
-    .container p{
-        font-size: 1.2em;
-        color: #555;
-        margin-bottom: 30px;
-        line-height: 1.8;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    .container ul{
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        max-width: 600px;
-        text-align: left;
-    }
-    .container ul li{
-        font-size: 1.1em;
-        color: #333;
-        padding: 10px 0;
-        position: relative;
-        padding-left: 30px;
-        line-height: 1.6;
-    }
-    .container ul li::before{
-        content: "✅";
-        position: absolute;
-        left: 0;
-        color: #28a745;
-        font-size: 1.2em;
-        line-height: 1;
-    }
+    .container {
+    background: linear-gradient(135deg, rgba(123, 212, 123, 0.957), #f7f7f7);
+    padding: 50px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.container p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: left;
+}
+.container ul li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+
+.container ul ul {
+    padding-left: 20px; 
+    margin-top: 5px;
+}
+
+.container ul ul li::before {
+    content: none; 
+}
+.container ul li {
+    font-size: 1.1em;
+    color: black;
+    padding: 10px 0;
+    position: relative;
+    padding-left: 30px;
+    line-height: 1.6;
+}
+.container ul ul li {
+  margin-bottom: 3px;
+    font-size: 16px;
+    color:black;
+}
+
     @media (max-width :768px){
         .container{
             padding: 30px 15px;
@@ -398,8 +417,7 @@
                             <li> <a href="volunteer.html">Volunteer & Updates</a></li>
                                 <li> <a href="popular.html">Popular Cases</a></li>
                                 <li> <a href="contact.html">Contact</a></li>
-                                <li> <a href="donate.html"></a></li>
-                                    
+                                <li> <a href="donate.html"></a></li>           
                 </ul>
                 <button class="make-a-donate">Donate Now</button>
             </nav>
@@ -408,15 +426,29 @@
 <div class="container">
     <section>
         <h2>Join us in making a difference!</h2>
-        <p>Volunteering with <mark style="background-color: rgb(26, 145, 26);border-radius: 5px;">HelpSomeone</mark> is a rewarding way to give back to the community. 
+        <p>Volunteering with <mark style="background-color: rgb(26, 145, 26);border-radius: ;">HelpSomeone</mark> is a rewarding way to give back to the community. 
             Whether you have a few hours to spare or want to dedicate long-term support, your contributions can create lasting change.</p><br>
             <h2>Why volunteer with us ?</h2>
             <ul>
-                <li>Make a positive impact</li>
-                <li>Meet like-minded individuals</li>
-                <li>Develop new skills</li>
-                <li>Gain work experience and references</li>
-            </ul>
+              <li>Make a Positive Impact
+                  <ul>
+                      <li style="margin-bottom: 0.02px;">Help improve the lives of those in need</li>
+                      <li >Contribute to meaningful projects in your community</li>
+                  </ul>
+                </li>
+              <li>Develop New Skills
+                  <ul>
+                      <li>Enhance your leadership and communication skills</li>
+                      <li >Learn to work in a team and manage projects</li>
+                  </ul>
+              </li>
+              <li>Gain Work Experience and References
+                  <ul>
+                      <li>Build your resume with valuable volunteer experience</li>
+                      <li class="why">Receive letters of recommendation from our organization</li>
+                  </ul>
+              </li>
+          </ul>
     </section>
 </div>
 <section class="volunteers">
