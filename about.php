@@ -550,7 +550,7 @@ font-size: 1.5em;
     <nav class="nav-links">
       <div class="logo">HelpSomeone</div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a>
+        <li><a href="index.php">Home</a>
         <li class="dropdown">
           <a href="#">About Us</a>
           <ul class="dropdown-content">
@@ -560,11 +560,12 @@ font-size: 1.5em;
             <li><a href="#teamID">Our Team</a></li>
           </ul>
         </li>
-        <li> <a href="volunteer.html">Volunteer & Updates</a></li>
-        <li> <a href="popular.html">Popular Cases</a></li>
-        <li> <a href="contact.html">Contact</a></li>
+        <li> <a href="volunteer.php">Volunteer & Updates</a></li>
+        <li> <a href="popular.php">Popular Cases</a></li>
+        <li> <a href="contact.php">Contact</a></li>
+        <li> <a href="donate.php">Donate</a></li>
       </ul>
-      <button class="make-a-donate">Donate Now</button>
+     
     </nav>
   </header>
 
@@ -842,12 +843,12 @@ font-size: 1.5em;
       <div class="col">
         <h3>Links</h3>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="volunteer.html">Volunteer & Updates</a></li>
-          <li><a href="popular.html"> Popular Cases</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="about.php">About Us</a></li>
+          <li><a href="volunteer.php">Volunteer & Updates</a></li>
+          <li><a href="popular.php"> Popular Cases</a></li>
+          <li><a href="donate.php">Donate</a></li>
+          <li><a href="contact.php">Contact Us</a></li>
         </ul>
       </div>
       <div class="col">

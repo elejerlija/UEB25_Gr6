@@ -1,14 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
 
-    
-    const donateButton = document.querySelector('.make-a-donate');
-
-  
-    donateButton.addEventListener('click', function () {
-        alert('Thank you for deciding to help! You will be redirected to the donation page.');
-        window.location.href = 'donate.html'; 
-    });
-});
 const slides = document.querySelectorAll(".slides img");
 let slideIndex = 0;
 let intervalid = null;
@@ -68,6 +58,3 @@ if (clickSound) {
  console.error('The audio element with ID "click-sound" was not found.');
 }
 
-setTimeout(function() {
-  document.querySelector('.make-a-donate').style.opacity = 1; 
-}, 500);
