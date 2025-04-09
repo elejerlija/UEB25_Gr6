@@ -1,3 +1,27 @@
+<?php 
+/*associative array*/
+$team = [
+  [
+    "name" => "Niko Johnson",
+    "position" => "Founder & CEO",
+    "image" => "image/team_1 (2).png"
+  ],
+  [
+    "name" => "Emma Carter",
+    "position" => "Content Writer",
+    "image" => "image/team_2.png"
+  ],
+  [
+    "name" => "Melissa Mitchell",
+    "position" => "Web Developer",
+    "image" => "image/team_3.png"
+  ]
+];
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -748,74 +772,24 @@ font-size: 1.5em;
 
 
   <section id="teamID" class="team-section">
-    <div class="team-container" id="team-container">
-      <h1 style="color: #2d6a4f; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
-    </div>
-    <div class="cards">
+  <div class="team-container" id="team-container">
+    <h1 style="color: #2d6a4f; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
+  </div>
+  <div class="cards">
+     <?php    /*foreach*/
+       foreach ($team as $member){ ?>
       <div class="card_wrapper">
         <div class="team_image">
-          <img src="image/team_1 (2).png " alt="">
-          <div class="social">
-            <a href="https://www.instagram.com" target="_blank">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com" target="_blank">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.linkedin.com" target="_blank">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-          </div>
+          <img src="<?php echo $member['image'] ?>"   alt="<?php echo "Image of" .$member['name'] ?>">
         </div>
         <div class="team_detail">
-          <h2>Niko Johnson </h2>
-          <p>Founder & CEO</p>
+          <h2><?php echo $member['name'] ?></h2>
+          <p><?php echo $member['position'] ?></p>
         </div>
       </div>
-
-      <div class="card_wrapper">
-        <div class="team_image">
-          <img src="image/team_2.png" alt="">
-          <div class="social">
-            <a href="https://www.instagram.com" target="_blank">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com" target="_blank">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.linkedin.com" target="_blank">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-        <div class="team_detail">
-          <h2>Emma Carter</h2>
-          <p>Content Writer</p>
-        </div>
-      </div>
-
-      <div class="card_wrapper">
-        <div class="team_image">
-          <img src="image/team_3.png" alt="">
-          <div class="social">
-            <a href="https://www.instagram.com" target="_blank">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com" target="_blank">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.linkedin.com" target="_blank">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-        <div class="team_detail">
-          <h2>Melissa Mitchell</h2>
-          <p>Web Developer</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <?php } ?>
+  </div>
+</section>
 
 
   <footer>
