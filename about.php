@@ -17,6 +17,51 @@ $team = [
     "image" => "image/team_3.png"
   ]
 ];
+
+/*class*/
+class AboutUs
+{
+ /*private atributes*/
+    private $mission;
+    private $vision;
+
+    
+  /*contructor*/
+    public function __construct($mission, $vision)
+    {
+      
+        $this->mission = $mission;
+        $this->vision = $vision;
+
+    }
+
+   
+
+    /*get function */
+    public function getMission()
+    {
+        return $this->mission;
+    }
+
+
+    public function getVision()
+    {
+        return $this->vision;
+    }
+}
+$aboutUs = new AboutUs(
+  "At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
+                lives. Our mission is to provide support and opportunities to those in need, fostering a
+                world
+                where compassion and generosity create lasting change.",
+  "To create a world where every individual has the opportunity to thrive, free from poverty, injustice,
+                and
+                inequality. We envision a future where kindness and collaboration unite us to overcome challenges and
+                build stronger, more compassionate communities.",
+
+);
+
+
 ?>
 
 
@@ -687,21 +732,16 @@ font-size: 1.5em;
           <div class="row">
             <div class="about-item">
               <i class="fa fa-book"></i>
+              
               <h3> OUR MISSION</h3>
               <hr />
-              <p>At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
-                lives. Our mission is to provide support and opportunities to those in need, fostering a
-                world
-                where compassion and generosity create lasting change.</p>
+              <p><?php echo $aboutUs->getMission(); ?></p>
             </div>
             <div class="about-item">
               <i class="fa fa-globe"></i>
               <h3>OUR VISION</h3>
               <hr />
-              <p>To create a world where every individual has the opportunity to thrive, free from poverty, injustice,
-                and
-                inequality. We envision a future where kindness and collaboration unite us to overcome challenges and
-                build stronger, more compassionate communities.</p>
+              <p><?php echo $aboutUs->getVision(); ?></p>
             </div>
 
           </div>
