@@ -520,9 +520,42 @@
 <section>
   <div class="partnership">
     <h1 class="title" style="font-size: 2rem;">Our Charity Partners</h1>
-    <ul class="partner-list" id="partner-list"></ul>
-</div>
+    <ul class="partner-list" id="partner-list">
+      <?php
+        $partners = [
+            'unicef' => [
+                'name' => 'United Nations Children\'s Fund',
+                'description' => 'Focuses on providing humanitarian aid, education, and protection to children worldwide',
+                'website' => 'https://www.unicef.org/'
+            ],
+            'redcross' => [
+                'name' => 'The Red Cross',
+                'description' => 'Provides emergency assistance, disaster relief, and education in communities affected by crises and conflicts.',
+                'website' => 'https://www.redcross.org/'
+            ],
+            'savethechildren' => [
+                'name' => 'Save the Children',
+                'description' => 'Works to improve the lives of children around the world by providing education, healthcare, and emergency relief.',
+                'website' => 'https://www.savethechildren.net/'
+            ],
+            'oxfam' => [
+                'name' => 'Oxfam',
+                'description' => 'Works on global poverty alleviation, social justice, and humanitarian issues.',
+                'website' => 'https://www.oxfam.org/'
+            ]
+        ];
+        ksort($partners);        
+        foreach ($partners as $partner) {
+            echo '<li class="partner-item">';
+            echo '<h2><a href="' . $partner['website'] . '" target="_blank">' . $partner['name'] . '</a></h2>';
+            echo '<p>' . $partner['description'] . '</p>';
+            echo '</li>';
+        }
+      ?>
+    </ul>
+  </div>
 </section>
+
 <section style="background-color: white;">
   <div class="join-section" id="join-section">
     <div class="join-form">
@@ -677,44 +710,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-        const partners= [
-    { 
-        name: "United Nations Children's Fund",
-        description: "Focuses on providing humanitarian aid, education, and protection to children worldwide", 
-        website: "https://www.unicef.org/" 
-    },
-    { 
-        name: "The Red Cross", 
-        description: "Provides emergency assistance, disaster relief, and education in communities affected by crises and conflicts.", 
-        website: "https://www.redcross.org/" 
-    },
-    { 
-        name: "Save the Children", 
-        description: "Works to improve the lives of children around the world by providing education, healthcare, and emergency relief.", 
-        website: "https://www.savethechildren.net/" 
-    },
-    { 
-        name: "Oxfam", 
-        description: "Works on global poverty alleviation, social justice, and humanitarian issues.", 
-        website: "https://www.oxfam.org/" 
-    },
-];
-
-
-const filteredPartners = partners.filter(partner => partner.name.toLowerCase().includes('children'));
-
-const partnerItems = filteredPartners.map(partner => `
-    <li class="partner-item">
-        <h2>${partner.name}</h2>
-        <p>${partner.description}</p>
-        <a href="${partner.website}" target="_blank">Visit Website</a>
-    </li>
-`);
-
-
-const partnerList = document.getElementById("partner-list");
-partnerList.innerHTML = partnerItems.join('');
 
 </script>
 
