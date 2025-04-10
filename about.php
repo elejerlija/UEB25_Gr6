@@ -1,22 +1,5 @@
 <?php 
 
-$team = [
-  [
-    "name" => "Niko Johnson",
-    "position" => "Founder & CEO",
-    "image" => "image/team_1 (2).png"
-  ],
-  [
-    "name" => "Emma Carter",
-    "position" => "Content Writer",
-    "image" => "image/team_2.png"
-  ],
-  [
-    "name" => "Melissa Mitchell",
-    "position" => "Web Developer",
-    "image" => "image/team_3.png"
-  ]
-];
 
 class OurTeam
 {
@@ -46,6 +29,27 @@ class OurTeam
         return $this->image;
     }
 }
+$teamMember1 = new OurTeam("Niko Johnson", "Founder & CEO", "image/team_1 (2).png");
+$teamMember2 = new OurTeam("Emma Carter", "Content Writer", "image/team_2.png");
+$teamMember3 = new OurTeam("Melissa Mitchell", "Web Developer", "image/team_3.png");
+
+$team = [
+    [
+        "name" => $teamMember1->getName(),
+        "position" => $teamMember1->getPosition(),
+        "image" => $teamMember1->getImage()
+    ],
+    [
+        "name" => $teamMember2->getName(),
+        "position" => $teamMember2->getPosition(),
+        "image" => $teamMember2->getImage()
+    ],
+    [
+        "name" => $teamMember3->getName(),
+        "position" => $teamMember3->getPosition(),
+        "image" => $teamMember3->getImage()
+    ]
+];
 
 
 class AboutUs
@@ -65,7 +69,7 @@ class AboutUs
         return $this->mission;
     }
 
-    
+
     public function getVision()
     {
         return $this->vision;
