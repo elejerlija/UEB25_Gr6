@@ -1,5 +1,5 @@
 <?php 
-/*associative array*/
+
 $team = [
   [
     "name" => "Niko Johnson",
@@ -18,48 +18,68 @@ $team = [
   ]
 ];
 
-/*class*/
-class AboutUs
+class OurTeam
 {
- /*private atributes*/
-    private $mission;
-    private $vision;
+    private $name;
+    protected $position;
+    public $image;
 
-    
-  /*contructor*/
-    public function __construct($mission, $vision)
+    public function __construct($name, $position, $image)
     {
-      
-        $this->mission = $mission;
-        $this->vision = $vision;
-
+        $this->name = $name;
+        $this->position = $position;
+        $this->image = $image;
     }
 
-   
+    public function getName()
+    {
+        return $this->name;
+    }
 
-    /*get function */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+}
+
+
+class AboutUs
+{
+ 
+    public $mission;
+    public $vision;
+
+   public function setMission ($mission){
+    $this->mission=$mission;
+   }
+   public function setVision ($vision){
+    $this->vision=$vision;
+   }
     public function getMission()
     {
         return $this->mission;
     }
 
-
+    
     public function getVision()
     {
         return $this->vision;
     }
 }
-$aboutUs = new AboutUs(
-  "At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
-                lives. Our mission is to provide support and opportunities to those in need, fostering a
-                world
-                where compassion and generosity create lasting change.",
-  "To create a world where every individual has the opportunity to thrive, free from poverty, injustice,
-                and
-                inequality. We envision a future where kindness and collaboration unite us to overcome challenges and
-                build stronger, more compassionate communities.",
-
-);
+$aboutUs = new AboutUs();
+$aboutUs->setMission( "At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
+lives. Our mission is to provide support and opportunities to those in need, fostering a
+world
+where compassion and generosity create lasting change.");
+$aboutUs->setVision("To create a world where every individual has the opportunity to thrive, free from poverty, injustice,
+and
+inequality. We envision a future where kindness and collaboration unite us to overcome challenges and
+build stronger, more compassionate communities.");
 
 
 ?>
@@ -816,7 +836,7 @@ font-size: 1.5em;
     <h1 style="color: #2d6a4f; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
   </div>
   <div class="cards">
-     <?php    /*foreach*/
+     <?php    
        foreach ($team as $member){ ?>
       <div class="card_wrapper">
         <div class="team_image">
