@@ -1,8 +1,29 @@
+<?php
+include_once 'about.php';
+
+class Volunteer extends OurTeam
+{
+    private $volunteerType;
+
+    // Constructor to initialize volunteer data
+    public function __construct($name, $position, $image, $volunteerType)
+    {
+        parent::__construct($name, $position, $image);
+        $this->volunteerType = $volunteerType;
+    }
+
+    // Getter for volunteer type
+    public function getVolunteerType()
+    {
+        return $this->volunteerType;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=devive-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Volunteer & Updates</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -419,7 +440,6 @@
                                 <li> <a href="contact.php">Contact</a></li>
                                 <li> <a href="donate.php">Donate</a></li>          
                 </ul>
-             
             </nav>
         </header>
         <br><br>
@@ -451,43 +471,45 @@
           </ul>
     </section>
 </div>
-<section class="volunteers">
-    <h1 style="text-align: center; font-size: 2rem;">Meet Our Volunteers</h1>
-    <div class="volunteer-grid">
-        <div class="volunteer-card">
-            <img src="image/vl1.jpg" alt="Emily Carter">
-            <div>
-                <h3>Emily Carter</h3>
-                <p><i>Emily</i> has been a key 
-                    contributor to our health programs, 
-                    helping organize numerous health camps.</p>
-            </div>
-        </div>
-        <div class="volunteer-card">
-        <img src="image/vl2.jpg" alt="James Park">
-        <div>
-            <h3>James Park</h3>
-                <p><i>James</i> supports our education initiatives by 
-                    mentoring students and providing guidance.</p>
-            </div>
-        </div>
-            <div class="volunteer-card">
-                <img src="image/vl3.jpg" alt="Harry Williams">
-                <div>
-                    <h3>Harry Williams</h3>
-                    <p><i>Harry</i> has been active in our environmental projects, 
-                        organizing clean-up drives and tree plantations.</p>
-                </div>
-        </div>
-        <div class="volunteer-card">
-            <img src="image/vl4.jpg" alt="Rine Ademi">
-            <div>
-                <h3>Rin&euml Ademi</h3>
-                <p><i>Rin&euml</i> is a dedicated charity volunteer who has spent the 
-                last five years working tirelessly 
-                to support underprivileged families.</p>
-            </div>
-        </div>
+<?php
+
+define('ERROR_COLOR', 'red');
+define('VOLUNTEER_IMAGE_DIR', 'image/');
+
+$volunteers = [
+    ['Rinë Ademi', 'vl4.jpg', 'Rinë is a dedicated charity volunteer who has spent the last five years working tirelessly to support underprivileged families.'],
+    ['Emily Carter', 'vl1.jpg', 'Emily has been a key contributor to our health programs, helping organize numerous health camps.'],
+    ['James Park', 'vl2.jpg', 'James supports our education initiatives by mentoring students and providing guidance.'],
+    ['Harry Williams', 'vl3.jpg', 'Harry has been active in our environmental projects, organizing clean-up drives and tree plantations.'],
+];
+rsort($volunteers);
+echo '<section class="volunteers">';
+echo '<h1 style="text-align: center; font-size: 2rem;">Meet Our Volunteers</h1>';
+echo '<div class="volunteer-grid">';
+foreach ($volunteers as $i => $v) {
+    switch (count($v)) {
+        case 3:
+            $name =$v[0];
+            $image = VOLUNTEER_IMAGE_DIR . $v[1];
+            $bio = $v[2];
+            $firstName = explode(' ', $v[0])[0];
+
+            echo '<div class="volunteer-card">';
+            echo '<img src="' . $image . '" alt="' . $name . '">';
+            echo '<div>';
+            echo '<h3>' . $name . '</h3>';
+            echo '<p><i>' . $firstName . '</i> ' . $bio . '</p>';
+            echo '</div>';
+            echo '</div>';
+            break;
+        default:
+            echo '<p style="color: ' . ERROR_COLOR . ';">Error: Missing data for volunteer at index ' . $i . '.</p>';
+            break;
+    }
+}
+echo '</div>';
+echo '</section>';
+?>
     </div>
 </section>
 <section>
