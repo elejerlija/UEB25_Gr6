@@ -1,8 +1,44 @@
+<?php
+class CaseItem {
+    private $title;
+    private $description;
+    private $amount;
+    private $image;
+    private $id; 
+    private $padding;
+
+    public function __construct($id, $title, $description, $amount, $image,$padding) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->description = $description;
+        $this->amount = $amount;
+        $this->image = $image;
+        $this->padding = $padding;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+    public function getTitle() {
+        return $this->title;
+    }
+    public function getDescription() {
+        return $this->description;
+    }
+    public function getAmount() {
+        return $this->amount;
+    }
+    public function getImage() {
+        return $this->image;
+    }
+    public function getPadding(){
+        return $this->padding;
+    }
+}
 
 
 
-
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
