@@ -33,57 +33,7 @@ $teamMember1 = new OurTeam("Niko Johnson", "Founder & CEO", "image/team_1 (2).pn
 $teamMember2 = new OurTeam("Emma Carter", "Content Writer", "image/team_2.png");
 $teamMember3 = new OurTeam("Melissa Mitchell", "Web Developer", "image/team_3.png");
 
-$team = [
-    [
-        "name" => $teamMember1->getName(),
-        "position" => $teamMember1->getPosition(),
-        "image" => $teamMember1->getImage()
-    ],
-    [
-        "name" => $teamMember2->getName(),
-        "position" => $teamMember2->getPosition(),
-        "image" => $teamMember2->getImage()
-    ],
-    [
-        "name" => $teamMember3->getName(),
-        "position" => $teamMember3->getPosition(),
-        "image" => $teamMember3->getImage()
-    ]
-];
-
-
-class AboutUs
-{
- 
-    public $mission;
-    public $vision;
-
-   public function setMission ($mission){
-    $this->mission=$mission;
-   }
-   public function setVision ($vision){
-    $this->vision=$vision;
-   }
-    public function getMission()
-    {
-        return $this->mission;
-    }
-
-
-    public function getVision()
-    {
-        return $this->vision;
-    }
-}
-$aboutUs = new AboutUs();
-$aboutUs->setMission( "At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
-lives. Our mission is to provide support and opportunities to those in need, fostering a
-world
-where compassion and generosity create lasting change.");
-$aboutUs->setVision("To create a world where every individual has the opportunity to thrive, free from poverty, injustice,
-and
-inequality. We envision a future where kindness and collaboration unite us to overcome challenges and
-build stronger, more compassionate communities.");
+$teamMembers = [$teamMember1, $teamMember2, $teamMember3];
 
 
 ?>
@@ -759,13 +709,19 @@ font-size: 1.5em;
               
               <h3> OUR MISSION</h3>
               <hr />
-              <p><?php echo $aboutUs->getMission(); ?></p>
+              <p>At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
+lives. Our mission is to provide support and opportunities to those in need, fostering a
+world
+where compassion and generosity create lasting change.</p>
             </div>
             <div class="about-item">
               <i class="fa fa-globe"></i>
               <h3>OUR VISION</h3>
               <hr />
-              <p><?php echo $aboutUs->getVision(); ?></p>
+              <p>At HelpSomeone, we strive to make a meaningful difference by empowering communities and transforming
+lives. Our mission is to provide support and opportunities to those in need, fostering a
+world
+where compassion and generosity create lasting change.</p>
             </div>
 
           </div>
@@ -835,25 +791,26 @@ font-size: 1.5em;
   </section>
 
 
-  <section id="teamID" class="team-section">
+<section id="teamID" class="team-section">
   <div class="team-container" id="team-container">
     <h1 style="color: #2d6a4f; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
   </div>
   <div class="cards">
-     <?php    
-       foreach ($team as $member){ ?>
-      <div class="card_wrapper">
-        <div class="team_image">
-          <img src="<?php echo $member['image'] ?>"   alt="<?php echo "Image of" .$member['name'] ?>">
+    <?php    
+      foreach ($teamMembers as $member) { ?>
+        <div class="card_wrapper">
+          <div class="team_image">
+            <img src="<?php echo $member->getImage(); ?>" alt="<?php echo "Image of " . $member->getName(); ?>">
+          </div>
+          <div class="team_detail">
+            <h2><?php echo $member->getName(); ?></h2>
+            <p><?php echo $member->getPosition(); ?></p>
+          </div>
         </div>
-        <div class="team_detail">
-          <h2><?php echo $member['name'] ?></h2>
-          <p><?php echo $member['position'] ?></p>
-        </div>
-      </div>
     <?php } ?>
   </div>
 </section>
+
 
 
   <footer>
