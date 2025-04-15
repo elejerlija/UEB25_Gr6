@@ -1,19 +1,23 @@
 <?php
 class CaseItem {
+    private $id;
     private $title;
     private $description;
     private $amount;
     private $image;
-    private $id; 
     private $padding;
+    private $imageHeight;
+    private $imageWidth;
 
-    public function __construct($id, $title, $description, $amount, $image,$padding) {
+    public function __construct($id, $title, $description, $amount, $image, $padding = "13px", $imageHeight = "135", $imageWidth = "250") {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->amount = $amount;
         $this->image = $image;
         $this->padding = $padding;
+        $this->imageHeight = $imageHeight;
+        $this->imageWidth = $imageWidth;
     }
 
     public function getId() {
@@ -31,23 +35,27 @@ class CaseItem {
     public function getImage() {
         return $this->image;
     }
-    public function getPadding(){
+    public function getPadding() {
         return $this->padding;
+    }
+    public function getImageHeight() {
+        return $this->imageHeight;
+    }
+    public function getImageWidth() {
+        return $this->imageWidth;
     }
 }
 
-
 $cases = [
-    new CaseItem("modal4", "Help us to Send Food", "Raised: \$5000 | Goal: \$9000", 30, "image/popular-5.jpg", "13px"),
-    new CaseItem("modal5", "Clothes For Everyone", "Raised: \$6000 | Goal: \$12000", 50, "image/popular-2.jpg", "13px"),
-    new CaseItem("modal6", "Water For All Children", "Raised: \$7000 | Goal: \$10000", 70, "image/popular-3.jpg", "12px"),
-    new CaseItem("modal7", "Education For Everyone", "Raised: \$4000 | Goal: \$8000", 40, "image/popular-4.jpg", "3px"),
-    new CaseItem("modal8", "Medical Support", "Raised: \$8000 | Goal: \$15000", 50, "image/popular-1.jpg", "15px"),
-    new CaseItem("modal9", "Homes for Everyone", "Raised: \$2500 | Goal: \$10000", 25, "image/popular-6.jpg", "15px")
+    new CaseItem("modal4", "Help us to Send Food", "Raised: $5000 | Goal: $9000", 30, "image/popular-5.jpg", "17px", "135", "200"),
+    new CaseItem("modal5", "Clothes For Everyone", "Raised: $6000 | Goal: $12000", 50, "image/popular-2.jpg", "15px", "135", "200"),
+    new CaseItem("modal6", "Water For All Children", "Raised: $7000 | Goal: $10000", 70, "image/popular-3.jpg", "14px", "135", "200"),
+    new CaseItem("modal7", "Education For Everyone", "Raised: $4000 | Goal: $8000", 40, "image/popular-4.jpg", "3px", "135", "200"),
+    new CaseItem("modal8", "Medical Support", "Raised: $8000 | Goal: $15000", 50, "image/popular-1.jpg", "15px", "135", "200"),
+    new CaseItem("modal9", "Homes for Everyone", "Raised: $2500 | Goal: $10000", 25, "image/popular-6.jpg", "15px", "135", "200")
 ];
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -281,8 +289,25 @@ $cases = [
     <fieldset>
         <legend>Popular Cases</legend>
         <div class="div">
-           
+        <div class="cases-container">
+    <?php foreach ($cases as $case): ?>
+        <div class="case">
+            <img 
+                src="<?= $case->getImage(); ?>" 
+                alt="Case image" 
+                style="height: <?= $case->getImageHeight(); ?>px; width: <?= $case->getImageWidth(); ?>px; object-fit: cover;">
+            
+            <div class="progress-bar">
+                <span style="width: <?= $case->getAmount(); ?>%;"></span>
+            </div><br>
+
+            <h3 style="padding: <?= $case->getPadding(); ?>;"><?= $case->getTitle(); ?></h3>
+            <p><?= $case->getDescription(); ?></p>
+            <a href="#<?= $case->getId(); ?>" class="open-modal">Dhuro</a>
         </div>
+    <?php endforeach; ?>
+</div>
+
 
         </div>
 
