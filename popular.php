@@ -37,6 +37,15 @@ class CaseItem {
 }
 
 
+$cases = [
+    new CaseItem("modal4", "Help us to Send Food", "Raised: \$5000 | Goal: \$9000", 30, "image/popular-5.jpg", "13px"),
+    new CaseItem("modal5", "Clothes For Everyone", "Raised: \$6000 | Goal: \$12000", 50, "image/popular-2.jpg", "13px"),
+    new CaseItem("modal6", "Water For All Children", "Raised: \$7000 | Goal: \$10000", 70, "image/popular-3.jpg", "12px"),
+    new CaseItem("modal7", "Education For Everyone", "Raised: \$4000 | Goal: \$8000", 40, "image/popular-4.jpg", "3px"),
+    new CaseItem("modal8", "Medical Support", "Raised: \$8000 | Goal: \$15000", 50, "image/popular-1.jpg", "15px"),
+    new CaseItem("modal9", "Homes for Everyone", "Raised: \$2500 | Goal: \$10000", 25, "image/popular-6.jpg", "15px")
+];
+
 
 ?>
 
