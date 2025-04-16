@@ -1,24 +1,3 @@
-<?php
-include_once 'about.php';
-
-class Volunteer extends OurTeam
-{
-    private $volunteerType;
-
-    // Constructor to initialize volunteer data
-    public function __construct($name, $position, $image, $volunteerType)
-    {
-        parent::__construct($name, $position, $image);
-        $this->volunteerType = $volunteerType;
-    }
-
-    // Getter for volunteer type
-    public function getVolunteerType()
-    {
-        return $this->volunteerType;
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -577,13 +556,12 @@ echo '</section>';
     </ul>
   </div>
 </section>
-
 <section style="background-color: white;">
   <div class="join-section" id="join-section">
     <div class="join-form">
       <h3>Join Us Today</h3>
       <p>Join Our Team of Volunteers and Help Us Create a Better Tomorrow!</p>
-      <form id="joinForm" onsubmit="return validate()">
+      <form id="joinForm" method="post">
         <div class="form-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" placeholder="Your Full Name" required>
@@ -591,20 +569,18 @@ echo '</section>';
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" placeholder="Your Email" required>
-          <div id="emailError" class="error"></div>
         </div>
         <div class="form-group">
           <label for="gender">Choose Gender</label>
           <div class="gender-options">
-            <label><input type="radio" name="gender" value="Female"> Female</label>
-            <label><input type="radio" name="gender" value="Male"> Male</label>
-            <label><input type="radio" name="gender" value="Other"> Other</label>
+            <label><input type="radio" name="gender" value="Female" required> Female</label>
+            <label><input type="radio" name="gender" value="Male" required> Male</label>
+            <label><input type="radio" name="gender" value="Other" required> Other</label>
           </div>
         </div>
         <div class="form-group">
           <label for="age">Age</label>
-          <input type="number" id="age" name="age" placeholder="Your Age"required >
-          <div id="ageError" class="error"></div>
+          <input type="number" id="age" name="age" placeholder="Your Age" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -614,13 +590,71 @@ echo '</section>';
           <label for="confirmPassword">Confirm Password</label>
           <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password" required>
         </div>
-        <div id="message" style="display: none;"></div>
-        <input type="submit" value="Join Now" id="submitBtn" >
+        <input type="submit" value="Join Now">
         <input type="reset" value="Reset">
       </form>
     </div>
   </div>
 </section>
+<?php
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+    $fullName = $_POST['name'];
+    if (empty($fullName)) {
+        $errors[] = "Full Name is required!";
+    } elseif (!preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $fullName)) {
+        $errors[] = "Full Name must contain only letters and include both First and Last Name.";
+    }
+
+   
+    $email = $_POST['email'];
+    if (empty($email)) {
+        $errors[] = "Email is required!";
+    } elseif (!preg_match("/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/", $email)) {
+        $errors[] = "Invalid email format!";
+    }
+
+    
+    $gender = $_POST['gender'];
+    if (empty($gender)) {
+        $errors[] = "Gender is required!";
+    }
+
+    
+    $age = $_POST['age'];
+    if (empty($age)) {
+        $errors[] = "Age is required!";
+    } elseif ($age < 18 || $age > 99) {
+        $errors[] = "Age must be between 18 and 99!";
+    } elseif (!is_numeric($age) || $age < 0) {
+        $errors[] = "Invalid age value!";
+    }
+
+    
+    $password = $_POST['password'];
+    if (empty($password)) {
+        $errors[] = "Password is required!";
+    } elseif (strlen($password) < 6) {
+        $errors[] = "Password must be at least 6 characters!";
+    } elseif (!preg_match("/[A-Z]/", $password) || !preg_match("/[a-z]/", $password) || !preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
+        $errors[] = "Password must include uppercase, lowercase, and symbols!";
+    }
+
+    
+    $confirmPassword = $_POST['confirmPassword'];
+    if ($password !== $confirmPassword) {
+        $errors[] = "Passwords do not match!";
+    }
+    if (empty($errors)) {
+        echo "<p>Your form has been submitted successfully!</p>";
+    }
+}
+?>
+
+ 
+
 
 <script>
 
@@ -679,58 +713,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form.join-form"); 
-    const messageElement = document.getElementById("message");
-
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let isValid = true;
-        let message = "";
-
-        try {
-            const nameInput = document.getElementById("name").value.trim();
-            const emailInput = document.getElementById("email").value.trim();
-            const passwordInput = document.getElementById("password").value.trim();
-            const confirmPasswordInput = document.getElementById("confirmPassword").value.trim();
-            const genderInput = document.querySelector('input[name="gender"]:checked');
-            const ageInput = document.getElementById("age").value.trim();
-            const age = parseInt(ageInput, 10);
-
-            if (!nameInput) {
-                throw new Error("Full Name is required!");
-            } else if (!emailInput) {
-                throw new Error("Email is required!");
-            } else if (!emailInput.includes("@") || !emailInput.includes(".")) {
-                throw new Error("Invalid email format!");
-            } else if (!genderInput) {
-                throw new Error("Gender selection is required!");
-            } else if (isNaN(age) || age < 18) {
-                throw new Error("You must be at least 18 years old to join!");
-            } else if (!passwordInput) {
-                throw new Error("Password is required!");
-            } else if (!confirmPasswordInput) {
-                throw new Error("Confirm Password is required!");
-            } else if (passwordInput !== confirmPasswordInput) {
-                throw new Error("Passwords do not match!");
-            }
-
-            alert("Thank you for joining!");
-
-            form.reset(); 
-            messageElement.style.display = "none";
-
-        } catch (error) {
-          
-            isValid = false;
-            message = error.message;
-            messageElement.style.color = "red";
-            messageElement.textContent = message;
-            messageElement.style.display = "block";
-        }
-    });
-});
 
 
 </script>
