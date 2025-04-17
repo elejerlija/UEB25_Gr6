@@ -10,7 +10,55 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
-  
+   .error-box {
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 15px 20px 15px 20px;
+  border-radius: 10px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 600px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-box h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #991b1b;
+}
+
+.error-box ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.error-box li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+
+.error-box .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  color: #b91c1c;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
     .volunteer-grid{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -580,7 +628,7 @@ echo '</section>';
         </div>
         <div class="form-group">
           <label for="age">Age</label>
-          <input type="number" id="age" name="age" placeholder="Your Age" required>
+          <input type="number" id="age" name="age" placeholder="Your Age" min="18" max="99"required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -601,35 +649,40 @@ $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
-    $fullName = $_POST['name'];
+    $fullName = trim($_POST['name']);
     if (empty($fullName)) {
         $errors[] = "Full Name is required!";
     } elseif (!preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $fullName)) {
         $errors[] = "Full Name must contain only letters and include both First and Last Name.";
     }
 
-   
-    $email = $_POST['email'];
+    
+    $email = trim($_POST['email']);
     if (empty($email)) {
         $errors[] = "Email is required!";
-    } elseif (!preg_match("/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/", $email)) {
+    } elseif (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
         $errors[] = "Invalid email format!";
     }
 
     
-    $gender = $_POST['gender'];
+    $gender = $_POST['gender'] ?? '';
     if (empty($gender)) {
         $errors[] = "Gender is required!";
     }
 
     
-    $age = $_POST['age'];
-    if (empty($age)) {
+    $ageInput = trim($_POST['age']);
+    if ($ageInput === '') {
         $errors[] = "Age is required!";
-    } elseif ($age < 18 || $age > 99) {
-        $errors[] = "Age must be between 18 and 99!";
-    } elseif (!is_numeric($age) || $age < 0) {
-        $errors[] = "Invalid age value!";
+    } elseif (!is_numeric($ageInput)) {
+        $errors[] = "Age must be a number!";
+    } else {
+        $age = (int)$ageInput;
+        if ($age < 0) {
+            $errors[] = "Age cannot be negative!";
+        } elseif ($age < 18 || $age > 99) {
+            $errors[] = "Age must be between 18 and 99!";
+        }
     }
 
     
@@ -638,8 +691,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Password is required!";
     } elseif (strlen($password) < 6) {
         $errors[] = "Password must be at least 6 characters!";
-    } elseif (!preg_match("/[A-Z]/", $password) || !preg_match("/[a-z]/", $password) || !preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
-        $errors[] = "Password must include uppercase, lowercase, and symbols!";
+    } elseif (!preg_match("/[A-Z]/", $password) || 
+              !preg_match("/[a-z]/", $password) || 
+              !preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
+        $errors[] = "Password must include uppercase, lowercase, and a symbol!";
     }
 
     
@@ -647,13 +702,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($password !== $confirmPassword) {
         $errors[] = "Passwords do not match!";
     }
-    if (empty($errors)) {
-        echo "<p>Your form has been submitted successfully!</p>";
-    }
+    if (!empty($errors)) {
+      echo "<div class='error-box'>";
+      echo "<button class='close-btn' onclick='this.parentElement.style.display=\"none\";'>&times;</button>";
+      echo "<h4>Please fix the following errors:</h4>";
+      echo "<ul>";
+      foreach ($errors as $error) {
+          echo "<li>$error</li>";
+      }
+      echo "</ul></div>";
+  }
+  
+  
 }
 ?>
-
- 
 
 
 <script>
