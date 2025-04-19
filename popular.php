@@ -9,7 +9,7 @@ class CaseItem {
     private $imageHeight;
     private $imageWidth;
 
-    public function __construct($id, $title, $description, $amount, $image, $padding = "13px", $imageHeight = "135", $imageWidth = "250") {
+    public function __construct($id, $title, $description, $amount, $image, $padding, $imageHeight, $imageWidth) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
@@ -55,7 +55,6 @@ $cases = [
     new CaseItem("modal9", "Homes for Everyone", "Raised: $2500 | Goal: $10000", 25, "image/popular-6.jpg", "15px", "135", "200")
 ];
 ?>
-
 <?php
 session_start();
 $success = "";
@@ -68,15 +67,28 @@ if (isset($_POST['submit-general-comment'])) {
     $comment = trim($_POST['comment']);
     $selected_case = trim($_POST['selected_case']);
 
-    if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
-        $error = "Emri duhet të përmbajë vetëm shkronja.";
-    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $surname)) {
-        $error = "Mbiemri duhet të përmbajë vetëm shkronja.";
+    if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $name)) {
+        $error = "Emri duhet të përmbajë vetëm shkronja dhe të jetë mes 2-30 karaktereve.";
+    } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $surname)) {
+        $error = "Mbiemri duhet të përmbajë vetëm shkronja dhe të jetë mes 2-30 karaktereve.";
+    } elseif (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Email-i nuk është i vlefshëm.";
     } elseif (strlen($comment) < 5) {
-        $error = "Komenti është shumë i shkurtër.";
+        $error = "Komenti është shumë i shkurtër (minimum 5 karaktere).";
+    } elseif (empty($selected_case)) {
+        $error = "Ju lutem zgjidhni një rast.";
+    } else {
+        $success = "Faleminderit për mendimin tuaj për rastin: $selected_case!";
+    }
+
+    if ($success) {
+        $_SESSION['success_message'] = $success;
+        header("Location: " . strtok($_SERVER["REQUEST_URI"], '?') . "#comment-section");
+        exit;
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,6 +114,12 @@ if (isset($_POST['submit-general-comment'])) {
         a.visited {
             color: rgb(9, 161, 148);
         }
+
+        #form-success {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
         
 .comment-fieldset {
   border: 4px solidrgb(17, 105, 61);
@@ -458,7 +476,7 @@ if (isset($_POST['submit-general-comment'])) {
 
             <h3 style="padding: <?= $case->getPadding(); ?>;"><?= $case->getTitle(); ?></h3>
             <p><?= $case->getDescription(); ?></p>
-            <a href="#<?= $case->getId(); ?>" class="open-modal">Dhuro</a>
+            <a href="#<?= $case->getId(); ?>" class="open-modal">Read</a>
         </div>
     <?php endforeach; ?>
 </div>
@@ -551,44 +569,58 @@ if (isset($_POST['submit-general-comment'])) {
             <a href="#" class="close-btn">Close</a>
         </div>
     </fieldset>
- 
-<fieldset class="comment-fieldset">
-  <legend>💬 Jep mendimin tënd</legend>
+
+    
+ <fieldset class="comment-fieldset" id="comment-section">
+  <legend>💬 Share Your Opinion
+  </legend>
 
   <p class="comment-intro">
-    Ndaje mendimin tënd për ndonjërin nga rastet tona. Na intereson shumë çfarë mendon! 😊
-  </p>
+  Share your thoughts on one of our cases. We really care about what you think! 😊  </p>
 
-  <button onclick="togglePublicCommentForm()" class="toggle-comment-form">📣 Shkruaj mendimin tuaj</button>
+  <button onclick="togglePublicCommentForm()" class="toggle-comment-form">📣 Write Your Opinion
+  </button>
+  <?php
+    if (isset($_SESSION['success_message'])) {
+        echo "<p id='form-success' class='message success custom-success'>{$_SESSION['success_message']}</p>";
+        unset($_SESSION['success_message']); 
+    }
+?>
+
+
 
   <div id="public-comment-form" class="public-comment-form">
+  
+
     <?php if (!empty($error)) echo "<p class='message error'>$error</p>"; ?>
-    <?php if (!empty($success)) echo "<p class='message success'>$success</p>"; ?>
 
-    <form method="post" action="">
-      <div class="form-group">
-        <input type="text" name="name" placeholder="Emri" required>
-        <input type="text" name="surname" placeholder="Mbiemri" required>
-      </div>
+    <form method="post" action="#comment-section">
+    <div class="form-group">
+    <input type="text" name="name" placeholder="Emri" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+    <input type="text" name="surname" placeholder="Mbiemri" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
+    </div>
 
-      <input type="email" name="email" placeholder="Email (opsional)">
+    <input type="email" name="email" placeholder="Email (opsional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
 
-      <select name="selected_case" required>
-        <option value="">Zgjedh një rast...</option>
-        <option value="Help us to Send Food">Help us to Send Food</option>
-        <option value="Clothes For Everyone">Clothes For Everyone</option>
-        <option value="Water For All Children">Water For All Children</option>
-        <option value="Education For Everyone">Education For Everyone</option>
-        <option value="Medical Support">Medical Support</option>
-        <option value="Homes for Everyone">Homes for Everyone</option>
+      <select name="selected_case">
+        <option value="">Choose a Case...
+        </option>
+        <option value="Help us to Send Food"><?= ($_POST['selected_case'] ?? '') === 'Help us to Send Food' ? 'selected' : '' ?> Help us to Send Food</option>
+        <option value="Clothes For Everyone"><?= ($_POST['selected_case'] ?? '') === 'Clothes For Everyone' ? 'selected' : '' ?> Clothes For Everyone</option>
+        <option value="Water For All Children"><?= ($_POST['selected_case'] ?? '') === 'Water For All Children' ? 'selected' : '' ?> Water For All Children</option>
+        <option value="Education For Everyone"><?= ($_POST['selected_case'] ?? '') === 'Education For Everyone' ? 'selected' : '' ?> Education For Everyone</option>
+        <option value="Medical Support"><?= ($_POST['selected_case'] ?? '') === 'Medical Support' ? 'selected' : '' ?> Medical Support</option>
+        <option value="Homes for Everyone"><?= ($_POST['selected_case'] ?? '') === 'Homes for Everyone' ? 'selected' : '' ?> Homes for Everyone</option>
       </select>
 
-      <textarea name="comment" rows="5" placeholder="Shkruani mendimin tuaj këtu..." required></textarea>
+      <textarea name="comment" rows="5" placeholder="Shkruani mendimin tuaj këtu..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
 
-      <button type="submit" name="submit-general-comment">💾 Dergo mendimin</button>
+      <button type="submit" name="submit-general-comment">💾 Submit Your Opinion
+      </button>
     </form>
   </div>
 </fieldset>
+
 
     <footer>
         <div class="row">
@@ -712,43 +744,47 @@ if (isset($_POST['submit-general-comment'])) {
     </script>
   
         
-    <script>
-    function togglePublicCommentForm() {
+            <script>
+            function togglePublicCommentForm() {
+                const form = document.getElementById("public-comment-form");
+                form.classList.toggle("visible");
+
+                if (form.classList.contains("visible")) {
+                    setTimeout(() => {
+                        form.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 50);
+                }
+            }
+
+            </script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const error = <?= json_encode($error) ?>;
+    const success = <?= json_encode($success) ?>;
     const form = document.getElementById("public-comment-form");
-    form.scrollIntoView({ behavior: "smooth" });
-    form.classList.toggle("visible");
+    const successMsg = document.getElementById("form-success");
+
+    if (error) {
+        form.classList.add("visible");
+        setTimeout(() => {
+            form.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
     }
-    </script>
-    <script>
-    document.querySelector('form').addEventListener('submit', function (e) {
-        e.preventDefault();
 
-        const form = this;
-        const formData = new FormData(form);
-        const messageContainer = document.createElement('p');
+    if (successMsg) {
+        setTimeout(() => {
+            successMsg.style.opacity = "0";
+            successMsg.style.transition = "opacity 0.5s ease";
+        }, 3000);
 
-        fetch("", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.text())
-        .then(html => {
-            messageContainer.textContent = "✅ Faleminderit për mendimin tuaj!";
-            messageContainer.className = "message success custom-success";
-            form.parentElement.insertBefore(messageContainer, form);
-
-            form.reset();
-
-            setTimeout(() => {
-                messageContainer.remove();
-                togglePublicCommentForm(); 
-            }, 2000);
-        });
-    });
-    </script>
-
-
-
+        setTimeout(() => {
+            successMsg.style.display = "none";
+        }, 3500);
+    }
+});
+</script>
 </body>
-
 </html>
