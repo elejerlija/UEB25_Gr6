@@ -56,6 +56,32 @@ $cases = [
 ];
 ?>
 
+<?php
+session_start();
+$success = "";
+$error = "";
+
+if (isset($_POST['submit-general-comment'])) {
+    $name = trim($_POST['name']);
+    $surname = trim($_POST['surname']);
+    $email = trim($_POST['email']);
+    $comment = trim($_POST['comment']);
+    $selected_case = trim($_POST['selected_case']);
+
+    if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
+        $error = "Emri duhet të përmbajë vetëm shkronja.";
+    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $surname)) {
+        $error = "Mbiemri duhet të përmbajë vetëm shkronja.";
+    } elseif (strlen($comment) < 5) {
+        $error = "Komenti është shumë i shkurtër.";
+    } else {
+        $success = "Faleminderit për mendimin tuaj për rastin: $selected_case!";
+    }
+}
+?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +107,129 @@ $cases = [
         a.visited {
             color: rgb(9, 161, 148);
         }
-    </style>
+        
+.comment-fieldset {
+  border: 4px solidrgb(17, 105, 61);
+  border-radius: 15px;
+  padding: 40px;
+  margin: 80px auto;
+  max-width: 1000px;
+  background: linear-gradient(to right, #f0fdfa, #ffffff);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  position: relative;
+  text-align: center;
+}
+
+.comment-fieldset legend {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #00796b;
+  padding: 0 20px;
+  background-color: #f0fdfa;
+  border: 2px dashedrgb(16, 92, 37);
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.comment-intro {
+  font-size: 1.1em;
+  color: #333;
+  margin: 20px 0;
+}
+
+.toggle-comment-form {
+  background-color:rgb(5, 91, 38);
+  color: white;
+  padding: 14px 28px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-comment-form:hover {
+  background-color: #00897b;
+}
+
+.public-comment-form {
+  margin-top: 30px;
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.public-comment-form.visible {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.public-comment-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.public-comment-form .form-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.public-comment-form input,
+.public-comment-form textarea,
+.public-comment-form select {
+  width: 80%;
+  max-width: 550px;
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.2s ease;
+}
+
+.public-comment-form input:focus,
+.public-comment-form textarea:focus,
+.public-comment-form select:focus {
+  border-color:rgb(12, 92, 51);
+  outline: none;
+}
+
+.public-comment-form button[type="submit"] {
+  background-color:rgb(22, 90, 32);
+  color: white;
+  padding: 12px 35px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.public-comment-form button[type="submit"]:hover {
+  background-color: #004d40;
+}
+
+.message {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+.message.error {
+  color: #d63031;
+}
+.message.success {
+  color: #2ecc71;
+}
+</style>
+
 
 
 </head>
@@ -311,7 +459,8 @@ $cases = [
 
         </div>
 
-        <div id="modal-overlay"></div>
+<!-- Overlay -->
+<div id="modal-overlay"></div>
 
 
         <div id="modal4" class="modal">
@@ -396,6 +545,46 @@ $cases = [
             <a href="#" class="close-btn">Close</a>
         </div>
     </fieldset>
+ 
+<!-- SEKSIONI PËR KOMENTE PËRGJITHSHME (i veçantë me fieldset) -->
+<fieldset class="comment-fieldset">
+  <legend>💬 Jep mendimin tënd</legend>
+
+  <p class="comment-intro">
+    Ndaje mendimin tënd për ndonjërin nga rastet tona. Na intereson shumë çfarë mendon! 😊
+  </p>
+
+  <button onclick="togglePublicCommentForm()" class="toggle-comment-form">📣 Shkruaj mendimin tuaj</button>
+
+  <div id="public-comment-form" class="public-comment-form">
+    <?php if (!empty($error)) echo "<p class='message error'>$error</p>"; ?>
+    <?php if (!empty($success)) echo "<p class='message success'>$success</p>"; ?>
+
+    <form method="post" action="">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Emri" required>
+        <input type="text" name="surname" placeholder="Mbiemri" required>
+      </div>
+
+      <input type="email" name="email" placeholder="Email (opsional)">
+
+      <select name="selected_case" required>
+        <option value="">Zgjedh një rast...</option>
+        <option value="Help us to Send Food">Help us to Send Food</option>
+        <option value="Clothes For Everyone">Clothes For Everyone</option>
+        <option value="Water For All Children">Water For All Children</option>
+        <option value="Education For Everyone">Education For Everyone</option>
+        <option value="Medical Support">Medical Support</option>
+        <option value="Homes for Everyone">Homes for Everyone</option>
+      </select>
+
+      <textarea name="comment" rows="5" placeholder="Shkruani mendimin tuaj këtu..." required></textarea>
+
+      <button type="submit" name="submit-general-comment">💾 Dergo mendimin</button>
+    </form>
+  </div>
+</fieldset>
+
     <footer>
         <div class="row">
             <div class="col">
@@ -459,6 +648,7 @@ $cases = [
 
 
     </fieldset>
+    
 
     <script>
 
@@ -513,13 +703,17 @@ $cases = [
         animateNumber('volunteers', 250);
         animateNumber('projects', 45);
 
-    </script>
-
-
-   
 
     </script>
-
+  
+        
+    <script>
+    function togglePublicCommentForm() {
+    const form = document.getElementById("public-comment-form");
+    form.scrollIntoView({ behavior: "smooth" });
+    form.classList.toggle("visible");
+    }
+    </script>
 
 </body>
 
