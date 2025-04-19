@@ -74,14 +74,9 @@ if (isset($_POST['submit-general-comment'])) {
         $error = "Mbiemri duhet të përmbajë vetëm shkronja.";
     } elseif (strlen($comment) < 5) {
         $error = "Komenti është shumë i shkurtër.";
-    } else {
-        $success = "Faleminderit për mendimin tuaj për rastin: $selected_case!";
     }
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -198,7 +193,7 @@ if (isset($_POST['submit-general-comment'])) {
 .public-comment-form input:focus,
 .public-comment-form textarea:focus,
 .public-comment-form select:focus {
-  border-color:rgb(12, 92, 51);
+  border-color:rgb(0, 184, 89);
   outline: none;
 }
 
@@ -228,6 +223,18 @@ if (isset($_POST['submit-general-comment'])) {
 .message.success {
   color: #2ecc71;
 }
+.custom-success {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
 </style>
 
 
@@ -459,7 +466,6 @@ if (isset($_POST['submit-general-comment'])) {
 
         </div>
 
-<!-- Overlay -->
 <div id="modal-overlay"></div>
 
 
@@ -546,7 +552,6 @@ if (isset($_POST['submit-general-comment'])) {
         </div>
     </fieldset>
  
-<!-- SEKSIONI PËR KOMENTE PËRGJITHSHME (i veçantë me fieldset) -->
 <fieldset class="comment-fieldset">
   <legend>💬 Jep mendimin tënd</legend>
 
@@ -714,6 +719,35 @@ if (isset($_POST['submit-general-comment'])) {
     form.classList.toggle("visible");
     }
     </script>
+    <script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const form = this;
+        const formData = new FormData(form);
+        const messageContainer = document.createElement('p');
+
+        fetch("", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(html => {
+            messageContainer.textContent = "✅ Faleminderit për mendimin tuaj!";
+            messageContainer.className = "message success custom-success";
+            form.parentElement.insertBefore(messageContainer, form);
+
+            form.reset();
+
+            setTimeout(() => {
+                messageContainer.remove();
+                togglePublicCommentForm(); 
+            }, 2000);
+        });
+    });
+    </script>
+
+
 
 </body>
 
