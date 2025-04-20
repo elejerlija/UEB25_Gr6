@@ -607,11 +607,11 @@ showHeader();
 
     <form method="post" action="#comment-section">
     <div class="form-group">
-    <input type="text" name="name" placeholder="Emri" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
-    <input type="text" name="surname" placeholder="Mbiemri" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
+    <input type="text" name="name" placeholder="Name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+    <input type="text" name="surname" placeholder="Surname" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
     </div>
 
-    <input type="email" name="email" placeholder="Email (opsional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+    <input type="email" name="email" placeholder="Email (optional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
 
       <select name="selected_case">
         <option value="">Choose a Case...
@@ -624,7 +624,7 @@ showHeader();
         <option value="Homes for Everyone"><?= ($_POST['selected_case'] ?? '') === 'Homes for Everyone' ? 'selected' : '' ?> Homes for Everyone</option>
       </select>
 
-      <textarea name="comment" rows="5" placeholder="Shkruani mendimin tuaj këtu..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
+      <textarea name="comment" rows="5" placeholder="Write your opinion here..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
 
       <button type="submit" name="submit-general-comment">💾 Submit Your Opinion
       </button>
