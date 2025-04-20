@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php include 'footer.php'; 
+include 'header.php'; ?>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -437,38 +439,58 @@
 </style>
 </head>
     <body>
-        <header>
-            <div class="top-bar">
-                <div class="contact-info">
-             <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone" style="color: #000; font-size: 12px;">   </i>  +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
-             <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;"> <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>      charity.kosova@gmail.com</a>
-                </div>
-                <div class="social-links">
-              <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-              <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
-              <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram" style=" color:  #DD2A7B; font-size: 16px;"></i></a>
-                </div>
-            </div>
-            <nav class="nav-links">
-                <div class="logo">HelpSomeone</div>
-                <ul class="nav-links">
-                    <li><a href="index.php">Home</a>
-                            <li class="dropdown">
-                              <a href="about.php" >About Us</a>
-                              <ul class="dropdown-content">
-                                <li><a href="about.php#aboutID ">Who are we</a></li>
-                                <li><a href="about.php#impactID">Our Impact</a></li>
-                                <li><a href="about.php#priorityID">Arrange by Priority</a></li>
-                                <li><a href="about.php#teamID">Our Team</a></li>
-                              </ul>
-                            </li>
-                            <li> <a href="volunteer.php">Volunteer & Updates</a></li>
-                                <li> <a href="popular.php">Popular Cases</a></li>
-                                <li> <a href="contact.php">Contact</a></li>
-                                <li> <a href="donate.php">Donate</a></li>          
-                </ul>
-            </nav>
-        </header>
+    <?php
+function showHeader() {
+
+  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
+  ?>
+
+  <header>
+    <div class="top-bar">
+      <div class="contact-info">
+        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="logo"><?= $site_name ?></div>
+      <ul class="nav-links">
+        <li><a href="index.php">Home</a></li>
+        <li class="dropdown">
+          <a href="about.php">About Us</a>
+          <ul class="dropdown-content">
+            <li><a href="about.php#aboutID">Who are we</a></li>
+            <li><a href="about.php#impactID">Our Impact</a></li>
+            <li><a href="about.php#priorityID">Arrange by Priority</a></li>
+            <li><a href="about.php#teamID">Our Team</a></li>
+          </ul>
+        </li>
+        <li><a href="volunteer.php">Volunteer & Updates</a></li>
+        <li><a href="popular.php">Popular Cases</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="donate.php">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <?php
+}
+
+
+showHeader();
+?>
+
+        
         <br><br>
 <div class="container">
     <section>
@@ -604,6 +626,62 @@ echo '</section>';
     </ul>
   </div>
 </section>
+<?php
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $fullName = trim($_POST['name'] ?? '');
+    if (empty($fullName)) {
+        $errors[] = "Full Name is required!";
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $fullName)) {
+        $errors[] = "Full Name must contain only letters and spaces!";
+    }
+
+    $email = trim($_POST['email'] ?? '');
+    if (empty($email)) {
+        $errors[] = "Email is required!";
+    } elseif (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email)) {
+        $errors[] = "Invalid email format!"; 
+    }
+
+    $gender = $_POST['gender'] ?? '';
+    if (empty($gender)) {
+        $errors[] = "Gender is required!";
+    }
+    $dob = $_POST['dob'] ?? '';
+    if (empty($dob)) {
+        $errors[] = "Date of Birth is required!";
+    } elseif (!preg_match("/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/", $dob)) {
+        $errors[] = "Date of Birth must be in dd/mm/yyyy format!";
+    } else {
+       
+        list($day, $month, $year) = explode('/', $dob);
+        $birthDate = new DateTime("$year-$month-$day");
+        $currentDate = new DateTime();
+        $age = $currentDate->diff($birthDate)->y;
+
+        if ($age < 18 || $age > 99) {
+            $errors[] = "Age must be between 18 and 99!";
+        }
+    }
+  
+
+    $password = $_POST['password'] ?? '';
+    if (empty($password)) {
+        $errors[] = "Password is required!";
+    } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/", $password)) {
+        $errors[] = "Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol!";
+    }
+
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
+    if ($password !== $confirmPassword) {
+        $errors[] = "Passwords do not match!";
+    }
+}
+?>
+
+
 <section style="background-color: white;">
   <div class="join-section" id="join-section">
     <div class="join-form">
@@ -612,24 +690,24 @@ echo '</section>';
       <form id="joinForm" method="post">
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+          <input type="text" id="name" name="name" placeholder="Your Full Name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>" required>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <input type="email" id="email" name="email" placeholder="Your Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" required>
         </div>
         <div class="form-group">
           <label for="gender">Choose Gender</label>
           <div class="gender-options">
-            <label><input type="radio" name="gender" value="Female" required> Female</label>
-            <label><input type="radio" name="gender" value="Male" required> Male</label>
-            <label><input type="radio" name="gender" value="Other" required> Other</label>
+            <label><input type="radio" name="gender" value="Female" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Female') ? 'checked' : ''; ?> required> Female</label>
+            <label><input type="radio" name="gender" value="Male" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Male') ? 'checked' : ''; ?> required> Male</label>
+            <label><input type="radio" name="gender" value="Other" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Other') ? 'checked' : ''; ?> required> Other</label>
           </div>
         </div>
+        
         <div class="form-group">
-          <label for="age">Age</label>
-          <input type="number" id="age" name="age" placeholder="Your Age" min="18" max="99"required>
-        </div>
+        <label for="dob">Date of Birth:</label>
+        <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" required></div>
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Choose a Password" required>
@@ -641,85 +719,84 @@ echo '</section>';
         <input type="submit" value="Join Now">
         <input type="reset" value="Reset">
       </form>
-    </div>
-  </div>
-</section>
-<?php
-$errors = [];
 
+    
+      <?php 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
-    $fullName = trim($_POST['name']);
-    if (empty($fullName)) {
-        $errors[] = "Full Name is required!";
-    } elseif (!preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $fullName)) {
-        $errors[] = "Full Name must contain only letters and include both First and Last Name.";
+    if (!empty($errors)) { ?>
+        <div class="error-box">
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+          <h4>Please fix the following errors:</h4>
+          <ul>
+            <?php foreach ($errors as $error): ?>
+              <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+    <?php } else {
+        echo "<div class='success-box'>Registration successful!</div>";
     }
-
-    
-    $email = trim($_POST['email']);
-    if (empty($email)) {
-        $errors[] = "Email is required!";
-    } elseif (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
-        $errors[] = "Invalid email format!";
-    }
-
-    
-    $gender = $_POST['gender'] ?? '';
-    if (empty($gender)) {
-        $errors[] = "Gender is required!";
-    }
-
-    
-    $ageInput = trim($_POST['age']);
-    if ($ageInput === '') {
-        $errors[] = "Age is required!";
-    } elseif (!is_numeric($ageInput)) {
-        $errors[] = "Age must be a number!";
-    } else {
-        $age = (int)$ageInput;
-        if ($age < 0) {
-            $errors[] = "Age cannot be negative!";
-        } elseif ($age < 18 || $age > 99) {
-            $errors[] = "Age must be between 18 and 99!";
-        }
-    }
-
-    
-    $password = $_POST['password'];
-    if (empty($password)) {
-        $errors[] = "Password is required!";
-    } elseif (strlen($password) < 6) {
-        $errors[] = "Password must be at least 6 characters!";
-    } elseif (!preg_match("/[A-Z]/", $password) || 
-              !preg_match("/[a-z]/", $password) || 
-              !preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
-        $errors[] = "Password must include uppercase, lowercase, and a symbol!";
-    }
-
-    
-    $confirmPassword = $_POST['confirmPassword'];
-    if ($password !== $confirmPassword) {
-        $errors[] = "Passwords do not match!";
-    }
-    if (!empty($errors)) {
-      echo "<div class='error-box'>";
-      echo "<button class='close-btn' onclick='this.parentElement.style.display=\"none\";'>&times;</button>";
-      echo "<h4>Please fix the following errors:</h4>";
-      echo "<ul>";
-      foreach ($errors as $error) {
-          echo "<li>$error</li>";
-      }
-      echo "</ul></div>";
-  }
-  
-  
 }
 ?>
 
+    </div>
+  </div>
+</section>
+
+
+
+
+
 
 <script>
+document.getElementById("joinForm").addEventListener("submit", function(event) {
+    let errors = [];
 
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const dob = document.getElementById("dob").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!/^[a-zA-Z ]+$/.test(name)) {
+        errors.push("Full Name must contain only letters and spaces.");
+    }
+
+    if (!/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/.test(email)) {
+        errors.push("Invalid email format.");
+    }
+
+    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(dob)) {
+    errors.push("Date of Birth must be in dd/mm/yyyy format.");
+} else {
+    const [day, month, year] = dob.split('/');
+    const birthDate = new Date(year, month - 1, day);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+        age--; 
+    }
+
+    if (age < 18 || age > 99) {
+        errors.push("Age must be between 18 and 99.");
+    }
+}
+
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password)) {
+        errors.push("Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol.");
+    }
+
+    if (password !== confirmPassword) {
+        errors.push("Passwords do not match.");
+    }
+
+    if (errors.length > 0) {
+        event.preventDefault(); 
+        alert("Please fix the following:\n\n" + errors.join("\n"));
+    }
+});
 document.addEventListener("DOMContentLoaded", function () {
     const events = [
         { date: "2025-01-10", name: "Community Cleanup Drive" },
@@ -814,11 +891,12 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
     <div class="col">
       <h3>We'd Love to Hear From You</h3>
-      <form class="footer-form">
-        <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-          placeholder="  Leave a message">
-        <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-      </form>
+      <form class="footer-form" method="POST" action="">
+  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+  <input type="text" name="message" placeholder="  Leave a message" required>
+  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+</form>
+
       <div class="social-icons">
         <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #2d6a4f;"></i></a>
         <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #2d6a4f;"></i></i></a>
@@ -831,3 +909,13 @@ document.addEventListener("DOMContentLoaded", function () {
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
     </body>
 </html>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+    const errorBox = document.querySelector('.error-box');
+    const successBox = document.querySelector('.success-box');
+
+    if (errorBox || successBox) {
+        (errorBox || successBox).scrollIntoView({ behavior: 'smooth' });
+    }
+});
+</script>

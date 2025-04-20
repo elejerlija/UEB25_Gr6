@@ -1,4 +1,7 @@
 <?php
+include 'footer.php'; 
+include 'header.php'; 
+
 class CaseItem {
     private $id;
     private $title;
@@ -9,7 +12,7 @@ class CaseItem {
     private $imageHeight;
     private $imageWidth;
 
-    public function __construct($id, $title, $description, $amount, $image, $padding = "13px", $imageHeight = "135", $imageWidth = "250") {
+    public function __construct($id, $title, $description, $amount, $image, $padding, $imageHeight, $imageWidth) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
@@ -55,6 +58,39 @@ $cases = [
     new CaseItem("modal9", "Homes for Everyone", "Raised: $2500 | Goal: $10000", 25, "image/popular-6.jpg", "15px", "135", "200")
 ];
 ?>
+<?php
+session_start();
+$success = "";
+$error = "";
+
+if (isset($_POST['submit-general-comment'])) {
+    $name = trim($_POST['name']);
+    $surname = trim($_POST['surname']);
+    $email = trim($_POST['email']);
+    $comment = trim($_POST['comment']);
+    $selected_case = trim($_POST['selected_case']);
+
+    if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $name)) {
+        $error = "The name must contain only letters and be between 2-30 characters.";
+    } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $surname)) {
+        $error = "The surname must contain only letters and be between 2-30 characters.";
+    } elseif (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "The email address is not valid.";
+    } elseif (strlen($comment) < 5) {
+        $error = "The comment is too short (minimum 5 characters).";
+    } elseif (empty($selected_case)) {
+        $error = "Please select a case.";
+    } else {
+        $success = "Thank you for your opinion on the case: $selected_case!";
+    }
+
+    if ($success) {
+        $_SESSION['success_message'] = $success;
+        header("Location: " . strtok($_SERVER["REQUEST_URI"], '?') . "#comment-section");
+        exit;
+    }
+}
+?>
 
 
 <!DOCTYPE html>
@@ -81,7 +117,147 @@ $cases = [
         a.visited {
             color: rgb(9, 161, 148);
         }
-    </style>
+
+        #form-success {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+        
+.comment-fieldset {
+  border: 4px solidrgb(17, 105, 61);
+  border-radius: 15px;
+  padding: 40px;
+  margin: 80px auto;
+  max-width: 1000px;
+  background: linear-gradient(to right, #f0fdfa, #ffffff);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  position: relative;
+  text-align: center;
+}
+
+.comment-fieldset legend {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #00796b;
+  padding: 0 20px;
+  background-color: #f0fdfa;
+  border: 2px dashedrgb(16, 92, 37);
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.comment-intro {
+  font-size: 1.1em;
+  color: #333;
+  margin: 20px 0;
+}
+
+.toggle-comment-form {
+  background-color:rgb(5, 91, 38);
+  color: white;
+  padding: 14px 28px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-comment-form:hover {
+  background-color: #00897b;
+}
+
+.public-comment-form {
+  margin-top: 30px;
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.public-comment-form.visible {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.public-comment-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.public-comment-form .form-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.public-comment-form input,
+.public-comment-form textarea,
+.public-comment-form select {
+  width: 80%;
+  max-width: 550px;
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.2s ease;
+}
+
+.public-comment-form input:focus,
+.public-comment-form textarea:focus,
+.public-comment-form select:focus {
+  border-color:rgb(0, 184, 89);
+  outline: none;
+}
+
+.public-comment-form button[type="submit"] {
+  background-color:rgb(22, 90, 32);
+  color: white;
+  padding: 12px 35px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.public-comment-form button[type="submit"]:hover {
+  background-color: #004d40;
+}
+
+.message {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+.message.error {
+  color: #d63031;
+}
+.message.success {
+  color: #2ecc71;
+}
+.custom-success {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1em;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+</style>
+
 
 
 </head>
@@ -89,49 +265,57 @@ $cases = [
 <body>
 
 
-    <header>
+<?php
+function showHeader() {
 
-        <div class="top-bar">
-            <div class="contact-info">
-                <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone"
-                        style="color: #000; font-size: 12px;"> </i> +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
-                <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;">
-                    <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>
-                    charity.kosova@gmail.com</a>
-            </div>
-            <div class="social-links">
-                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"
-                        style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-                <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"
-                        style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
-                <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram"
-                        style=" color:  #DD2A7B; font-size: 16px;"></i></a>
-            </div>
-        </div>
+  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
+  ?>
+
+  <header>
+    <div class="top-bar">
+      <div class="contact-info">
+        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="logo"><?= $site_name ?></div>
+      <ul class="nav-links">
+        <li><a href="index.php">Home</a></li>
+        <li class="dropdown">
+          <a href="about.php">About Us</a>
+          <ul class="dropdown-content">
+            <li><a href="about.php#aboutID">Who are we</a></li>
+            <li><a href="about.php#impactID">Our Impact</a></li>
+            <li><a href="about.php#priorityID">Arrange by Priority</a></li>
+            <li><a href="about.php#teamID">Our Team</a></li>
+          </ul>
+        </li>
+        <li><a href="volunteer.php">Volunteer & Updates</a></li>
+        <li><a href="popular.php">Popular Cases</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="donate.php">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <?php
+}
 
 
-        <nav class="nav-links">
-            <div class="logo">HelpSomeone</div>
-            <ul class="nav-links">
-                <li><a href="index.php">Home</a>
-                <li class="dropdown">
-                    <a href="about.php">About Us</a>
-                    <ul class="dropdown-content">
-                        <li><a href="about.php#aboutID">Who are we</a></li>
-                        <li><a href="about.php#impactID">Our Impact</a></li>
-                        <li><a href="about.php#priorityID">Arrange by Priority</a></li>
-                        <li><a href="about.php#teamID">Our Team</a></li>
-                    </ul>
-                </li>
-                <li> <a href="volunteer.php">Volunteer & Updates</a></li>
-                <li> <a href="popular.php">Popular Cases</a></li>
-                <li> <a href="contact.php">Contact</a></li>
-                <li> <a href="donate.php">Donate</a></li>
-            </ul>
-           
-           
-        </nav>
-    </header>
+showHeader();
+?>
+
     <div class="header-2">
         <h1>Impactful Giving</h1>
         <p>"Making a difference, one donation at a time."</p>
@@ -303,7 +487,7 @@ $cases = [
 
             <h3 style="padding: <?= $case->getPadding(); ?>;"><?= $case->getTitle(); ?></h3>
             <p><?= $case->getDescription(); ?></p>
-            <a href="#<?= $case->getId(); ?>" class="open-modal">Dhuro</a>
+            <a href="#<?= $case->getId(); ?>" class="open-modal">Read</a>
         </div>
     <?php endforeach; ?>
 </div>
@@ -311,7 +495,7 @@ $cases = [
 
         </div>
 
-        <div id="modal-overlay"></div>
+<div id="modal-overlay"></div>
 
 
         <div id="modal4" class="modal">
@@ -396,6 +580,59 @@ $cases = [
             <a href="#" class="close-btn">Close</a>
         </div>
     </fieldset>
+
+    
+ <fieldset class="comment-fieldset" id="comment-section">
+  <legend>💬 Share Your Opinion
+  </legend>
+
+  <p class="comment-intro">
+  Share your thoughts on one of our cases. We really care about what you think! 😊  </p>
+
+  <button onclick="togglePublicCommentForm()" class="toggle-comment-form">📣 Write Your Opinion
+  </button>
+  <?php
+    if (isset($_SESSION['success_message'])) {
+        echo "<p id='form-success' class='message success custom-success'>{$_SESSION['success_message']}</p>";
+        unset($_SESSION['success_message']); 
+    }
+?>
+
+
+
+  <div id="public-comment-form" class="public-comment-form">
+  
+
+    <?php if (!empty($error)) echo "<p class='message error'>$error</p>"; ?>
+
+    <form method="post" action="#comment-section">
+    <div class="form-group">
+    <input type="text" name="name" placeholder="Name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+    <input type="text" name="surname" placeholder="Surname" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
+    </div>
+
+    <input type="email" name="email" placeholder="Email (optional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+
+      <select name="selected_case">
+        <option value="">Choose a Case...
+        </option>
+        <option value="Help us to Send Food"><?= ($_POST['selected_case'] ?? '') === 'Help us to Send Food' ? 'selected' : '' ?> Help us to Send Food</option>
+        <option value="Clothes For Everyone"><?= ($_POST['selected_case'] ?? '') === 'Clothes For Everyone' ? 'selected' : '' ?> Clothes For Everyone</option>
+        <option value="Water For All Children"><?= ($_POST['selected_case'] ?? '') === 'Water For All Children' ? 'selected' : '' ?> Water For All Children</option>
+        <option value="Education For Everyone"><?= ($_POST['selected_case'] ?? '') === 'Education For Everyone' ? 'selected' : '' ?> Education For Everyone</option>
+        <option value="Medical Support"><?= ($_POST['selected_case'] ?? '') === 'Medical Support' ? 'selected' : '' ?> Medical Support</option>
+        <option value="Homes for Everyone"><?= ($_POST['selected_case'] ?? '') === 'Homes for Everyone' ? 'selected' : '' ?> Homes for Everyone</option>
+      </select>
+
+      <textarea name="comment" rows="5" placeholder="Write your opinion here..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
+
+      <button type="submit" name="submit-general-comment">💾 Submit Your Opinion
+      </button>
+    </form>
+  </div>
+</fieldset>
+
+
     <footer>
         <div class="row">
             <div class="col">
@@ -432,11 +669,12 @@ $cases = [
             </div>
             <div class="col">
                 <h3>We'd Love to Hear From You</h3>
-                <form class="footer-form">
-                    <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-                        placeholder="  Leave a message">
-                    <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-                </form>
+                <form class="footer-form" method="POST" action="">
+  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+  <input type="text" name="message" placeholder="  Leave a message" required>
+  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+</form>
+
                 <div class="social-icons">
                     <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
                             style="color: #2d6a4f;"></i></a>
@@ -459,6 +697,7 @@ $cases = [
 
 
     </fieldset>
+    
 
     <script>
 
@@ -513,14 +752,51 @@ $cases = [
         animateNumber('volunteers', 250);
         animateNumber('projects', 45);
 
-    </script>
-
-
-   
 
     </script>
+  
+        
+            <script>
+            function togglePublicCommentForm() {
+                const form = document.getElementById("public-comment-form");
+                form.classList.toggle("visible");
+
+                if (form.classList.contains("visible")) {
+                    setTimeout(() => {
+                        form.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 50);
+                }
+            }
+
+            </script>
 
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const error = <?= json_encode($error) ?>;
+    const success = <?= json_encode($success) ?>;
+    const form = document.getElementById("public-comment-form");
+    const successMsg = document.getElementById("form-success");
+
+    if (error) {
+        form.classList.add("visible");
+        setTimeout(() => {
+            form.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+    }
+
+    if (successMsg) {
+        setTimeout(() => {
+            successMsg.style.opacity = "0";
+            successMsg.style.transition = "opacity 0.5s ease";
+        }, 3000);
+
+        setTimeout(() => {
+            successMsg.style.display = "none";
+        }, 3500);
+    }
+});
+</script>
 </body>
-
 </html>
