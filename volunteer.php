@@ -631,28 +631,26 @@ $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $fullName = trim($_POST['name']);
+    $fullName = trim($_POST['name'] ?? '');
     if (empty($fullName)) {
         $errors[] = "Full Name is required!";
     } elseif (!preg_match("/^[a-zA-Z ]+$/", $fullName)) {
         $errors[] = "Full Name must contain only letters and spaces!";
     }
-   
-    $email = trim($_POST['email']);
+
+    $email = trim($_POST['email'] ?? '');
     if (empty($email)) {
         $errors[] = "Email is required!";
     } elseif (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email)) {
         $errors[] = "Invalid email format!"; 
     }
 
-  
     $gender = $_POST['gender'] ?? '';
     if (empty($gender)) {
         $errors[] = "Gender is required!";
     }
 
-  
-    $ageInput = trim($_POST['age']);
+    $ageInput = trim($_POST['age'] ?? '');
     if ($ageInput === '') {
         $errors[] = "Age is required!";
     } elseif (!ctype_digit($ageInput)) {
@@ -664,23 +662,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    $password = $_POST['password'];
+    $password = $_POST['password'] ?? '';
     if (empty($password)) {
         $errors[] = "Password is required!";
     } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/", $password)) {
         $errors[] = "Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol!";
     }
 
-  
-    $confirmPassword = $_POST['confirmPassword'];
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
     if ($password !== $confirmPassword) {
         $errors[] = "Passwords do not match!";
     }
-
-  
-   
 }
 ?>
+
 
 <section style="background-color: white;">
   <div class="join-section" id="join-section">
