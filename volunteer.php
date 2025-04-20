@@ -604,6 +604,62 @@ echo '</section>';
     </ul>
   </div>
 </section>
+<?php
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $fullName = trim($_POST['name']);
+    if (empty($fullName)) {
+        $errors[] = "Full Name is required!";
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $fullName)) {
+        $errors[] = "Full Name must contain only letters and spaces!";
+    }
+   
+    $email = trim($_POST['email']);
+    if (empty($email)) {
+        $errors[] = "Email is required!";
+    } elseif (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email)) {
+        $errors[] = "Invalid email format!"; 
+    }
+
+  
+    $gender = $_POST['gender'] ?? '';
+    if (empty($gender)) {
+        $errors[] = "Gender is required!";
+    }
+
+  
+    $ageInput = trim($_POST['age']);
+    if ($ageInput === '') {
+        $errors[] = "Age is required!";
+    } elseif (!ctype_digit($ageInput)) {
+        $errors[] = "Age must be a valid number!";
+    } else {
+        $age = (int)$ageInput;
+        if ($age < 18 || $age > 99) {
+            $errors[] = "Age must be between 18 and 99!";
+        }
+    }
+
+    $password = $_POST['password'];
+    if (empty($password)) {
+        $errors[] = "Password is required!";
+    } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/", $password)) {
+        $errors[] = "Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol!";
+    }
+
+  
+    $confirmPassword = $_POST['confirmPassword'];
+    if ($password !== $confirmPassword) {
+        $errors[] = "Passwords do not match!";
+    }
+
+  
+   
+}
+?>
+
 <section style="background-color: white;">
   <div class="join-section" id="join-section">
     <div class="join-form">
@@ -612,23 +668,23 @@ echo '</section>';
       <form id="joinForm" method="post">
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+          <input type="text" id="name" name="name" placeholder="Your Full Name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>" required>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required>
+          <input type="email" id="email" name="email" placeholder="Your Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" required>
         </div>
         <div class="form-group">
           <label for="gender">Choose Gender</label>
           <div class="gender-options">
-            <label><input type="radio" name="gender" value="Female" required> Female</label>
-            <label><input type="radio" name="gender" value="Male" required> Male</label>
-            <label><input type="radio" name="gender" value="Other" required> Other</label>
+            <label><input type="radio" name="gender" value="Female" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Female') ? 'checked' : ''; ?> required> Female</label>
+            <label><input type="radio" name="gender" value="Male" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Male') ? 'checked' : ''; ?> required> Male</label>
+            <label><input type="radio" name="gender" value="Other" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Other') ? 'checked' : ''; ?> required> Other</label>
           </div>
         </div>
         <div class="form-group">
           <label for="age">Age</label>
-          <input type="number" id="age" name="age" placeholder="Your Age" min="18" max="99"required>
+          <input type="number" id="age" name="age" placeholder="Your Age" min="18" max="99" value="<?php echo isset($_POST['age']) ? $_POST['age'] : ''; ?>" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -641,85 +697,70 @@ echo '</section>';
         <input type="submit" value="Join Now">
         <input type="reset" value="Reset">
       </form>
-    </div>
-  </div>
-</section>
-<?php
-$errors = [];
 
+    
+      <?php 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
-    $fullName = trim($_POST['name']);
-    if (empty($fullName)) {
-        $errors[] = "Full Name is required!";
-    } elseif (!preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $fullName)) {
-        $errors[] = "Full Name must contain only letters and include both First and Last Name.";
+    if (!empty($errors)) { ?>
+        <div class="error-box">
+          <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+          <h4>Please fix the following errors:</h4>
+          <ul>
+            <?php foreach ($errors as $error): ?>
+              <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+    <?php } else {
+        echo "<div class='success-box'>Registration successful!</div>";
     }
-
-    
-    $email = trim($_POST['email']);
-    if (empty($email)) {
-        $errors[] = "Email is required!";
-    } elseif (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
-        $errors[] = "Invalid email format!";
-    }
-
-    
-    $gender = $_POST['gender'] ?? '';
-    if (empty($gender)) {
-        $errors[] = "Gender is required!";
-    }
-
-    
-    $ageInput = trim($_POST['age']);
-    if ($ageInput === '') {
-        $errors[] = "Age is required!";
-    } elseif (!is_numeric($ageInput)) {
-        $errors[] = "Age must be a number!";
-    } else {
-        $age = (int)$ageInput;
-        if ($age < 0) {
-            $errors[] = "Age cannot be negative!";
-        } elseif ($age < 18 || $age > 99) {
-            $errors[] = "Age must be between 18 and 99!";
-        }
-    }
-
-    
-    $password = $_POST['password'];
-    if (empty($password)) {
-        $errors[] = "Password is required!";
-    } elseif (strlen($password) < 6) {
-        $errors[] = "Password must be at least 6 characters!";
-    } elseif (!preg_match("/[A-Z]/", $password) || 
-              !preg_match("/[a-z]/", $password) || 
-              !preg_match("/[!@#$%^&*(),.?\":{}|<>]/", $password)) {
-        $errors[] = "Password must include uppercase, lowercase, and a symbol!";
-    }
-
-    
-    $confirmPassword = $_POST['confirmPassword'];
-    if ($password !== $confirmPassword) {
-        $errors[] = "Passwords do not match!";
-    }
-    if (!empty($errors)) {
-      echo "<div class='error-box'>";
-      echo "<button class='close-btn' onclick='this.parentElement.style.display=\"none\";'>&times;</button>";
-      echo "<h4>Please fix the following errors:</h4>";
-      echo "<ul>";
-      foreach ($errors as $error) {
-          echo "<li>$error</li>";
-      }
-      echo "</ul></div>";
-  }
-  
-  
 }
 ?>
 
+    </div>
+  </div>
+</section>
+
+
+
+
+
 
 <script>
+document.getElementById("joinForm").addEventListener("submit", function(event) {
+    let errors = [];
 
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const age = document.getElementById("age").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!/^[a-zA-Z ]+$/.test(name)) {
+        errors.push("Full Name must contain only letters and spaces.");
+    }
+
+    if (!/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/.test(email)) {
+        errors.push("Invalid email format.");
+    }
+
+    if (age === '' || isNaN(age) || age < 18 || age > 99) {
+        errors.push("Age must be between 18 and 99.");
+    }
+
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password)) {
+        errors.push("Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol.");
+    }
+
+    if (password !== confirmPassword) {
+        errors.push("Passwords do not match.");
+    }
+
+    if (errors.length > 0) {
+        event.preventDefault(); 
+        alert("Please fix the following:\n\n" + errors.join("\n"));
+    }
+});
 document.addEventListener("DOMContentLoaded", function () {
     const events = [
         { date: "2025-01-10", name: "Community Cleanup Drive" },
@@ -831,3 +872,13 @@ document.addEventListener("DOMContentLoaded", function () {
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
     </body>
 </html>
+<script>
+window.addEventListener('DOMContentLoaded', function () {
+    const errorBox = document.querySelector('.error-box');
+    const successBox = document.querySelector('.success-box');
+
+    if (errorBox || successBox) {
+        (errorBox || successBox).scrollIntoView({ behavior: 'smooth' });
+    }
+});
+</script>
