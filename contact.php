@@ -1,3 +1,39 @@
+<?php
+session_start();
+
+$name = $email = $comment = '';
+$errors = ['name' => '', 'email' => '', 'comment' => ''];
+$success = '';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit-general-comment'])) {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $comment = trim($_POST['comment']);
+
+    // Validim për emër (2-30 shkronja)
+    if (!preg_match("/^[a-zA-Z ]{2,30}$/", $name)) {
+        $errors['name'] = "Name must contain only letters and be 2–30 characters long.";
+    }
+
+    // Validim për email
+   if (!preg_match("/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i", $email)) {
+    $errors['email'] = "Email is not valid.";
+}
+
+    // Validim për koment (min 5 karaktere)
+    if (strlen($comment) < 5) {
+        $errors['comment'] = "Comment must be at least 5 characters long.";
+    }
+
+    // Nëse nuk ka gabime
+    if (!array_filter($errors)) {
+        $success = "Thank you for your comment!";
+        $name = $email = $comment = ''; // fushat i zbrazim pas suksesit
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +51,10 @@
   <title>Contact</title>
 
   <style>
+    
+    
+    
+
   body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -98,6 +138,17 @@ main {
     resize: vertical;
     min-height: 120px;
 }
+.error {
+    color: red;
+    margin-top: 4px;
+    font-size: 14px;
+  }
+  .success {
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
 
   </style>
 </head>
@@ -152,13 +203,23 @@ main {
       <h2>Get in Touch</h2>
       <p>If you have any questions or would like to reach out to us, please use the form below.</p>
    <br>
-      <form id="contactForm">
-          <input type="text" id="name" placeholder="Your Name" required>
-          <input type="email" id="email" placeholder="Your Email" required>
-          <textarea id="message" placeholder="Your Message" required></textarea>
-          <button type="submit">Contact</button>
-          <p id="feedback" class="message"></p>
-      </form>
+   <form method="POST" action="" id="contactForm">
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" id="name" value="<?= htmlspecialchars($name) ?>"><br>
+    <?php if ($errors['name']) echo "<p class='error'>{$errors['name']}</p>"; ?>
+
+    <label for="email">Email:</label><br>
+    <input type="text" name="email" id="email" value="<?= htmlspecialchars($email) ?>"><br>
+    <?php if ($errors['email']) echo "<p class='error'>{$errors['email']}</p>"; ?>
+
+    <label for="comment">Comment:</label><br>
+    <textarea name="comment" id="comment"><?= htmlspecialchars($comment) ?></textarea><br>
+    <?php if ($errors['comment']) echo "<p class='error'>{$errors['comment']}</p>"; ?>
+
+    <button type="submit" name="submit-general-comment">Submit</button><br><br>
+    <?php if ($success) echo "<p class='success'>{$success}</p>"; ?>
+</form>
+
     </section>
   </main>
 
@@ -214,51 +275,44 @@ main {
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 </body>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("contactForm");
-    const feedbackElement = document.getElementById("feedback");
+$(document).ready(function () {
+  $("#contactForm").submit(function (e) {
+    e.preventDefault(); // mos lejo submit direkt
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); 
+    let name = $("#name").val().trim();
+    let email = $("#email").val().trim();
+    let comment = $("#comment").val().trim();
+    let valid = true;
 
-        
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
+    $(".error").text(""); // fshij gabimet e vjetra
 
-        try {
-           
-            if (!name) {
-                throw new Error("Name is required!");
-            }
-            if (!email) {
-                throw new Error("Email is required!");
-            }
-            if (!email.includes("@") || !email.includes(".")) {
-                throw new Error("Invalid email format!");
-            }
-            if (!message) {
-                throw new Error("Message cannot be empty!");
-            }
+    // Validimi për name
+    if (!/^[a-zA-Z ]{2,30}$/.test(name)) {
+      $("#name").after("<p class='error'>Name must be 2–30 letters.</p>");
+      valid = false;
+    }
 
-          
-            feedbackElement.textContent = "Thank you for contacting us!";
-            feedbackElement.className = "message success";
-            feedbackElement.style.display = "block";
+    // Validimi për email
+    if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email)) {
+      $("#email").after("<p class='error'>Invalid email format.</p>");
+      valid = false;
+    }
 
-     
-            form.reset();
+    // Validimi për comment
+    if (comment.length < 5) {
+      $("#comment").after("<p class='error'>Comment too short.</p>");
+      valid = false;
+    }
 
-        } catch (error) {
-          
-            feedbackElement.textContent = error.message;
-            feedbackElement.className = "message error";
-            feedbackElement.style.display = "block";
-        }
-    });
+    // Nëse të gjitha janë në rregull
+    if (valid) {
+      $("#contactForm").hide();
+      $(".contact-form").append("<p class='success'>Thank you for your comment!</p>");
+    }
+  });
 });
-
 </script>
 
 
