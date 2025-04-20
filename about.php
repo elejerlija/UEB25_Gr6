@@ -29,6 +29,20 @@ class OurTeam
     {
         return $this->image;
     }
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
 }
 $teamMember1 = new OurTeam("Niko Johnson", "Founder & CEO", "image/team_1 (2).png");
 $teamMember2 = new OurTeam("Emma Carter", "Content Writer", "image/team_2.png");
