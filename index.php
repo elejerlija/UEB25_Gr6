@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php require 'footer.php'; ?>
+<?php require 'header.php'; ?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,33 +21,36 @@
   <link rel="stylesheet" href="style.css">
 
 </head>
-<?php require 'footer.php'; ?>
+
 <body>
 
-  <header>
+<?php
+function showHeader() {
 
+  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
+  ?>
+
+  <header>
     <div class="top-bar">
       <div class="contact-info">
-        <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone"
-            style="color: #000; font-size: 12px;"> </i> +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
-        <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;"> <i
-            class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> charity.kosova@gmail.com</a>
+        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
+        </a>
       </div>
       <div class="social-links">
-        <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"
-            style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-        <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"
-            style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
-        <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram"
-            style=" color:  #DD2A7B; font-size: 16px;"></i></a>
+        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
       </div>
     </div>
 
-
     <nav class="nav-links">
-      <div class="logo">HelpSomeone</div>
+      <div class="logo"><?= $site_name ?></div>
       <ul class="nav-links">
-        <li><a href="index.php">Home</a>
+        <li><a href="index.php">Home</a></li>
         <li class="dropdown">
           <a href="about.php">About Us</a>
           <ul class="dropdown-content">
@@ -56,15 +60,20 @@
             <li><a href="about.php#teamID">Our Team</a></li>
           </ul>
         </li>
-        <li> <a href="volunteer.php">Volunteer & Updates</a></li>
-        <li> <a href="popular.php">Popular Cases</a></li>
-        <li> <a href="contact.php">Contact</a></li>
-        <li> <a href="donate.php">Donate</a></li>
-
+        <li><a href="volunteer.php">Volunteer & Updates</a></li>
+        <li><a href="popular.php">Popular Cases</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="donate.php">Donate</a></li>
       </ul>
-
     </nav>
   </header>
+
+  <?php
+}
+
+
+showHeader();
+?>
   <section class="hero">
     <div class="overlay"></div>
     <div class="slider">
