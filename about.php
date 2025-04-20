@@ -36,6 +36,22 @@ $teamMember3 = new OurTeam("Melissa Mitchell", "Web Developer", "image/team_3.pn
 $teamMembers = [$teamMember1, $teamMember2, $teamMember3];
 
 
+
+
+$nameMap = [];
+foreach ($teamMembers as $index => $member) {
+    $nameMap[$index] = $member->getName();
+}
+asort($nameMap); 
+
+$sortedTeamMembers = [];
+foreach ($nameMap as $index => $name) {
+    $sortedTeamMembers[] = $teamMembers[$index];
+}
+
+
+
+
 ?>
 
 
@@ -797,7 +813,7 @@ where compassion and generosity create lasting change.</p>
   </div>
   <div class="cards">
     <?php    
-      foreach ($teamMembers as $member) { ?>
+      foreach ($sortedTeamMembers as $member) { ?>
         <div class="card_wrapper">
           <div class="team_image">
             <img src="<?php echo $member->getImage(); ?>" alt="<?php echo "Image of " . $member->getName(); ?>">
