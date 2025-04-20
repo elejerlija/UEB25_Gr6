@@ -1,4 +1,7 @@
 <?php
+include 'footer.php'; 
+include 'header.php'; 
+
 class CaseItem {
     private $id;
     private $title;
@@ -262,49 +265,57 @@ if (isset($_POST['submit-general-comment'])) {
 <body>
 
 
-    <header>
+<?php
+function showHeader() {
 
-        <div class="top-bar">
-            <div class="contact-info">
-                <a href="tel:+123456789" style="color: black; text-decoration: none;"><i class="fa-solid fa-phone"
-                        style="color: #000; font-size: 12px;"> </i> +383 45 333 111</a>&nbsp;&nbsp;&nbsp;
-                <a href="mailto:charity.kosova@email.com" target="_blank" style="color: black; text-decoration: none;">
-                    <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i>
-                    charity.kosova@gmail.com</a>
-            </div>
-            <div class="social-links">
-                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"
-                        style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-                <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"
-                        style="color: #1DA1F2; font-size: 16px;"></i></a> &nbsp;&nbsp;&nbsp;
-                <a href="https://instagram.com" target="_blank"> <i class="fa-brands fa-instagram"
-                        style=" color:  #DD2A7B; font-size: 16px;"></i></a>
-            </div>
-        </div>
+  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
+  ?>
+
+  <header>
+    <div class="top-bar">
+      <div class="contact-info">
+        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="logo"><?= $site_name ?></div>
+      <ul class="nav-links">
+        <li><a href="index.php">Home</a></li>
+        <li class="dropdown">
+          <a href="about.php">About Us</a>
+          <ul class="dropdown-content">
+            <li><a href="about.php#aboutID">Who are we</a></li>
+            <li><a href="about.php#impactID">Our Impact</a></li>
+            <li><a href="about.php#priorityID">Arrange by Priority</a></li>
+            <li><a href="about.php#teamID">Our Team</a></li>
+          </ul>
+        </li>
+        <li><a href="volunteer.php">Volunteer & Updates</a></li>
+        <li><a href="popular.php">Popular Cases</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="donate.php">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <?php
+}
 
 
-        <nav class="nav-links">
-            <div class="logo">HelpSomeone</div>
-            <ul class="nav-links">
-                <li><a href="index.php">Home</a>
-                <li class="dropdown">
-                    <a href="about.php">About Us</a>
-                    <ul class="dropdown-content">
-                        <li><a href="about.php#aboutID">Who are we</a></li>
-                        <li><a href="about.php#impactID">Our Impact</a></li>
-                        <li><a href="about.php#priorityID">Arrange by Priority</a></li>
-                        <li><a href="about.php#teamID">Our Team</a></li>
-                    </ul>
-                </li>
-                <li> <a href="volunteer.php">Volunteer & Updates</a></li>
-                <li> <a href="popular.php">Popular Cases</a></li>
-                <li> <a href="contact.php">Contact</a></li>
-                <li> <a href="donate.php">Donate</a></li>
-            </ul>
-           
-           
-        </nav>
-    </header>
+showHeader();
+?>
+
     <div class="header-2">
         <h1>Impactful Giving</h1>
         <p>"Making a difference, one donation at a time."</p>
@@ -658,11 +669,12 @@ if (isset($_POST['submit-general-comment'])) {
             </div>
             <div class="col">
                 <h3>We'd Love to Hear From You</h3>
-                <form class="footer-form">
-                    <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-                        placeholder="  Leave a message">
-                    <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-                </form>
+                <form class="footer-form" method="POST" action="">
+  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+  <input type="text" name="message" placeholder="  Leave a message" required>
+  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+</form>
+
                 <div class="social-icons">
                     <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
                             style="color: #2d6a4f;"></i></a>

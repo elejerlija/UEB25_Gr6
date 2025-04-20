@@ -41,7 +41,6 @@ foreach ($teamMembers as $index => $member) {
     $nameMap[$index] = $member->getName();
 }
 asort($nameMap); 
-
 $sortedTeamMembers = [];
 foreach ($nameMap as $index => $name) {
     $sortedTeamMembers[] = $teamMembers[$index];

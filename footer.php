@@ -9,6 +9,5 @@
     if ($debug_mode) {
               var_dump($_POST);
     }
-    
 }
 ?>
