@@ -2,51 +2,15 @@
 
 include 'footer.php'; 
 include 'header.php'; 
-class OurTeam
-{
-    private $name;
-    protected $position;
-    public $image;
+include 'TeamClasses.php';
 
-    public function __construct($name, $position, $image)
-    {
-        $this->name = $name;
-        $this->position = $position;
-        $this->image = $image;
-    }
 
-    public function getName()
-    {
-        return $this->name;
-    }
 
-    public function getPosition()
-    {
-        return $this->position;
-    }
+$teamMember1 =new Manager("Niko Johnson", "image/team_1 (2).png", 10);
+$teamMember2 =new Writer("Emma Carter", "image/team_2.png", "storytelling");
+$teamMember3 =new Developer("Melissa Mitchell", "image/team_3.png", "JavaScript");
 
-    public function getImage()
-    {
-        return $this->image;
-    }
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
-    public function setPosition($position)
-    {
-        $this->position = $position;
-    }
-
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-}
-$teamMember1 = new OurTeam("Niko Johnson", "Founder & CEO", "image/team_1 (2).png");
-$teamMember2 = new OurTeam("Emma Carter", "Content Writer", "image/team_2.png");
-$teamMember3 = new OurTeam("Melissa Mitchell", "Web Developer", "image/team_3.png");
 
 $teamMembers = [$teamMember1, $teamMember2, $teamMember3];
 
@@ -400,7 +364,7 @@ foreach ($nameMap as $index => $name) {
       width: 300px;
       height: 390px;
       border-radius: 300px;
-      background-color: #2d6a4f;
+      background-color:rgb(111, 180, 150);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -410,7 +374,7 @@ foreach ($nameMap as $index => $name) {
     }
 
     .card_wrapper:hover {
-      height: 500px;
+      height: 800px;
     }
 
     .cards {
@@ -827,22 +791,25 @@ where compassion and generosity create lasting change.</p>
   </section>
 
 
-<section id="teamID" class="team-section">
+  <section id="teamID" class="team-section">
   <div class="team-container" id="team-container">
     <h1 style="color: #2d6a4f; font-size: 2.5em; text-align: center;">Meet Our Team</h1>
   </div>
-  <div class="cards">
-    <?php    
-      foreach ($sortedTeamMembers as $member) { ?>
-        <div class="card_wrapper">
-          <div class="team_image">
-            <img src="<?php echo $member->getImage(); ?>" alt="<?php echo "Image of " . $member->getName(); ?>">
-          </div>
-          <div class="team_detail">
-            <h2><?php echo $member->getName(); ?></h2>
-            <p><?php echo $member->getPosition(); ?></p>
-          </div>
+  <div class="cards" >
+    <?php foreach ($sortedTeamMembers as $member) { ?>
+      <div class="card_wrapper" >
+        <div class="team_image">
+          <img src="<?php echo $member->getImage(); ?>" alt="<?php echo "Image of " . $member->getName(); ?>" style="width: 100%; border-radius: 10px;">
         </div>
+        <div class="team_detail">
+          
+         
+          <p >
+            <?php echo $member->introduce(); ?><br>
+            <?php echo $member->getRoleInfo(); ?>
+          </p>
+        </div>
+      </div>
     <?php } ?>
   </div>
 </section>
