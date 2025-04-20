@@ -1,6 +1,6 @@
 <?php 
 
-
+include 'footer.php'; 
 class OurTeam
 {
     private $name;
@@ -34,9 +34,6 @@ $teamMember2 = new OurTeam("Emma Carter", "Content Writer", "image/team_2.png");
 $teamMember3 = new OurTeam("Melissa Mitchell", "Web Developer", "image/team_3.png");
 
 $teamMembers = [$teamMember1, $teamMember2, $teamMember3];
-
-
-
 
 $nameMap = [];
 foreach ($teamMembers as $index => $member) {
@@ -864,11 +861,13 @@ where compassion and generosity create lasting change.</p>
       </div>
       <div class="col">
         <h3>We'd Love to Hear From You</h3>
-        <form class="footer-form">
-          <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-            placeholder="  Leave a message">
-          <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-        </form>
+   
+        <form class="footer-form" method="POST" action="">
+  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+  <input type="text" name="message" placeholder="  Leave a message" required>
+  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+</form>
+
         <div class="social-icons">
           <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #2d6a4f;"></i></a>
           <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #2d6a4f;"></i></i></a>
@@ -878,6 +877,10 @@ where compassion and generosity create lasting change.</p>
       </div>
     </div>
   </footer>
+
+
+
+
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 
 </body>

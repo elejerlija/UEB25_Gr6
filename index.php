@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="style.css">
 
 </head>
-
+<?php require 'footer.php'; ?>
 <body>
 
   <header>
@@ -150,12 +150,13 @@
         </ul>
       </div>
       <div class="col">
-        <h3>We'd Love to Hear From You</h3>
-        <form class="footer-form">
-          <i class="fa-regular fa-envelope" style="color: #ffffff;"></i> <input type="text"
-            placeholder="  Leave a message">
-          <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-        </form>
+      <h3>We'd Love to Hear From You</h3>
+      <form class="footer-form" method="POST" action="">
+  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+  <input type="text" name="message" placeholder="  Leave a message" required>
+  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+</form>
+
         <div class="social-icons">
           <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook" style="color: #2d6a4f;"></i></a>
           <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram" style="color: #2d6a4f;"></i></i></a>
@@ -165,6 +166,7 @@
       </div>
     </div>
   </footer>
+  
 
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
 
