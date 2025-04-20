@@ -649,18 +649,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($gender)) {
         $errors[] = "Gender is required!";
     }
-
-    $ageInput = trim($_POST['age'] ?? '');
-    if ($ageInput === '') {
-        $errors[] = "Age is required!";
-    } elseif (!ctype_digit($ageInput)) {
-        $errors[] = "Age must be a valid number!";
+    $dob = $_POST['dob'] ?? '';
+    if (empty($dob)) {
+        $errors[] = "Date of Birth is required!";
+    } elseif (!preg_match("/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/", $dob)) {
+        $errors[] = "Date of Birth must be in dd/mm/yyyy format!";
     } else {
-        $age = (int)$ageInput;
+       
+        list($day, $month, $year) = explode('/', $dob);
+        $birthDate = new DateTime("$year-$month-$day");
+        $currentDate = new DateTime();
+        $age = $currentDate->diff($birthDate)->y;
+
         if ($age < 18 || $age > 99) {
             $errors[] = "Age must be between 18 and 99!";
         }
     }
+  
 
     $password = $_POST['password'] ?? '';
     if (empty($password)) {
@@ -701,9 +706,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         
         <div class="form-group">
-          <label for="age">Age</label>
-          <input type="number" id="age" name="age" placeholder="Your Age" min="18" max="99" value="<?php echo isset($_POST['age']) ? $_POST['age'] : ''; ?>" required>
-        </div>
+        <label for="dob">Date of Birth:</label>
+        <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" required></div>
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Choose a Password" required>
@@ -750,7 +754,7 @@ document.getElementById("joinForm").addEventListener("submit", function(event) {
 
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
-    const age = document.getElementById("age").value.trim();
+    const dob = document.getElementById("dob").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
@@ -762,9 +766,23 @@ document.getElementById("joinForm").addEventListener("submit", function(event) {
         errors.push("Invalid email format.");
     }
 
-    if (age === '' || isNaN(age) || age < 18 || age > 99) {
+    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(dob)) {
+    errors.push("Date of Birth must be in dd/mm/yyyy format.");
+} else {
+    const [day, month, year] = dob.split('/');
+    const birthDate = new Date(year, month - 1, day);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
+        age--; 
+    }
+
+    if (age < 18 || age > 99) {
         errors.push("Age must be between 18 and 99.");
     }
+}
 
     if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password)) {
         errors.push("Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol.");
