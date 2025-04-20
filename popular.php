@@ -68,17 +68,17 @@ if (isset($_POST['submit-general-comment'])) {
     $selected_case = trim($_POST['selected_case']);
 
     if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $name)) {
-        $error = "Emri duhet të përmbajë vetëm shkronja dhe të jetë mes 2-30 karaktereve.";
+        $error = "The name must contain only letters and be between 2-30 characters.";
     } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $surname)) {
-        $error = "Mbiemri duhet të përmbajë vetëm shkronja dhe të jetë mes 2-30 karaktereve.";
+        $error = "The surname must contain only letters and be between 2-30 characters.";
     } elseif (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Email-i nuk është i vlefshëm.";
+        $error = "The email address is not valid.";
     } elseif (strlen($comment) < 5) {
-        $error = "Komenti është shumë i shkurtër (minimum 5 karaktere).";
+        $error = "The comment is too short (minimum 5 characters).";
     } elseif (empty($selected_case)) {
-        $error = "Ju lutem zgjidhni një rast.";
+        $error = "Please select a case.";
     } else {
-        $success = "Faleminderit për mendimin tuaj për rastin: $selected_case!";
+        $success = "Thank you for your opinion on the case: $selected_case!";
     }
 
     if ($success) {
