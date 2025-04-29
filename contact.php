@@ -10,25 +10,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit-general-commen
     $email = trim($_POST['email']);
     $comment = trim($_POST['comment']);
 
-    // Validim për emër (2-30 shkronja)
     if (!preg_match("/^[a-zA-Z ]{2,30}$/", $name)) {
         $errors['name'] = "Name must contain only letters and be 2–30 characters long.";
     }
 
-    // Validim për email
    if (!preg_match("/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i", $email)) {
     $errors['email'] = "Email is not valid.";
 }
 
-    // Validim për koment (min 5 karaktere)
     if (strlen($comment) < 5) {
         $errors['comment'] = "Comment must be at least 5 characters long.";
     }
 
-    // Nëse nuk ka gabime
     if (!array_filter($errors)) {
         $success = "Thank you for your comment!";
-        $name = $email = $comment = ''; // fushat i zbrazim pas suksesit
+        $name = $email = $comment = ''; 
     }
 }
 ?>
@@ -287,34 +283,34 @@ showHeader();
 <script>
 $(document).ready(function () {
   $("#contactForm").submit(function (e) {
-    e.preventDefault(); // mos lejo submit direkt
+    e.preventDefault(); 
 
     let name = $("#name").val().trim();
     let email = $("#email").val().trim();
     let comment = $("#comment").val().trim();
     let valid = true;
 
-    $(".error").text(""); // fshij gabimet e vjetra
+    $(".error").text(""); 
 
-    // Validimi për name
+    
     if (!/^[a-zA-Z ]{2,30}$/.test(name)) {
       $("#name").after("<p class='error'>Name must be 2–30 letters.</p>");
       valid = false;
     }
 
-    // Validimi për email
+    
     if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email)) {
       $("#email").after("<p class='error'>Invalid email format.</p>");
       valid = false;
     }
 
-    // Validimi për comment
+    
     if (comment.length < 5) {
       $("#comment").after("<p class='error'>Comment too short.</p>");
       valid = false;
     }
 
-    // Nëse të gjitha janë në rregull
+    
     if (valid) {
       $("#contactForm").hide();
       $(".contact-form").append("<p class='success'>Thank you for your comment!</p>");
