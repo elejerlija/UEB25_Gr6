@@ -283,34 +283,34 @@ showHeader();
 <script>
 $(document).ready(function () {
   $("#contactForm").submit(function (e) {
-    e.preventDefault(); 
+    e.preventDefault(); // mos lejo submit direkt
 
     let name = $("#name").val().trim();
     let email = $("#email").val().trim();
     let comment = $("#comment").val().trim();
     let valid = true;
 
-    $(".error").text(""); 
+    $(".error").text(""); // fshij gabimet e vjetra
 
-    
+    // Validimi për name
     if (!/^[a-zA-Z ]{2,30}$/.test(name)) {
       $("#name").after("<p class='error'>Name must be 2–30 letters.</p>");
       valid = false;
     }
 
-    
+    // Validimi për email
     if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email)) {
       $("#email").after("<p class='error'>Invalid email format.</p>");
       valid = false;
     }
 
-    
+    // Validimi për comment
     if (comment.length < 5) {
       $("#comment").after("<p class='error'>Comment too short.</p>");
       valid = false;
     }
 
-    
+    // Nëse të gjitha janë në rregull
     if (valid) {
       $("#contactForm").hide();
       $(".contact-form").append("<p class='success'>Thank you for your comment!</p>");
