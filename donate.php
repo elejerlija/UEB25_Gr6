@@ -1,351 +1,123 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-<?php include 'footer.php'; 
-include 'header.php'; ?>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <title>Donate</title>
-    <style>
-    
-body {
-    background-color: #e2fcdb;
-}
-     
-        h2 {
-            color: #333;
-            text-align: center;
-        }
-
-        #amount,
-        #message,
-        #name,
-        #email {
-            color: black;
-        }
-
-        .donate-class {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background: #f9f9f9;
-            padding: 20px;
-            border: 2px solid #c9c9c9;
-            border-radius: 5px;
-            max-width: 800px;
-            margin-bottom: 50px;
-            margin-left: 22%;
-        }
-
-        .donate-class label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .donate-class input,
-        .donate-class textarea,
-        .donate-class button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #bdbdbd;
-            border-radius: 5px;
-        }
-
-        .donate-class button {
-            background: linear-gradient(45deg, #013f06, #90e9a5);
-            transition: transform 0.3s, background-color 0.3s;
-            color:white
-        }
-
-        form button:hover {
-            transform: scale(1.1);
-            background: linear-gradient(45deg, #90e9a5, #013f06);
-        }
-
-        #non-anonymous-fields {
-            visibility: visible;
-            opacity: 1;
-            transition: visibility 0.3s, opacity 0.3s;
-        }
-
-        #non-anonymous-fields.hidden {
-            visibility: hidden;
-            opacity: 0;
-        }
- 
-ol {
-  padding-left: 0; 
-  list-style-type: none;
-  counter-reset: list-counter; 
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-
-ol li {
-  position: relative;
-  margin-bottom: 15px;
-  padding-left: 30px; 
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  padding: 10px;
-  border-left: 4px solid #2d6a4f;
-}
-
-
-ol li::before {
-  content: counter(list-counter) ".  "; 
-  counter-increment: list-counter; 
-  position: absolute;
-  left: 10px; 
-  top: 10px; 
-  color: #2d6a4f;
-  font-weight: bold;
-}
-
-ol li:hover {
-  background-color: #eaf5e7;
-  cursor: pointer;
-}
-.HowToDonate-section{
-    margin-top: 20px;
-
-}
-
-
-
-
-    </style>
-</head>
-
-<body>
 <?php
-function showHeader() {
-
-  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
-  ?>
-
-  <header>
-    <div class="top-bar">
-      <div class="contact-info">
-        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
-          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
-        </a>&nbsp;&nbsp;&nbsp;
-        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
-          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
-        </a>
-      </div>
-      <div class="social-links">
-        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
-      </div>
-    </div>
-
-    <nav class="nav-links">
-      <div class="logo"><?= $site_name ?></div>
-      <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li class="dropdown">
-          <a href="about.php">About Us</a>
-          <ul class="dropdown-content">
-            <li><a href="about.php#aboutID">Who are we</a></li>
-            <li><a href="about.php#impactID">Our Impact</a></li>
-            <li><a href="about.php#priorityID">Arrange by Priority</a></li>
-            <li><a href="about.php#teamID">Our Team</a></li>
-          </ul>
-        </li>
-        <li><a href="volunteer.php">Volunteer & Updates</a></li>
-        <li><a href="popular.php">Popular Cases</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="donate.php">Donate</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: signin.php?reason=protected");
+    exit();
 }
 
-
+include_once 'includes/header.php';
+include_once 'includes/footer.php';
 showHeader();
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Donate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/donate.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
+</head>
 
+<body>
 
-    <section class="HowToDonate-section">
-        <h2>How to Make a Donation:</h2>
-        <br>
-        <ol style="word-wrap: break-word;" >
-          <li style="white-space: pre-wrap;">    Select the amount you wish to donate.</li>
-          <li style="white-space: pre-wrap;">    Complete the donation and receive a confirmation of your contribution.</li>
-        </ol>
-      </section>
-      
-    <main>
-        <section class="donate-class">
-            <h2>Donate for a good cause</h2>
-            <form>
-                <label for="amount">Value you want to donate (€):</label>
-                <input list="donation-suggestions" id="amount" name="amount" required
-                    placeholder="Write a sum of money.">
-                <datalist id="donation-suggestions">
-                    <option value="10">
-                    <option value="20">
-                    <option value="50">
-                    <option value="100">
-                    <option value="200">
-                </datalist>
-<br>
-<br>
+<div class="donation-container">
+  <h2>Make a Donation</h2>
+  <form id="donationForm">
+    <!-- Amount -->
+    <div class="donation-group">
+      <label>Donation Amount ($)</label>
+      <div class="amount-buttons">
+        <input type="radio" id="amt10" name="amount" value="10" checked>
+        <label for="amt10">$10</label>
 
-                <label for="anonymous-checkbox" class="anonymous-checkbox-label" style=" margin-right: 650px; ">
-                    <input type="checkbox" id="anonymous-checkbox" name="anonymous" class="anonymous-checkbox">
-                    <span class="checkbox-text" >Anonymous</span>
-                </label>
-                
-<br>
-                <div id="non-anonymous-fields">
-                    <label for="name">Full name:</label>
-                    <input type="text" id="name" name="name">
+        <input type="radio" id="amt25" name="amount" value="25">
+        <label for="amt25">$25</label>
 
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email">
-                </div>
+        <input type="radio" id="amt50" name="amount" value="50">
+        <label for="amt50">$50</label>
 
-                <label for="message">Your message (optional):</label>
-                <textarea id="message" name="message" rows="4"></textarea>
+        <input type="radio" id="amt100" name="amount" value="100">
+        <label for="amt100">$100</label>
 
-                <section>
-                    <h3>Total Raised:</h3>
-                    <output id="total-raised">5000€</output>
-                </section>
+        <input type="radio" id="amtCustom" name="amount" value="custom">
+        <label for="amtCustom">Custom</label>
+      </div>
+      <input type="number" id="customAmount" class="donation-input" placeholder="Enter custom amount" style="display: none;">
+    </div>
 
-                <button type="submit">Submit</button>
-            </form>
-    </main>
+    <!-- Personal Info -->
+    <div class="donation-group">
+      <label>Full Name</label>
+      <input type="text" class="donation-input" required>
+    </div>
+    <div class="donation-group">
+      <label>Email</label>
+      <input type="email" class="donation-input" required>
+    </div>
 
+    <!-- Payment Method -->
+    <div class="donation-group">
+      <label>Payment Method</label>
+      <div class="payment-method">
+        <label><input type="radio" name="paymentMethod" value="card" checked> Card</label>
+        <label><input type="radio" name="paymentMethod" value="paypal"> PayPal</label>
+      </div>
+    </div>
 
-    <footer>
-        <div class="row">
-            <div class="col">
-                <img src="image/logo-helpsomeone.png" class="logo" alt="">
-                <br>
-                <br>
-                <p
-                    style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
-                    Together, we create a world of hope.</p>
-            </div>
-            <div class="col">
-                <h3>Office</h3>
-                <address>
-                    <p>Mother Teresa Street</p>
-                    <br>
-                    <p>Gjilan, 60000, Kosov&euml;</p>
-                    <br>
-                    <p>Phone: +383 45 333 111</p>
-                    <br>
-                    <a class="class-id" href="mailto:charity.kosova@gmail.com"
-                        style="color: white;">charity.kosova@gmail.com</a>
-                </address>
-            </div>
-            <div class="col">
-                <h3>Links</h3>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="volunteer.php">Volunteer & Updates</a></li>
-                    <li><a href="popular.php"> Popular Cases</a></li>
-                    <li><a href="donate.php">Donate</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>We'd Love to Hear From You</h3>
-                <form class="footer-form" method="POST" action="">
-  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
-  <input type="text" name="message" placeholder="  Leave a message" required>
-  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-</form>
+    <!-- Card Fields -->
+    <div id="cardFields">
+      <div class="donation-group">
+        <label>Card Number</label>
+        <input type="text" class="donation-input" placeholder="1234 5678 9012 3456">
+      </div>
+      <div class="donation-group">
+        <label>Expiry Date</label>
+        <input type="text" class="donation-input" placeholder="MM/YY">
+      </div>
+      <div class="donation-group">
+        <label>CVV</label>
+        <input type="text" class="donation-input" placeholder="123">
+      </div>
+    </div>
 
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
-                            style="color: #2d6a4f;"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"
-                            style="color: #2d6a4f;"></i></i></a>
-                    <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter"
-                            style="color: #2d6a4f;"></i></i></a>
-                    <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp"
-                            style="color: #2d6a4f;"></i></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- PayPal Notice -->
+    <div id="paypalButton" style="display: none;">
+      <p>You will be redirected to PayPal to complete your donation.</p>
+    </div>
 
-    <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
-</body>
+    <button type="submit" class="donation-btn">Donate Now</button>
+  </form>
+</div>
+
+<?php showFooter(); ?>
 
 <script>
- $(document).ready(function() {
-    const anonymousCheckbox = $('#anonymous-checkbox');
-    const nonAnonymousFields = $('#non-anonymous-fields');
+  document.addEventListener('DOMContentLoaded', function () {
+    const amountRadios = document.querySelectorAll('input[name="amount"]');
+    const customAmount = document.getElementById('customAmount');
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    const cardFields = document.getElementById('cardFields');
+    const paypalButton = document.getElementById('paypalButton');
 
-    anonymousCheckbox.change(function() {
-        if (anonymousCheckbox.is(':checked')) {
-            nonAnonymousFields.hide(); 
-        } else {
-            nonAnonymousFields.show(); 
-        }
+    amountRadios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        customAmount.style.display = (this.value === 'custom') ? 'block' : 'none';
+      });
     });
-});
 
-
-    let totalRaised = 5000; 
-
-document.querySelector('form').addEventListener('submit', function (e) {
-e.preventDefault();
-
-
-const amount = parseFloat(document.getElementById('amount').value) || 0;
-if(amount<0){
-    alert("You cannot submit this amount.");
-    return;
-}
-totalRaised += amount;
-
-const totalOutput = document.getElementById('total-raised');
-totalOutput.textContent = `${totalRaised.toLocaleString()}€`;
-
-
-let donorName = document.getElementById('name').value || "Anonymous"; 
-let donationAmount = amount.toFixed(2) + "€"; 
-
-
-let donationMessage = "Thank you, [DonorName]! You have donated [Amount] for our cause.";
-
-
-donationMessage = donationMessage.replace("[DonorName]", donorName).replace("[Amount]", donationAmount);
-
-
-alert(donationMessage);
-
-
-e.target.reset();
-});
-
-
-
-
+    paymentRadios.forEach(radio => {
+      radio.addEventListener('change', function () {
+        const isPayPal = this.value === 'paypal';
+        cardFields.style.display = isPayPal ? 'none' : 'block';
+        paypalButton.style.display = isPayPal ? 'block' : 'none';
+      });
+    });
+  });
 </script>
+
+</body>
 </html>

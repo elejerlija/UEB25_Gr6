@@ -1,0 +1,89 @@
+ body {
+      background-color: #f4fff4;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .donation-container {
+      max-width: 600px;
+      margin: 60px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      border: 2px solid #c3e6cb;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .donation-container h2 {
+      text-align: center;
+      color: #2d6a4f;
+    }
+
+    .donation-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .donation-input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .amount-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .amount-buttons input[type="radio"] {
+      display: none;
+    }
+
+    .amount-buttons label {
+      flex: 1;
+      padding: 10px;
+      background-color: #e6f4ea;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 1px solid #2d6a4f;
+    }
+
+    .amount-buttons input[type="radio"]:checked + label {
+      background-color: #2d6a4f;
+      color: white;
+    }
+
+    .payment-method {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .donation-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #2d6a4f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .donation-btn:hover {
+      background-color: #1b4332;
+    }
+
+    #paypalButton {
+      margin-top: 10px;
+    }

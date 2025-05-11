@@ -1,6 +1,20 @@
 <?php
-include 'footer.php'; 
-include 'header.php'; 
+session_start(); 
+
+if (!isset($_SESSION['username'])) {
+    header("Location: signin.php?reason=protected");
+    exit();
+}
+
+include 'includes/header.php';
+include 'includes/footer.php';
+
+showHeader();
+?>
+
+
+<?php
+
 
 class CaseItem {
     private $id;
@@ -59,7 +73,7 @@ $cases = [
 ];
 ?>
 <?php
-session_start();
+
 $success = "";
 $error = "";
 
@@ -101,8 +115,8 @@ if (isset($_POST['submit-general-comment'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impactful Giving</title>
 
-    <link rel="stylesheet" href="popular.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/popular.css">
+    <link rel="stylesheet" href="style/style.css">
     <script src="script.js" defer></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -265,56 +279,7 @@ if (isset($_POST['submit-general-comment'])) {
 <body>
 
 
-<?php
-function showHeader() {
 
-  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
-  ?>
-
-  <header>
-    <div class="top-bar">
-      <div class="contact-info">
-        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
-          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
-        </a>&nbsp;&nbsp;&nbsp;
-        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
-          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
-        </a>
-      </div>
-      <div class="social-links">
-        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
-        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
-      </div>
-    </div>
-
-    <nav class="nav-links">
-      <div class="logo"><?= $site_name ?></div>
-      <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li class="dropdown">
-          <a href="about.php">About Us</a>
-          <ul class="dropdown-content">
-            <li><a href="about.php#aboutID">Who are we</a></li>
-            <li><a href="about.php#impactID">Our Impact</a></li>
-            <li><a href="about.php#priorityID">Arrange by Priority</a></li>
-            <li><a href="about.php#teamID">Our Team</a></li>
-          </ul>
-        </li>
-        <li><a href="volunteer.php">Volunteer & Updates</a></li>
-        <li><a href="popular.php">Popular Cases</a></li>
-        <li><a href="contact.php">Contact</a></li>
-        <li><a href="donate.php">Donate</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <?php
-}
-
-
-showHeader();
-?>
 
     <div class="header-2">
         <h1>Impactful Giving</h1>
@@ -630,64 +595,10 @@ showHeader();
       </button>
     </form>
   </div>
+  <?php showFooter(); ?>
 </fieldset>
 
 
-    <footer>
-        <div class="row">
-            <div class="col">
-                <img src="image/logo-helpsomeone.png" class="logo" alt="">
-                <br>
-                <br>
-                <p
-                    style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
-                    Together, we create a world of hope.</p>
-            </div>
-            <div class="col">
-                <h3>Office</h3>
-                <address>
-                    <p>Mother Teresa Street</p>
-                    <br>
-                    <p>Gjilan, 60000, Kosov&euml;</p>
-                    <br>
-                    <p>Phone: +383 45 333 111</p>
-                    <br>
-                    <a class="class-id" href="mailto:charity.kosova@gmail.com"
-                        style="color: white;">charity.kosova@gmail.com</a>
-                </address>
-            </div>
-            <div class="col">
-                <h3>Links</h3>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="volunteer.php">Volunteer & Updates</a></li>
-                    <li><a href="popular.php"> Popular Cases</a></li>
-                    <li><a href="donate.php">Donate</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>We'd Love to Hear From You</h3>
-                <form class="footer-form" method="POST" action="">
-  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
-  <input type="text" name="message" placeholder="  Leave a message" required>
-  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-</form>
-
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
-                            style="color: #2d6a4f;"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"
-                            style="color: #2d6a4f;"></i></i></a>
-                    <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter"
-                            style="color: #2d6a4f;"></i></i></a>
-                    <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp"
-                            style="color: #2d6a4f;"></i></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
