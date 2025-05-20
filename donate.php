@@ -16,18 +16,27 @@ showHeader();
   <meta charset="UTF-8">
   <title>Donate</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="style/donate.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  
 </head>
-
 <body>
 
 <div class="donation-container">
   <h2>Make a Donation</h2>
-  <form id="donationForm">
-    <!-- Amount -->
+
+  <?php if (isset($_SESSION['donation_errors'])): ?>
+    <div class="error-box" style="color: red; background: #ffe6e6; padding: 10px; border-radius: 5px;">
+      <ul>
+        <?php foreach ($_SESSION['donation_errors'] as $error): ?>
+          <li><?= htmlspecialchars($error) ?></li>
+        <?php endforeach; unset($_SESSION['donation_errors']); ?>
+      </ul>
+    </div>
+  <?php endif; ?>
+
+  <!-- CARD DONATION FORM -->
+  <form id="donationForm" method="POST" action="donate_process.php">
     <div class="donation-group">
       <label>Donation Amount ($)</label>
       <div class="amount-buttons">
@@ -46,20 +55,19 @@ showHeader();
         <input type="radio" id="amtCustom" name="amount" value="custom">
         <label for="amtCustom">Custom</label>
       </div>
-      <input type="number" id="customAmount" class="donation-input" placeholder="Enter custom amount" style="display: none;">
+      <input type="number" id="customAmount" name="customAmount" class="donation-input" placeholder="Enter custom amount" style="display: none;">
     </div>
 
-    <!-- Personal Info -->
     <div class="donation-group">
       <label>Full Name</label>
-      <input type="text" class="donation-input" required>
-    </div>
-    <div class="donation-group">
-      <label>Email</label>
-      <input type="email" class="donation-input" required>
+      <input type="text" name="fullname" class="donation-input" required>
     </div>
 
-    <!-- Payment Method -->
+    <div class="donation-group">
+      <label>Email</label>
+      <input type="email" name="email" class="donation-input" required>
+    </div>
+
     <div class="donation-group">
       <label>Payment Method</label>
       <div class="payment-method">
@@ -68,7 +76,6 @@ showHeader();
       </div>
     </div>
 
-    <!-- Card Fields -->
     <div id="cardFields">
       <div class="donation-group">
         <label>Card Number</label>
@@ -84,13 +91,17 @@ showHeader();
       </div>
     </div>
 
-    <!-- PayPal Notice -->
-    <div id="paypalButton" style="display: none;">
-      <p>You will be redirected to PayPal to complete your donation.</p>
-    </div>
-
-    <button type="submit" class="donation-btn">Donate Now</button>
+    <button type="submit" class="donation-btn" id="cardSubmitBtn">Donate Now</button>
   </form>
+
+  <!-- PAYPAL BUTTON OUTSIDE THE FORM -->
+  <div id="paypalButton" style="display: none; margin-top: 20px;">
+    <p>You will be redirected to PayPal to complete your donation.</p>
+    <button type="button" class="donation-btn" onclick="window.open('https://www.paypal.com/donate?business=youremail@example.com&currency_code=USD', '_blank')">
+      Donate with PayPal
+    </button>
+  </div>
+
 </div>
 
 <?php showFooter(); ?>
@@ -102,6 +113,7 @@ showHeader();
     const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
     const cardFields = document.getElementById('cardFields');
     const paypalButton = document.getElementById('paypalButton');
+    const cardSubmitBtn = document.getElementById('cardSubmitBtn');
 
     amountRadios.forEach(radio => {
       radio.addEventListener('change', function () {
@@ -114,6 +126,7 @@ showHeader();
         const isPayPal = this.value === 'paypal';
         cardFields.style.display = isPayPal ? 'none' : 'block';
         paypalButton.style.display = isPayPal ? 'block' : 'none';
+        cardSubmitBtn.style.display = isPayPal ? 'none' : 'block';
       });
     });
   });

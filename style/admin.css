@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background-color: #2ecc71;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #27ae60;
+  height: 100vh;
+  position: fixed; /* <--- fixed to always show */
+  top: 50px;
+  left: 0;
+  padding-top: 20px;
+  color: white;
+}
+
+.sidebar button {
+  background-color: #1e8449;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sidebar button:hover {
+  background-color: #145a32;
+}
+
+.main-content {
+  margin-left: 210px;
+  padding: 20px;
+}
+
+#addAdminForm form {
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  border: 2px solid #ccc;
+  padding: 18px;
+  background: #fff;
+  border-radius: 15px;
+}
+
+#addAdminForm h2 {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+#addAdminForm input {
+  display: block;
+  border: 2px solid #ccc;
+  width: 95%;
+  padding: 8px;
+  margin: 8px auto;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#addAdminForm label {
+  color: #888;
+  font-size: 15px;
+  margin: 6px auto 2px 18px;
+  display: block;
+}
+
+#addAdminForm button {
+    background: #555;
+    padding: 8px 12px;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    margin: 10px auto 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+}
+
+
+#addAdminForm button:hover {
+  opacity: .7;
+}
+
+.error {
+  background: #F2DEDE;
+  color: #A94442;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+  margin: 20px auto;
+  font-size: 14px;
+}
+
+.success {
+  background: #D4EDDA;
+  color: #40754C;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+  margin: 20px auto;
+  font-size: 14px;
+}
+.logout-btn {
+    background-color: white;
+    color: #2c3e50;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.logout-icon {
+    font-size: 16px;
+}
+

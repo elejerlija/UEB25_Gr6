@@ -595,7 +595,8 @@ if (isset($_POST['submit-general-comment'])) {
       </button>
     </form>
   </div>
-  <?php showFooter(); ?>
+
+
 </fieldset>
 
 
@@ -608,7 +609,7 @@ if (isset($_POST['submit-general-comment'])) {
 
 
     </fieldset>
-    
+      <?php showFooter(); ?>
 
     <script>
 
