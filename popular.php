@@ -1,32 +1,14 @@
 <?php
-session_start(); 
-
-if (!isset($_SESSION['username'])) {
-    header("Location: signin.php?reason=protected");
-    exit();
-}
-
-include 'includes/header.php';
-include 'includes/footer.php';
-
-showHeader();
-?>
-
-
-<?php
+include_once 'includes/header.php';
+// ose
+require_once 'includes/footer.php';
 
 
 class CaseItem {
-    private $id;
-    private $title;
-    private $description;
-    private $amount;
-    private $image;
-    private $padding;
-    private $imageHeight;
-    private $imageWidth;
+    private $id, $title, $description, $amount, $image;
+    private $padding, $imageHeight, $imageWidth, $fullText;
 
-    public function __construct($id, $title, $description, $amount, $image, $padding, $imageHeight, $imageWidth) {
+    public function __construct($id, $title, $description, $amount, $image, $padding, $imageHeight, $imageWidth, $fullText) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
@@ -35,45 +17,98 @@ class CaseItem {
         $this->padding = $padding;
         $this->imageHeight = $imageHeight;
         $this->imageWidth = $imageWidth;
+        $this->fullText = $fullText;
     }
 
-    public function getId() {
-        return $this->id;
-    }
-    public function getTitle() {
-        return $this->title;
-    }
-    public function getDescription() {
-        return $this->description;
-    }
-    public function getAmount() {
-        return $this->amount;
-    }
-    public function getImage() {
-        return $this->image;
-    }
-    public function getPadding() {
-        return $this->padding;
-    }
-    public function getImageHeight() {
-        return $this->imageHeight;
-    }
-    public function getImageWidth() {
-        return $this->imageWidth;
-    }
+    public function getId() { return $this->id; }
+    public function getTitle() { return $this->title; }
+    public function getDescription() { return $this->description; }
+    public function getAmount() { return $this->amount; }
+    public function getImage() { return $this->image; }
+    public function getPadding() { return $this->padding; }
+    public function getImageHeight() { return $this->imageHeight; }
+    public function getImageWidth() { return $this->imageWidth; }
+    public function getFullText() { return $this->fullText; }
 }
-
-$cases = [
-    new CaseItem("modal4", "Help us to Send Food", "Raised: $5000 | Goal: $9000", 30, "image/popular-5.jpg", "17px", "135", "200"),
-    new CaseItem("modal5", "Clothes For Everyone", "Raised: $6000 | Goal: $12000", 50, "image/popular-2.jpg", "15px", "135", "200"),
-    new CaseItem("modal6", "Water For All Children", "Raised: $7000 | Goal: $10000", 70, "image/popular-3.jpg", "14px", "135", "200"),
-    new CaseItem("modal7", "Education For Everyone", "Raised: $4000 | Goal: $8000", 40, "image/popular-4.jpg", "3px", "135", "200"),
-    new CaseItem("modal8", "Medical Support", "Raised: $8000 | Goal: $15000", 50, "image/popular-1.jpg", "15px", "135", "200"),
-    new CaseItem("modal9", "Homes for Everyone", "Raised: $2500 | Goal: $10000", 25, "image/popular-6.jpg", "15px", "135", "200")
-];
 ?>
 <?php
+$cases = [
+    new CaseItem(
+        "modal4",
+        "Help us to Send Food",
+        "Raised: $5000 | Goal: $9000",
+        30,
+        "image/popular-5.jpg",
+        "17px",
+        "135",
+        "200",
+        "Every day, millions of people around the world go to bed hungry. We are on a mission to change that. 
+        By supporting our cause, you are helping us deliver essential food supplies to communities in need.
+         Your contribution ensures that families, especially children, receive nutritious meals and hope for a better tomorrow."
+    ),
+    new CaseItem(
+        "modal5",
+        "Clothes For Everyone",
+        "Raised: $6000 | Goal: $12000",
+        50,
+        "image/popular-2.jpg",
+        "15px",
+        "135",
+        "200",
+        "Access to clean, warm, and suitable clothing is essential for health and dignity. Through this initiative,
+         we aim to provide clothing to those who need it most—displaced families, refugees, and underprivileged communities.
+          Join us in wrapping the world in warmth and kindness."
+    ),
+    new CaseItem(
+        "modal6",
+        "Water For All Children",
+        "Raised: $7000 | Goal: $10000",
+        70,
+        "image/popular-3.jpg",
+        "14px",
+        "135",
+        "200",
+        "Clean and safe drinking water is a fundamental right. Millions of children around the world still suffer due to lack
+         of access to clean water. Our project focuses on building sustainable water sources in remote villages to ensure every
+          child can grow up healthy and strong."
+    ),
+    new CaseItem(
+        "modal7",
+        "Education For Everyone",
+        "Raised: $4000 | Goal: $8000",
+        40,
+        "image/popular-4.jpg",
+        "3px",
+        "135",
+        "200",
+        "Education is the key to breaking the cycle of poverty. Unfortunately, many children lack access to even the most basic educational resources. We are building schools, providing books, and training teachers in underserved areas. Be part of shaping a brighter future for all."
+    ),
+    new CaseItem(
+        "modal8",
+        "Medical Support",
+        "Raised: $8000 | Goal: $15000",
+        50,
+        "image/popular-1.jpg",
+        "15px",
+        "135",
+        "200",
+        "In many parts of the world, access to healthcare remains a privilege. Our campaign focuses on delivering medical supplies, funding treatments, and supporting healthcare workers in crisis zones. With your help, we can ensure that more lives are saved and suffering is reduced."
+    ),
+    new CaseItem(
+        "modal9",
+        "Homes for Everyone",
+        "Raised: $2500 | Goal: $10000",
+        25,
+        "image/popular-6.jpg",
+        "15px",
+        "135",
+        "200",
+        "A safe and secure home is more than just a roof over one’s head—it’s a foundation for a better life. This project builds affordable housing for families living in extreme poverty, giving them hope and a place to call their own. Help us lay the bricks of compassion and care."
+    )
+];
+?>
 
+<?php
 $success = "";
 $error = "";
 
@@ -97,7 +132,6 @@ if (isset($_POST['submit-general-comment'])) {
     } else {
         $success = "Thank you for your opinion on the case: $selected_case!";
     }
-
     if ($success) {
         $_SESSION['success_message'] = $success;
         header("Location: " . strtok($_SERVER["REQUEST_URI"], '?') . "#comment-section");
@@ -105,6 +139,76 @@ if (isset($_POST['submit-general-comment'])) {
     }
 }
 ?>
+<?php
+class Modal {
+    private $id;
+    private $title;
+    private $content;
+
+    public function __construct($id, $title, $content) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->content = $content;
+    }
+
+    public function render() {
+        echo '<div id="' . $this->id . '" class="modal">';
+        echo '<h2>' . $this->title . '</h2>';
+        echo '<p>"' . $this->content . '"</p>';
+        echo '<a href="#" class="close-btn">Close</a>';
+        echo '</div>';
+    }
+}
+?>
+
+<?php
+$modals = [
+    new Modal(
+        'modal1',
+        'Global Health',
+        'Health and wellbeing are the cornerstones of thriving communities.
+        Around the world, millions of people face preventable illnesses, lack access to essential healthcare,
+         and endure living conditions that hinder their physical and mental health. Our global health initiatives 
+         focus on combating diseases, improving sanitation, and expanding access to vital medical services and education 
+         in underserved areas. By addressing these critical issues, we strive to build a healthier, more equitable world 
+         where everyone has the opportunity to lead a fulfilling life. Explore how our partner charities are transforming
+          lives through innovative and impactful health programs.'
+    ),
+    new Modal(
+        'modal2',
+        'Animal Welfare',
+        'The well-being of animals is a vital part of creating a compassionate and sustainable world. Millions of animals
+         suffer daily due to neglect, abuse, or exploitation in various industries and environments. Our animal welfare initiatives
+          focus on protecting and improving the lives of animals, whether through rescuing those in need, advocating for stronger 
+          animal protection laws, or promoting ethical and sustainable practices. By supporting our efforts, you can help ensure that
+           all animals, from pets to wildlife, are treated with the care, respect, and dignity they deserve.'
+    ),
+    new Modal(
+        'modal3',
+        'Reducing Global Catastrophic Risks',
+        'Global catastrophic risks pose a significant threat to humanity and our planet\'s future. These risks include pandemics,
+         climate change, nuclear conflict, and emerging technologies that could have unintended, far-reaching consequences. Our initiatives 
+         aim to identify, mitigate, and prepare for these potential crises through research, advocacy, and international collaboration.
+          By addressing these challenges proactively, we can protect our global community and ensure a safer, more resilient future for
+           generations to come. Your support is crucial in helping us tackle the most pressing risks to humanity\'s survival and progress.'
+    ),
+    new Modal(
+        'modal-evaluators',
+        'Trusted Evaluators',
+        'Donating to a cause is an act of trust and generosity, and ensuring your contributions make the greatest impact is our shared goal.
+         Trusted evaluators are independent organizations and experts dedicated to assessing charities and initiatives based on their 
+         effectiveness, transparency, and overall impact. By relying on these evaluations, donors can make informed decisions and support 
+         the causes that deliver the highest value. Partner with us to amplify your impact, and let’s work together to ensure every donation
+          creates meaningful, lasting change.'
+    )
+];
+
+foreach ($modals as $modal) {
+    $modal->render();
+}
+?>
+
+
 
 
 <!DOCTYPE html>
@@ -115,8 +219,8 @@ if (isset($_POST['submit-general-comment'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impactful Giving</title>
 
-    <link rel="stylesheet" href="style/popular.css">
-    <link rel="stylesheet" href="style/style.css">
+<link rel="stylesheet" href="style/popular.css">
+        <link rel="stylesheet" href="style/style.css">
     <script src="script.js" defer></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -279,7 +383,56 @@ if (isset($_POST['submit-general-comment'])) {
 <body>
 
 
+<?php
 
+
+  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
+  ?>
+
+  <header>
+    <div class="top-bar">
+      <div class="contact-info">
+        <a href="tel:<?= $phone ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-phone" style="color: #000; font-size: 12px;"></i> <?= $phone ?>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="mailto:<?= $email ?>" style="color: black; text-decoration: none;">
+          <i class="fa-solid fa-envelope" style="color: #000; font-size: 14px;"></i> <?= $email ?>
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="<?= $facebook ?>" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $twitter ?>" target="_blank"><i class="fa-brands fa-twitter" style="color: #1DA1F2; font-size: 16px;"></i></a>&nbsp;&nbsp;&nbsp;
+        <a href="<?= $instagram ?>" target="_blank"><i class="fa-brands fa-instagram" style="color: #DD2A7B; font-size: 16px;"></i></a>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="logo"><?= $site_name ?></div>
+      <ul class="nav-links">
+        <li><a href="index.php">Home</a></li>
+        <li class="dropdown">
+          <a href="about.php">About Us</a>
+          <ul class="dropdown-content">
+            <li><a href="about.php#aboutID">Who are we</a></li>
+            <li><a href="about.php#impactID">Our Impact</a></li>
+            <li><a href="about.php#priorityID">Arrange by Priority</a></li>
+            <li><a href="about.php#teamID">Our Team</a></li>
+          </ul>
+        </li>
+        <li><a href="volunteer.php">Volunteer & Updates</a></li>
+        <li><a href="popular.php">Popular Cases</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="donate.php">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <?php
+
+
+
+
+?>
 
     <div class="header-2">
         <h1>Impactful Giving</h1>
@@ -387,53 +540,7 @@ if (isset($_POST['submit-general-comment'])) {
         </div>
     </div>
 
-    <div id="modal1" class="modal">
-        <h2>Global Health</h2>
-        <p>"Health and wellbeing are the cornerstones of thriving communities.
-            Around the world, millions of people face preventable illnesses,
-            lack access to essential healthcare, and endure living conditions that
-            hinder their physical and mental health. Our global health initiatives
-            focus on combating diseases, improving sanitation, and expanding access
-            to vital medical services and education in underserved areas. By addressing
-            these critical issues, we strive to build a healthier, more equitable world
-            where everyone has the opportunity to lead a fulfilling life. Explore how
-            our partner charities are transforming lives through innovative and impactful health programs."</p>
-        <a href="#" class="close-btn">Close</a>
-    </div>
-    <div id="modal2" class="modal">
-        <h2>Animal Welfare</h2>
-        <p>"The well-being of animals is a vital part of creating a compassionate
-            and sustainable world. Millions of animals suffer daily due to neglect,
-            abuse, or exploitation in various industries and environments.
-            Our animal welfare initiatives focus on protecting and improving the lives
-            of animals, whether through rescuing those in need, advocating for stronger
-            animal protection laws, or promoting ethical and sustainable practices.
-            By supporting our efforts, you can help ensure that all animals,
-            from pets to wildlife, are treated with the care, respect, and dignity they deserve."</p>
-        <a href="#" class="close-btn">Close</a>
-    </div>
-    <div id="modal3" class="modal">
-        <h2>Reducing Global Catastrophic Risks</h2>
-        <p>"Global catastrophic risks pose a significant threat to humanity and our planet's future.
-            These risks include pandemics, climate change, nuclear conflict, and emerging technologies
-            that could have unintended, far-reaching consequences. Our initiatives aim to identify,
-            mitigate, and prepare for these potential crises through research, advocacy,
-            and international collaboration. By addressing these challenges proactively,
-            we can protect our global community and ensure a safer, more resilient future
-            for generations to come. Your support is crucial in helping us tackle the most
-            pressing risks to humanity's survival and progress."</p>
-        <a href="#" class="close-btn">Close</a>
-    </div>
-    <div id="modal-evaluators" class="modal">
-        <h2>Trusted Evaluators</h2>
-        <p>"Donating to a cause is an act of trust and generosity, and ensuring your contributions
-            make the greatest impact is our shared goal. Trusted evaluators are independent organizations
-            and experts dedicated to assessing charities and initiatives based on their effectiveness,
-            transparency, and overall impact. By relying on these evaluations, donors can make informed
-            decisions and support the causes that deliver the highest value. Partner with us to amplify
-            your impact, and let’s work together to ensure every donation creates meaningful, lasting change."</p>
-        <a href="#" class="close-btn">Close</a>
-    </div>
+   
 
     <fieldset>
         <legend>Popular Cases</legend>
@@ -462,89 +569,16 @@ if (isset($_POST['submit-general-comment'])) {
 
 <div id="modal-overlay"></div>
 
-
-        <div id="modal4" class="modal">
-            <div class="modal-content">
-                <h3>Help us to Send Food</h3><br>
-                <p>"Every day, millions of people around the world go to bed hungry, with many
-                    struggling to find their next meal. Hunger affects not just physical health
-                    but also emotional well-being and the ability to thrive. Our mission is to
-                    provide life-saving food aid to families and communities facing acute hunger
-                    crises. With your support, we can distribute nutritious meals, partner with
-                    local organizations for sustainable food solutions, and ensure that no one has
-                    to endure the pain of an empty stomach. Together, we can fight hunger and give
-                    hope to those who need it most."
-
-
-                </p>
-                <a href="#" class="close-btn">Close</a>
-            </div>
-        </div>
-
-        <div id="modal5" class="modal">
-            <div class="modal-content">
-                <h3>Clothes For Everyone</h3><br>
-                <p>"Access to clean, warm, and suitable clothing is essential for maintaining
-                    dignity and resilience, yet many individuals face daily hardships without
-                    this basic necessity. Our initiative focuses on collecting, creating, and
-                    distributing clothing to people in need, from families affected by natural
-                    disasters to homeless individuals seeking warmth during harsh winters.
-                    Every piece of clothing you help provide means protection, comfort, and
-                    a renewed sense of hope for those who receive it. Join us in bringing warmth
-                    and dignity to lives across the globe, one garment at a time."</p>
-                <a href="#" class="close-btn">Close</a>
-            </div>
-        </div>
-
-        <div id="modal6" class="modal">
-            <div class="modal-content">
-                <h3>Water For All Children</h3><br>
-                <p>"Clean and safe drinking water is a fundamental right, yet millions of
-                    children worldwide lack access to this life-sustaining resource.
-                    Contaminated water leads to diseases, malnutrition, and high mortality rates,
-                    especially in impoverished regions. Our initiative works to install
-                    sustainable water systems, train communities in water conservation,
-                    and provide immediate access to clean water for children and families.
-                    Together, we can reduce waterborne illnesses, improve health, and ensure
-                    every child has a chance to grow and thrive with this basic necessity met."</p>
-                <a href="#" class="close-btn">Close</a>
-            </div>
-        </div>
-        <div id="modal7" class="modal">
-            <h2>Education For Everyone</h2><br>
-            <p>"Education is the key to breaking the cycle of poverty and unlocking potential,
-                yet millions of children and adults around the world remain without access
-                to quality learning opportunities. Our initiative aims to provide essential
-                resources, such as school supplies, trained teachers, and safe learning environments,
-                to underserved communities. By investing in education, we empower individuals to
-                build better futures, improve their communities, and inspire generations to come.
-                Your support helps transform lives, one classroom at a time, and ensures that everyone,
-                regardless of background, has a chance to learn and succeed."</p>
+<?php foreach ($cases as $case): ?>
+    <div id="<?= $case->getId(); ?>" class="modal">
+        <div class="modal-content">
+            <h3><?= $case->getTitle(); ?></h3><br>
+            <p><?= $case->getFullText(); ?></p>
             <a href="#" class="close-btn">Close</a>
         </div>
-        <div id="modal8" class="modal">
-            <h2>Medical Support</h2><br>
-            <p>"In many parts of the world, access to healthcare remains a privilege rather than a basic right
-                . Illness and injury can devastate families without the means to pay for medical treatment.
-                Our medical support programs focus on delivering essential healthcare services, medicines,
-                and equipment to underserved communities. We also work to train local healthcare providers
-                and establish long-term medical infrastructure to ensure lasting impact. With your help,
-                we can save lives, alleviate suffering, and bring hope to those who face health challenges
-                without the resources they need."</p>
-            <a href="#" class="close-btn">Close</a>
-        </div>
-        <div id="modal9" class="modal">
-            <h2>Homes for Everyone</h2><br>
-            <p>"A safe and secure home is more than just a roof over one’s head—it is a foundation for stability,
-                safety, and a better future. Millions of people around the world live without adequate shelter,
-                exposing them to harsh weather, illness, and insecurity. Our mission is to provide housing solutions,
-                from emergency shelters for those displaced by disasters to permanent homes for families in need.
-                We also focus on empowering communities through skills training and sustainable building practices.
-                With your support, we can help turn the dream of a safe home into a reality for countless
-                individuals and families."</p>
-            <a href="#" class="close-btn">Close</a>
-        </div>
-    </fieldset>
+    </div>
+<?php endforeach; ?>
+
 
     
  <fieldset class="comment-fieldset" id="comment-section">
@@ -595,11 +629,64 @@ if (isset($_POST['submit-general-comment'])) {
       </button>
     </form>
   </div>
-
-
 </fieldset>
 
 
+    <footer>
+        <div class="row">
+            <div class="col">
+                <img src="image/logo-helpsomeone.png" class="logo" alt="">
+                <br>
+                <br>
+                <p
+                    style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
+                    Together, we create a world of hope.</p>
+            </div>
+            <div class="col">
+                <h3>Office</h3>
+                <address>
+                    <p>Mother Teresa Street</p>
+                    <br>
+                    <p>Gjilan, 60000, Kosov&euml;</p>
+                    <br>
+                    <p>Phone: +383 45 333 111</p>
+                    <br>
+                    <a class="class-id" href="mailto:charity.kosova@gmail.com"
+                        style="color: white;">charity.kosova@gmail.com</a>
+                </address>
+            </div>
+            <div class="col">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="about.php">About Us</a></li>
+                    <li><a href="volunteer.php">Volunteer & Updates</a></li>
+                    <li><a href="popular.php"> Popular Cases</a></li>
+                    <li><a href="donate.php">Donate</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>We'd Love to Hear From You</h3>
+                <form class="footer-form" method="POST" action="">
+  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+  <input type="text" name="message" placeholder="  Leave a message" required>
+  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+</form>
+
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
+                            style="color: #2d6a4f;"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"
+                            style="color: #2d6a4f;"></i></i></a>
+                    <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter"
+                            style="color: #2d6a4f;"></i></i></a>
+                    <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp"
+                            style="color: #2d6a4f;"></i></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
@@ -609,7 +696,7 @@ if (isset($_POST['submit-general-comment'])) {
 
 
     </fieldset>
-      <?php showFooter(); ?>
+    
 
     <script>
 
