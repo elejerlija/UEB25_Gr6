@@ -30,8 +30,7 @@ class CaseItem {
     public function getImageWidth() { return $this->imageWidth; }
     public function getFullText() { return $this->fullText; }
 }
-?>
-<?php
+
 $cases = [
     new CaseItem(
         "modal4",
@@ -106,9 +105,7 @@ $cases = [
         "A safe and secure home is more than just a roof over one’s head—it’s a foundation for a better life. This project builds affordable housing for families living in extreme poverty, giving them hope and a place to call their own. Help us lay the bricks of compassion and care."
     )
 ];
-?>
 
-<?php
 $success = "";
 $error = "";
 
@@ -138,8 +135,7 @@ if (isset($_POST['submit-general-comment'])) {
         exit;
     }
 }
-?>
-<?php
+
 class Modal {
     private $id;
     private $title;
@@ -159,9 +155,7 @@ class Modal {
         echo '</div>';
     }
 }
-?>
 
-<?php
 $modals = [
     new Modal(
         'modal1',
@@ -208,6 +202,7 @@ foreach ($modals as $modal) {
 }
 ?>
 
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 
 
@@ -219,7 +214,7 @@ foreach ($modals as $modal) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impactful Giving</title>
 
-<link rel="stylesheet" href="style/popular.css">
+            <link rel="stylesheet" href="style/popular.css">
         <link rel="stylesheet" href="style/style.css">
     <script src="script.js" defer></script>
     <link
@@ -230,6 +225,8 @@ foreach ($modals as $modal) {
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
 
     <style>
         a.visited {
@@ -239,7 +236,7 @@ foreach ($modals as $modal) {
         #form-success {
     opacity: 1;
     transition: opacity 0.5s ease;
-}
+        }
 
         
 .comment-fieldset {
@@ -382,6 +379,7 @@ foreach ($modals as $modal) {
 
 <body>
 
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 <?php
 
@@ -427,12 +425,8 @@ foreach ($modals as $modal) {
     </nav>
   </header>
 
-  <?php
+ <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-
-
-
-?>
 
     <div class="header-2">
         <h1>Impactful Giving</h1>
@@ -540,7 +534,8 @@ foreach ($modals as $modal) {
         </div>
     </div>
 
-   
+   <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
 
     <fieldset>
         <legend>Popular Cases</legend>
@@ -562,25 +557,27 @@ foreach ($modals as $modal) {
             <a href="#<?= $case->getId(); ?>" class="open-modal">Read</a>
         </div>
     <?php endforeach; ?>
-</div>
-
-
-        </div>
-
-<div id="modal-overlay"></div>
-
-<?php foreach ($cases as $case): ?>
-    <div id="<?= $case->getId(); ?>" class="modal">
-        <div class="modal-content">
-            <h3><?= $case->getTitle(); ?></h3><br>
-            <p><?= $case->getFullText(); ?></p>
-            <a href="#" class="close-btn">Close</a>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-
     
+
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+        
+
+    <div id="modal-overlay"></div>
+
+    <?php foreach ($cases as $case): ?>
+        <div id="<?= $case->getId(); ?>" class="modal">
+            <div class="modal-content">
+                <h3><?= $case->getTitle(); ?></h3><br>
+                <p><?= $case->getFullText(); ?></p>
+                <a href="#" class="close-btn">Close</a>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
  <fieldset class="comment-fieldset" id="comment-section">
   <legend>💬 Share Your Opinion
   </legend>
@@ -595,7 +592,7 @@ foreach ($modals as $modal) {
         echo "<p id='form-success' class='message success custom-success'>{$_SESSION['success_message']}</p>";
         unset($_SESSION['success_message']); 
     }
-?>
+    ?>
 
 
 
@@ -631,7 +628,7 @@ foreach ($modals as $modal) {
   </div>
 </fieldset>
 
-
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <footer>
         <div class="row">
             <div class="col">
@@ -669,10 +666,10 @@ foreach ($modals as $modal) {
             <div class="col">
                 <h3>We'd Love to Hear From You</h3>
                 <form class="footer-form" method="POST" action="">
-  <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
-  <input type="text" name="message" placeholder="  Leave a message" required>
-  <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-</form>
+        <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
+        <input type="text" name="message" placeholder="  Leave a message" required>
+        <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
+        </form>
 
                 <div class="social-icons">
                     <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
@@ -696,7 +693,8 @@ foreach ($modals as $modal) {
 
 
     </fieldset>
-    
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
 
     <script>
 
@@ -752,10 +750,7 @@ foreach ($modals as $modal) {
         animateNumber('projects', 45);
 
 
-    </script>
-  
-        
-            <script>
+    
             function togglePublicCommentForm() {
                 const form = document.getElementById("public-comment-form");
                 form.classList.toggle("visible");
@@ -767,11 +762,6 @@ foreach ($modals as $modal) {
                 }
             }
 
-            </script>
-
-
-
-<script>
 document.addEventListener("DOMContentLoaded", function () {
     const error = <?= json_encode($error) ?>;
     const success = <?= json_encode($success) ?>;
@@ -797,5 +787,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
 </body>
 </html>
