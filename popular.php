@@ -1,12 +1,34 @@
 <?php
-session_start(); 
-
-
-
+session_start();
+include  'includes/db_conn.php';
 include 'includes/header.php';
 include 'includes/footer.php';
 
 showHeader();
+
+?>
+<?php
+
+
+$query = "SELECT name, surname, email, comment, case_name, created_at FROM comments ORDER BY created_at DESC";
+$result = $conn->query($query);
+
+$commentsByCase = [];
+$allComments = [];
+
+while ($row = $result->fetch_assoc()) {
+    $caseName = $row['case_name'];
+
+    if (!isset($commentsByCase[$caseName])) {
+        $commentsByCase[$caseName] = 0;
+    }
+    $commentsByCase[$caseName]++;
+
+    if (!isset($allComments[$caseName])) {
+        $allComments[$caseName] = [];
+    }
+    $allComments[$caseName][] = $row;
+}
 ?>
 
 
@@ -14,11 +36,13 @@ showHeader();
 
 
 
-class CaseItem {
+class CaseItem
+{
     private $id, $title, $description, $amount, $image;
     private $padding, $imageHeight, $imageWidth, $fullText;
 
-    public function __construct($id, $title, $description, $amount, $image, $padding, $imageHeight, $imageWidth, $fullText) {
+    public function __construct($id, $title, $description, $amount, $image, $padding, $imageHeight, $imageWidth, $fullText)
+    {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
@@ -30,15 +54,42 @@ class CaseItem {
         $this->fullText = $fullText;
     }
 
-    public function getId() { return $this->id; }
-    public function getTitle() { return $this->title; }
-    public function getDescription() { return $this->description; }
-    public function getAmount() { return $this->amount; }
-    public function getImage() { return $this->image; }
-    public function getPadding() { return $this->padding; }
-    public function getImageHeight() { return $this->imageHeight; }
-    public function getImageWidth() { return $this->imageWidth; }
-    public function getFullText() { return $this->fullText; }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+    public function getImage()
+    {
+        return $this->image;
+    }
+    public function getPadding()
+    {
+        return $this->padding;
+    }
+    public function getImageHeight()
+    {
+        return $this->imageHeight;
+    }
+    public function getImageWidth()
+    {
+        return $this->imageWidth;
+    }
+    public function getFullText()
+    {
+        return $this->fullText;
+    }
 }
 
 $cases = [
@@ -115,7 +166,6 @@ $cases = [
         "A safe and secure home is more than just a roof over one’s head—it’s a foundation for a better life. This project builds affordable housing for families living in extreme poverty, giving them hope and a place to call their own. Help us lay the bricks of compassion and care."
     )
 ];
-
 $success = "";
 $error = "";
 
@@ -137,27 +187,33 @@ if (isset($_POST['submit-general-comment'])) {
     } elseif (empty($selected_case)) {
         $error = "Please select a case.";
     } else {
-        $success = "Thank you for your opinion on the case: $selected_case!";
-    }
-    if ($success) {
-        $_SESSION['success_message'] = $success;
-        header("Location: " . strtok($_SERVER["REQUEST_URI"], '?') . "#comment-section");
+        $stmt = $conn->prepare("INSERT INTO comments (name, surname, email, comment, case_name) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $name, $surname, $email, $comment, $selected_case);
+        $stmt->execute();
+        $stmt->close();
+
+        $_SESSION['success_message'] = "Thank you for your opinion on the case: $selected_case!";
+        header("Location: comments.php");
         exit;
     }
 }
 
-class Modal {
+
+class Modal
+{
     private $id;
     private $title;
     private $content;
 
-    public function __construct($id, $title, $content) {
+    public function __construct($id, $title, $content)
+    {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
     }
 
-    public function render() {
+    public function render()
+    {
         echo '<div id="' . $this->id . '" class="modal">';
         echo '<h2>' . $this->title . '</h2>';
         echo '<p>"' . $this->content . '"</p>';
@@ -210,7 +266,25 @@ $modals = [
 foreach ($modals as $modal) {
     $modal->render();
 }
+
+$commentsByCase = [];
+if ($result = $conn->query("SELECT case_name, COUNT(*) as total FROM comments GROUP BY case_name")) {
+    while ($row = $result->fetch_assoc()) {
+        $commentsByCase[$row['case_name']] = (int)$row['total'];
+    }
+    $result->free();
+}
+
+$allComments = [];
+if ($commentsQuery = $conn->query("SELECT * FROM comments ORDER BY created_at DESC")) {
+    while ($row = $commentsQuery->fetch_assoc()) {
+        $allComments[$row['case_name']][] = $row;
+    }
+    $commentsQuery->free();
+}
+
 ?>
+
 
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
@@ -224,8 +298,8 @@ foreach ($modals as $modal) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impactful Giving</title>
 
-            <link rel="stylesheet" href="style/popular.css">
-        <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/popular.css">
+    <link rel="stylesheet" href="style/style.css">
     <script src="script.js" defer></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -235,7 +309,7 @@ foreach ($modals as $modal) {
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 
     <style>
@@ -244,144 +318,153 @@ foreach ($modals as $modal) {
         }
 
         #form-success {
-    opacity: 1;
-    transition: opacity 0.5s ease;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
 
-        
-.comment-fieldset {
-  border: 4px solidrgb(17, 105, 61);
-  border-radius: 15px;
-  padding: 40px;
-  margin: 80px auto;
-  max-width: 1000px;
-  background: linear-gradient(to right, #f0fdfa, #ffffff);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-  position: relative;
-  text-align: center;
-}
 
-.comment-fieldset legend {
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #00796b;
-  padding: 0 20px;
-  background-color: #f0fdfa;
-  border: 2px dashedrgb(16, 92, 37);
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
+        .comment-fieldset {
+            border: 4px solidrgb(17, 105, 61);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 80px auto;
+            max-width: 1000px;
+            background: linear-gradient(to right, #f0fdfa, #ffffff);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+        }
 
-.comment-intro {
-  font-size: 1.1em;
-  color: #333;
-  margin: 20px 0;
-}
+        .comment-fieldset legend {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00796b;
+            padding: 0 20px;
+            background-color: #f0fdfa;
+            border: 2px dashedrgb(16, 92, 37);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
 
-.toggle-comment-form {
-  background-color:rgb(5, 91, 38);
-  color: white;
-  padding: 14px 28px;
-  font-size: 1.1em;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+        .comment-intro {
+            font-size: 1.1em;
+            color: #333;
+            margin: 20px 0;
+        }
 
-.toggle-comment-form:hover {
-  background-color: #00897b;
-}
+        .toggle-comment-form {
+            background-color: rgb(5, 91, 38);
+            color: white;
+            padding: 14px 28px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-.public-comment-form {
-  margin-top: 30px;
-  display: none;
-  animation: fadeIn 0.4s ease forwards;
-}
+        .toggle-comment-form:hover {
+            background-color: #00897b;
+        }
 
-.public-comment-form.visible {
-  display: block;
-}
+        .public-comment-form {
+            margin-top: 30px;
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        .public-comment-form.visible {
+            display: block;
+        }
 
-.public-comment-form form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin-top: 20px;
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
 
-.public-comment-form .form-group {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: center;
-}
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.public-comment-form input,
-.public-comment-form textarea,
-.public-comment-form select {
-  width: 80%;
-  max-width: 550px;
-  padding: 12px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border 0.2s ease;
-}
+        .public-comment-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
 
-.public-comment-form input:focus,
-.public-comment-form textarea:focus,
-.public-comment-form select:focus {
-  border-color:rgb(0, 184, 89);
-  outline: none;
-}
+        .public-comment-form .form-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: center;
+        }
 
-.public-comment-form button[type="submit"] {
-  background-color:rgb(22, 90, 32);
-  color: white;
-  padding: 12px 35px;
-  font-size: 1em;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+        .public-comment-form input,
+        .public-comment-form textarea,
+        .public-comment-form select {
+            width: 80%;
+            max-width: 550px;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border 0.2s ease;
+        }
 
-.public-comment-form button[type="submit"]:hover {
-  background-color: #004d40;
-}
+        .public-comment-form input:focus,
+        .public-comment-form textarea:focus,
+        .public-comment-form select:focus {
+            border-color: rgb(0, 184, 89);
+            outline: none;
+        }
 
-.message {
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 1em;
-}
-.message.error {
-  color: #d63031;
-}
-.message.success {
-  color: #2ecc71;
-}
-.custom-success {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 1.1em;
-    background-color: #d4edda;
-    color: #155724;
-    padding: 12px 20px;
-    border: 1px solid #c3e6cb;
-    border-radius: 10px;
-    animation: fadeIn 0.5s ease-in-out;
-}
+        .public-comment-form button[type="submit"] {
+            background-color: rgb(22, 90, 32);
+            color: white;
+            padding: 12px 35px;
+            font-size: 1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-</style>
+        .public-comment-form button[type="submit"]:hover {
+            background-color: #004d40;
+        }
+
+        .message {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .message.error {
+            color: #d63031;
+        }
+
+        .message.success {
+            color: #2ecc71;
+        }
+
+        .custom-success {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 20px;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
 
 
 
@@ -389,16 +472,16 @@ foreach ($modals as $modal) {
 
 <body>
 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-<?php
-
-
-  global $phone, $email, $facebook, $twitter, $instagram, $site_name;
-  ?>
+    <?php
 
 
- <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+    global $phone, $email, $facebook, $twitter, $instagram, $site_name;
+    ?>
+
+
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 
     <div class="header-2">
@@ -507,34 +590,57 @@ foreach ($modals as $modal) {
         </div>
     </div>
 
-   <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
     <fieldset>
         <legend>Popular Cases</legend>
         <div class="div">
-        <div class="cases-container">
-    <?php foreach ($cases as $case): ?>
-        <div class="case">
-            <img 
-                src="<?= $case->getImage(); ?>" 
-                alt="Case image" 
-                style="height: <?= $case->getImageHeight(); ?>px; width: <?= $case->getImageWidth(); ?>px; object-fit: cover;">
-            
-            <div class="progress-bar">
-                <span style="width: <?= $case->getAmount(); ?>%;"></span>
-            </div><br>
+            <div class="cases-container">
+                <?php foreach ($cases as $case): ?>
+                    <div class="case">
+                        <img
+                            src="<?= $case->getImage(); ?>"
+                            alt="Case image"
+                            style="height: <?= $case->getImageHeight(); ?>px; width: <?= $case->getImageWidth(); ?>px; object-fit: cover;">
 
-            <h3 style="padding: <?= $case->getPadding(); ?>;"><?= $case->getTitle(); ?></h3>
-            <p><?= $case->getDescription(); ?></p>
-            <a href="#<?= $case->getId(); ?>" class="open-modal">Read</a>
-        </div>
-    <?php endforeach; ?>
-    
+                        <div class="progress-bar">
+                            <span style="width: <?= $case->getAmount(); ?>%;"></span>
+                        </div><br>
+
+                        <h3 style="padding: <?= $case->getPadding(); ?>;"><?= $case->getTitle(); ?></h3>
+                        <p><?= $case->getDescription(); ?></p>
+
+                        <?php
+                        $caseName = $case->getTitle();
+                        $commentCount = $commentsByCase[$caseName] ?? 0;
+                        ?>
+
+                        <details data-case="<?= htmlspecialchars($caseName) ?>">
+                            <summary>💬 Comments (<?= $commentCount ?>)</summary>
+                            <?php if (!empty($allComments[$caseName])): ?>
+                                <ul>
+                                    <?php foreach ($allComments[$caseName] as $c): ?>
+                                        <li>
+                                            <strong><?= htmlspecialchars($c['name']) ?> <?= htmlspecialchars($c['surname']) ?>:</strong>
+                                            <?= htmlspecialchars($c['comment']) ?>
+                                            <br><em><?= date("d M Y", strtotime($c['created_at'])) ?></em>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php else: ?>
+                                <p>No comments yet.</p>
+                            <?php endif; ?>
+                        </details>
+
+                        <a href="#<?= $case->getId(); ?>" class="open-modal">Read</a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
     </fieldset>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
-        
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+
 
     <div id="modal-overlay"></div>
 
@@ -551,112 +657,61 @@ foreach ($modals as $modal) {
 
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
- <fieldset class="comment-fieldset" id="comment-section">
-  <legend>💬 Share Your Opinion
-  </legend>
+    <fieldset class="comment-fieldset" id="comment-section">
+        <legend>💬 Share Your Opinion
+        </legend>
 
-  <p class="comment-intro">
-  Share your thoughts on one of our cases. We really care about what you think! 😊  </p>
+        <p class="comment-intro">
+            Share your thoughts on one of our cases. We really care about what you think! 😊 </p>
 
-  <button onclick="togglePublicCommentForm()" class="toggle-comment-form">📣 Write Your Opinion
-  </button>
-  <?php
-    if (isset($_SESSION['success_message'])) {
-        echo "<p id='form-success' class='message success custom-success'>{$_SESSION['success_message']}</p>";
-        unset($_SESSION['success_message']); 
-    }
-    ?>
+        <button onclick="togglePublicCommentForm()" class="toggle-comment-form">📣 Write Your Opinion
+        </button>
+        <?php
+        if (isset($_SESSION['success_message'])) {
+            echo "<p id='form-success' class='message success custom-success'>{$_SESSION['success_message']}</p>";
+            unset($_SESSION['success_message']);
+        }
+        ?>
 
 
 
-  <div id="public-comment-form" class="public-comment-form">
-  
+        <div id="public-comment-form" class="public-comment-form">
 
-    <?php if (!empty($error)) echo "<p class='message error'>$error</p>"; ?>
 
-    <form method="post" action="#comment-section">
-    <div class="form-group">
-    <input type="text" name="name" placeholder="Name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
-    <input type="text" name="surname" placeholder="Surname" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
-    </div>
+            <?php if (!empty($error)) echo "<p class='message error'>$error</p>"; ?>
 
-    <input type="email" name="email" placeholder="Email (optional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+            <!-- MUNDEMI ME PERDRO KETE PER TESTIM ->  <form method="post" action="popular.php">  -->
+            <form id="comment-form">
 
-      <select name="selected_case">
-        <option value="">Choose a Case...
-        </option>
-        <option value="Help us to Send Food"><?= ($_POST['selected_case'] ?? '') === 'Help us to Send Food' ? 'selected' : '' ?> Help us to Send Food</option>
-        <option value="Clothes For Everyone"><?= ($_POST['selected_case'] ?? '') === 'Clothes For Everyone' ? 'selected' : '' ?> Clothes For Everyone</option>
-        <option value="Water For All Children"><?= ($_POST['selected_case'] ?? '') === 'Water For All Children' ? 'selected' : '' ?> Water For All Children</option>
-        <option value="Education For Everyone"><?= ($_POST['selected_case'] ?? '') === 'Education For Everyone' ? 'selected' : '' ?> Education For Everyone</option>
-        <option value="Medical Support"><?= ($_POST['selected_case'] ?? '') === 'Medical Support' ? 'selected' : '' ?> Medical Support</option>
-        <option value="Homes for Everyone"><?= ($_POST['selected_case'] ?? '') === 'Homes for Everyone' ? 'selected' : '' ?> Homes for Everyone</option>
-      </select>
 
-      <textarea name="comment" rows="5" placeholder="Write your opinion here..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
-
-      <button type="submit" name="submit-general-comment">💾 Submit Your Opinion
-      </button>
-    </form>
-  </div>
-</fieldset>
-
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-    <footer>
-        <div class="row">
-            <div class="col">
-                <img src="image/logo-helpsomeone.png" class="logo" alt="">
-                <br>
-                <br>
-                <p
-                    style="font-family: 'Courier New', Courier, monospace ; font-size: 16px;    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">
-                    Together, we create a world of hope.</p>
-            </div>
-            <div class="col">
-                <h3>Office</h3>
-                <address>
-                    <p>Mother Teresa Street</p>
-                    <br>
-                    <p>Gjilan, 60000, Kosov&euml;</p>
-                    <br>
-                    <p>Phone: +383 45 333 111</p>
-                    <br>
-                    <a class="class-id" href="mailto:charity.kosova@gmail.com"
-                        style="color: white;">charity.kosova@gmail.com</a>
-                </address>
-            </div>
-            <div class="col">
-                <h3>Links</h3>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="volunteer.php">Volunteer & Updates</a></li>
-                    <li><a href="popular.php"> Popular Cases</a></li>
-                    <li><a href="donate.php">Donate</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <h3>We'd Love to Hear From You</h3>
-                <form class="footer-form" method="POST" action="">
-        <i class="fa-regular fa-envelope" style="color: #ffffff;"></i>
-        <input type="text" name="message" placeholder="  Leave a message" required>
-        <button type="submit"><i class="fa-solid fa-arrow-right " style="color: #ffffff;"></i></button>
-        </form>
-
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
-                            style="color: #2d6a4f;"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"
-                            style="color: #2d6a4f;"></i></i></a>
-                    <a href="https://www.twitter.com/"> <i class="fa-brands fa-twitter"
-                            style="color: #2d6a4f;"></i></i></a>
-                    <a href="https://www.whatsapp.com/"> <i class="fa-brands fa-whatsapp"
-                            style="color: #2d6a4f;"></i></i></a>
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+                    <input type="text" name="surname" placeholder="Surname" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
                 </div>
-            </div>
+
+                <input type="email" name="email" placeholder="Email (optional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+
+                <select name="selected_case">
+                    <option value="">Choose a Case...
+                    </option>
+                    <option value="Help us to Send Food" <?= ($_POST['selected_case'] ?? '') === 'Help us to Send Food' ? 'selected' : '' ?>>Help us to Send Food</option>
+                    <option value="Clothes For Everyone" <?= ($_POST['selected_case'] ?? '') === 'Clothes For Everyone' ? 'selected' : '' ?>>Clothes For Everyone</option>
+                    <option value="Water For All Children" <?= ($_POST['selected_case'] ?? '') === 'Water For All Children' ? 'selected' : '' ?>> Water For All Children</option>
+                    <option value="Education For Everyone" <?= ($_POST['selected_case'] ?? '') === 'Education For Everyone' ? 'selected' : '' ?>>Education For Everyone</option>
+                    <option value="Medical Support" <?= ($_POST['selected_case'] ?? '') === 'Medical Support' ? 'selected' : '' ?>>Medical Support</option>
+                    <option value="Homes for Everyone" <?= ($_POST['selected_case'] ?? '') === 'Homes for Everyone' ? 'selected' : '' ?>>Homes for Everyone</option>
+                </select>
+
+                <textarea name="comment" rows="5" placeholder="Write your opinion here..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
+
+                <button type="submit" name="submit-general-comment">Submit</button>
+
+            </form>
         </div>
-    </footer>
+    </fieldset>
+
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
@@ -666,101 +721,104 @@ foreach ($modals as $modal) {
 
 
     </fieldset>
+    <?php showFooter(); ?>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-
-
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
 
-        $('a[href^="#modal"]').on('click', function (event) {
-            event.preventDefault();
-            const modalId = $(this).attr('href');
-            const $modal = $(modalId);
-            const $overlay = $('#modal-overlay');
+            $('a[href^="#modal"]').on('click', function(e) {
+                e.preventDefault();
+                $($(this).attr('href')).show();
+                $('#modal-overlay').show();
+            });
 
-            if ($modal.length) {
-                $modal.css('display', 'block');
-                $overlay.css('display', 'block');
+            $('.close-btn').on('click', function(e) {
+                e.preventDefault();
+                $(this).closest('.modal').hide();
+                $('#modal-overlay').hide();
+            });
+
+
+            ["donations", "volunteers", "projects"].forEach(id =>
+                animateNumber(id, {
+                    donations: 1250,
+                    volunteers: 250,
+                    projects: 45
+                } [id])
+            );
+
+            function animateNumber(id, target) {
+                let current = 0;
+                const step = Math.ceil(target / 100);
+                const el = document.getElementById(id);
+                const interval = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(interval);
+                    }
+                    el.textContent = current;
+                }, 20);
             }
-        });
 
 
-        $(document).ready(function () {
-            $('a').on('click', function () {
-                $(this).addClass('visited');
-            });
-        });
-
-
-        document.querySelectorAll('.close-btn').forEach(button => {
-            button.addEventListener('click', event => {
-                event.preventDefault();
-                const modal = event.target.closest('.modal');
-                const overlay = document.getElementById('modal-overlay');
-
-                modal.style.display = 'none';
-                overlay.style.display = 'none';
-            });
-        });
-
-        function animateNumber(id, target) {
-            let current = 0;
-            const increment = Math.ceil(target / 100);
-            const element = document.getElementById(id);
-
-            const interval = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(interval);
-                }
-                element.textContent = current;
-            }, 20);
-        }
-
-
-        animateNumber('donations', 1250);
-        animateNumber('volunteers', 250);
-        animateNumber('projects', 45);
-
-
-    
-            function togglePublicCommentForm() {
+            window.togglePublicCommentForm = function() {
                 const form = document.getElementById("public-comment-form");
                 form.classList.toggle("visible");
-
+                document.querySelector(".custom-success")?.remove();
                 if (form.classList.contains("visible")) {
-                    setTimeout(() => {
-                        form.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }, 50);
+                    setTimeout(() => form.scrollIntoView({
+                        behavior: "smooth"
+                    }), 50);
                 }
             }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const error = <?= json_encode($error) ?>;
-    const success = <?= json_encode($success) ?>;
-    const form = document.getElementById("public-comment-form");
-    const successMsg = document.getElementById("form-success");
 
-    if (error) {
-        form.classList.add("visible");
-        setTimeout(() => {
-            form.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-    }
+            document.getElementById("comment-form").addEventListener("submit", async function(e) {
+                e.preventDefault();
+                const res = await fetch("submit_comment.php", {
+                    method: "POST",
+                    body: new FormData(this)
+                });
+                const data = await res.json();
+                if (!data.success) return alert("Error: " + data.message);
 
-    if (successMsg) {
-        setTimeout(() => {
-            successMsg.style.opacity = "0";
-            successMsg.style.transition = "opacity 0.5s ease";
-        }, 3000);
 
-        setTimeout(() => {
-            successMsg.style.display = "none";
-        }, 3500);
-    }
-});
-</script>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                document.getElementById("public-comment-form").classList.remove("visible");
+                document.getElementById("comment-section").insertAdjacentHTML(
+                    "beforeend",
+                    `<p class="custom-success">${data.message}</p>`
+                );
+
+
+                const d = data.data;
+                const comment = `
+            <li><strong>${d.name} ${d.surname}:</strong> ${d.comment}<br><em>${d.created_at}</em></li>
+        `;
+                document.querySelectorAll("details").forEach(detail => {
+                    if (detail.dataset.case === d.case_name) {
+                        let ul = detail.querySelector("ul");
+                        if (!ul) {
+                            ul = document.createElement("ul");
+                            detail.querySelector("p")?.remove();
+                            detail.appendChild(ul);
+                        }
+                        ul.insertAdjacentHTML("afterbegin", comment);
+                        const summary = detail.querySelector("summary");
+                        const m = summary.innerText.match(/Comments \((\d+)\)/);
+                        if (m) summary.innerText = `💬 Comments (${+m[1] + 1})`;
+                    }
+                });
+
+                this.reset();
+            });
+        });
+    </script>
+
+
+
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 </body>
+
 </html>
