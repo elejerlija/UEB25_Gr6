@@ -5,15 +5,16 @@
     font-family: 'Poppins',Arial, sans-serif;
 }
 
-
+/*
 .top-bar {
     background-color: #f7f7f7;
     display: flex;
     justify-content: space-between;
     padding: 5px 50px;
     font-size: 14px;
+    color: black;
 }
-
+*/
 .contact-info span {
     margin-right: 20px;
     color: black;
