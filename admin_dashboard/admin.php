@@ -22,7 +22,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     <a href="#">Overview</a>
     <a href="#">Manage Donations</a>
     <a href="#">Manage Volunteers</a>
-    <a href="#">Event Planner</a>
+    <a href="/UEB24_Gr26/admin_dashboard/event_planner.php">Event Planner</a>
     <a href="#">Contact Form Messages</a>
   <a href="/UEB24_Gr26/admin_dashboard/user_management.php">User Management</a>
 

@@ -127,10 +127,7 @@ echo '</section>';
         <p>Thank you to all who donated and participated!</p>
     </div>
 </section>
-<h2 style="text-align: center; margin: 0 auto;font-size: 2rem;">Event Calendar</h2><br>
-<section>
-  <div id="event-calendar" class="calendar"></div>
-</section>
+
 <section>
   <div class="partnership">
     <h1 class="title" style="font-size: 2rem;">Our Charity Partners</h1>
@@ -169,6 +166,12 @@ echo '</section>';
     </ul>
   </div>
 </section>
+<section class="calendar-section">
+    <?php
+ include 'get_events.php';
+ ?>
+</section>
+<section>
 <?php
 $errors = [];
 
@@ -340,61 +343,6 @@ document.getElementById("joinForm").addEventListener("submit", function(event) {
         alert("Please fix the following:\n\n" + errors.join("\n"));
     }
 });
-document.addEventListener("DOMContentLoaded", function () {
-    const events = [
-        { date: "2025-01-10", name: "Community Cleanup Drive" },
-        { date: "2025-01-15", name: "Annual Fundraiser Gala" }
-    ];
-    const calendarDiv = document.getElementById("event-calendar");
-
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December"
-    ];
-
-    
-    const headerDiv = document.createElement("div");
-    headerDiv.className = "calendar-header";
-    headerDiv.textContent = `${monthNames[month]} ${year}`;
-    calendarDiv.appendChild(headerDiv);
-
-    
-    for (let day = 1; day <= daysInMonth; day++) {
-        
-        const currentDayString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-       
-        const event = events.find(e => e.date === currentDayString);
-
-        const dayDiv = document.createElement("div");
-        dayDiv.textContent = day;
-
-        
-        if (
-            today.getFullYear() === year &&
-            today.getMonth() === month &&
-            today.getDate() === day
-        ) {
-            dayDiv.classList.add("today");
-        }
-
-  
-        if (event) {
-            dayDiv.classList.add("event");
-            dayDiv.title = event.name;
-            dayDiv.addEventListener("click", () => {
-                alert(`Event: ${event.name} on ${event.date}`);
-            });
-        }
-
-        calendarDiv.appendChild(dayDiv);
-    }
-});
-
 
 
 </script>
