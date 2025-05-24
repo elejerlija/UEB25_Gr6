@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-include 'includes/db_conn.php';
+include '../includes/db_conn.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Access denied. Admins only.");
@@ -22,40 +22,40 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 	$user_data = 'uname=' . urlencode($uname) . '&name=' . urlencode($name) . '&email=' . urlencode($email);
 
 	if (empty($email)) {
-	    header("Location: admin_dashboard.php?error=Email is required&$user_data");
+	    header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Email is required&$user_data");
 	    exit();
 	} elseif (empty($uname)) {
-		header("Location: admin_dashboard.php?error=Username is required&$user_data");
+		header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Username is required&$user_data");
 	    exit();
 	} elseif (empty($pass)) {
-        header("Location: admin_dashboard.php?error=Password is required&$user_data");
+        header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Password is required&$user_data");
 	    exit();
 	} elseif (empty($re_pass)) {
-        header("Location: admin_dashboard.php?error=Repeat password is required&$user_data");
+        header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Repeat password is required&$user_data");
 	    exit();
 	} elseif (empty($name)) {
-        header("Location: admin_dashboard.php?error=Name is required&$user_data");
+        header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Name is required&$user_data");
 	    exit();
 	} elseif ($pass !== $re_pass) {
-        header("Location: admin_dashboard.php?error=Passwords do not match&$user_data");
+        header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Passwords do not match&$user_data");
         exit();
 	} elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/', $pass)) {
-        header("Location: admin_dashboard.php?error=Password must be at least 8 characters with uppercase, lowercase, number, and symbol&$user_data");
+        header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Password must be at least 8 characters with uppercase, lowercase, number, and symbol&$user_data");
         exit();
     } else {
-		$pass = md5($pass); // or password_hash() in a real app
+		$pass = password_hash($pass, PASSWORD_DEFAULT);
 
 		$check_username = "SELECT * FROM users WHERE username='$uname'";
 		$res_username = mysqli_query($conn, $check_username);
 		if (mysqli_num_rows($res_username) > 0) {
-			header("Location: admin_dashboard.php?error=Username already exists&$user_data");
+			header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Username already exists&$user_data");
 	        exit();
 		}
 
 		$check_email = "SELECT * FROM users WHERE email='$email'";
 		$res_email = mysqli_query($conn, $check_email);
 		if (mysqli_num_rows($res_email) > 0) {
-			header("Location: admin_dashboard.php?error=Email already in use&$user_data");
+			header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Email already in use&$user_data");
 	        exit();
 		}
 
@@ -64,15 +64,15 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 		$result = mysqli_query($conn, $sql);
 
 		if ($result) {
-			header("Location: admin_dashboard.php?success=Admin successfully added");
+			header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?success=Admin successfully added");
 	        exit();
 		} else {
-			header("Location: admin_dashboard.php?error=Unknown error occurred&$user_data");
+			header("Location: /UEB24_Gr26/admin_dashboard/user_management.php?error=Unknown error occurred&$user_data");
 	        exit();
 		}
 	}
 
 } else {
-	header("Location: admin_dashboard.php");
+	header("Location: /UEB24_Gr26/admin_dashboard/user_management.php");
 	exit();
 }
