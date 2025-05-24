@@ -28,21 +28,21 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 			$row = mysqli_fetch_assoc($result);
 
 			if (password_verify($pass, $row['password'])) {
-				// Password correct → set session variables
+				
 				$_SESSION['username'] = $row['username'];
 				$_SESSION['name'] = $row['name'];
 				$_SESSION['id'] = $row['id'];
 				$_SESSION['role'] = $row['role'];
 
-				// Redirect by role
+				
 				if ($row['role'] === 'admin') {
-					header("Location: /UEB24_Gr26/admin.php");
+					header("Location: /UEB24_Gr26/admin_dashboard/admin.php");
 				} else {
 					header("Location: /UEB24_Gr26/index.php");
 				}
 				exit();
 			} else {
-				// Password incorrect
+				
 				header("Location: signin.php?error=Incorrect username or password");
 				exit();
 			}
