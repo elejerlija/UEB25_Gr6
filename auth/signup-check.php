@@ -43,8 +43,8 @@ if (isset($_POST['uname']) && isset($_POST['password'])
     header("Location: signup.php?error=Password must be at least 8 characters long and include uppercase, lowercase, number, and symbol&$user_data");
     exit();
 } else {
-		// Hash the password (for real apps, use password_hash())
-		$pass = md5($pass);
+	$pass = password_hash($pass, PASSWORD_DEFAULT);
+
 
 		// Check if username exists
 		$sql_uname = "SELECT * FROM users WHERE username='$uname'";
