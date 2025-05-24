@@ -18,22 +18,12 @@ $result = mysqli_query($conn, $sql);
 </head>
 <body>
 <div class="container">
-  <div class="container">
-
-<?php if (isset($_GET['success'])): ?>
-  <p style="color: limegreen; margin-bottom: 10px;">
-    <?= htmlspecialchars($_GET['success']) ?>
-  </p>
-<?php elseif (isset($_GET['error'])): ?>
-  <p style="color: red; margin-bottom: 10px;">
-    <?= htmlspecialchars($_GET['error']) ?>
-  </p>
-<?php endif; ?>
 
     <div class="header">
+        <a href="/UEB24_Gr26/admin_dashboard/admin.php"><i class="fas fa-arrow-left style="  style="color: #fbfcfe;"></i> </a>
       <h2>User Management</h2>
     </div>
-
+<br>
     <table>
       <thead>
         <tr>
@@ -52,7 +42,7 @@ $result = mysqli_query($conn, $sql);
       <td><?= htmlspecialchars($row['email']) ?></td>
       <td><?= htmlspecialchars(ucfirst($row['role'])) ?></td>
       <td class="actions">
-        <form action="/UEB24_Gr26/admin_dashboard/delete_user.php" method="POST" style="display:inline;">
+        <form action="/UEB24_GR26/admin_dashboard/delete_user.php" method="POST" style="display:inline;">
           <input type="hidden" name="username" value="<?= htmlspecialchars($row['username']) ?>">
           <button type="submit">Delete</button>
         </form>
@@ -63,7 +53,7 @@ $result = mysqli_query($conn, $sql);
 
     </table>
 
-    <form action="/UEB24_Gr26/admin_dashboard/add_admin.php" method="POST" onsubmit="return validateForm()">
+    <form action="/UEB24_GR26/admin_dashboard/add_admin.php" method="POST" onsubmit="return validateForm()">
       <h2>Add Admin</h2>
 
       <label for="uname">Username</label>

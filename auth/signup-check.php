@@ -20,7 +20,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 
 	$user_data = 'uname=' . urlencode($uname) . '&name=' . urlencode($name) . '&email=' . urlencode($email);
 
-	// Input validations
+	
 	if (empty($email)) {
 	    header("Location: signup.php?error=Email is required&$user_data");
 	    exit();
@@ -46,7 +46,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 	$pass = password_hash($pass, PASSWORD_DEFAULT);
 
 
-		// Check if username exists
+		
 		$sql_uname = "SELECT * FROM users WHERE username='$uname'";
 		$result_uname = mysqli_query($conn, $sql_uname);
 		if (mysqli_num_rows($result_uname) > 0) {
@@ -54,7 +54,6 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 	        exit();
 		}
 
-		// Check if email exists
 		$sql_email = "SELECT * FROM users WHERE email='$email'";
 		$result_email = mysqli_query($conn, $sql_email);
 		if (mysqli_num_rows($result_email) > 0) {
@@ -62,7 +61,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 	        exit();
 		}
 
-		// If all clear, insert user
+		
 		$sql2 = "INSERT INTO users(username, password, name, email) 
 		         VALUES('$uname', '$pass', '$name', '$email')";
 		$result2 = mysqli_query($conn, $sql2);
