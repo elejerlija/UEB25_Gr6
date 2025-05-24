@@ -13,7 +13,7 @@ echo '<p style="background-color: #fff3cd; color: #856404; padding: 10px; border
 </head>
 <body>
 
-     <form action="login.php" method="post">
+     <form action="signin_check.php" method="post">
      	<h2>LOGIN</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
