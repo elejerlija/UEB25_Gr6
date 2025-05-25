@@ -1,8 +1,13 @@
 <?php
 session_start();
+include '../includes/db_conn.php';
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Access denied. Admins only.");
 }
+
+$msg_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM contact_messages");
+$msg_row = mysqli_fetch_assoc($msg_result);
+$totalMessages = $msg_row['total'];
 ?>
 
 
@@ -47,7 +52,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
       <div class="card">
         <h3>Messages</h3>
-        <p>45</p>
+        <p><?php echo $totalMessages ?></p>
       </div>
     </div>
 
