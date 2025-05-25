@@ -58,11 +58,12 @@ exit();
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <title>Contact</title>
   <style>
-    input[readonly] {
-      background-color: #f3f4f6;
-      color: #111827;
-      border: 1px solid #d1d5db;
-    }
+ 
+        input[readonly] {
+  background-color: #f0f0f0;
+  color: #555;
+  cursor: not-allowed;
+}
   </style>
 </head>
 
