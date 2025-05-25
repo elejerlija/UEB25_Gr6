@@ -14,6 +14,7 @@ showHeader();
 
 
 
+
 <!DOCTYPE html>
  
 <html lang="en">
@@ -64,24 +65,60 @@ showHeader();
     </section>
 </div>
 <?php
-
 define('ERROR_COLOR', 'red');
 define('VOLUNTEER_IMAGE_DIR', 'image/');
 
+// Vargu me referencë i vullnetarëve
 $volunteers = [
     ['Rinë Ademi', 'vl4.jpg', 'Rinë is a dedicated charity volunteer who has spent the last five years working tirelessly to support underprivileged families.'],
     ['Emily Carter', 'vl1.jpg', 'Emily has been a key contributor to our health programs, helping organize numerous health camps.'],
     ['James Park', 'vl2.jpg', 'James supports our education initiatives by mentoring students and providing guidance.'],
     ['Harry Williams', 'vl3.jpg', 'Harry has been active in our environmental projects, organizing clean-up drives and tree plantations.'],
 ];
+
+// Funksion që shton vullnetarë përmes referencës
+function addVolunteer(array &$list, string $name, string $image, string $bio) {
+    $list[] = [$name, $image, $bio];
+}
+
+// Kthim i referencës së një vullnetari për modifikim
+function &findVolunteerByName(array &$list, string $searchName) {
+    foreach ($list as &$v) {
+        if ($v[0] === $searchName) {
+            return $v;
+        }
+    }
+    $null = null;
+    return $null;
+}
+
+// Shto një vullnetar shtesë për testim (mund të hiqet)
+addVolunteer($volunteers, 'Test Volunteer', 'test.jpg', 'Temporary volunteer.');
+
+// Modifiko përmes referencës biografinë e një vullnetari ekzistues
+$foundVolunteer = &findVolunteerByName($volunteers, 'James Park');
+if ($foundVolunteer !== null) {
+    $foundVolunteer[2] .= " (Updated through reference)";
+}
+
+// Hiq vullnetarin testues (përdorimi i unset me referencë)
+foreach ($volunteers as $key => &$v) {
+    if ($v[0] === 'Test Volunteer') {
+        unset($volunteers[$key]); // Largimi i elementit
+        break;
+    }
+}
+unset($v); // Largimi i referencës për siguri
+
 rsort($volunteers);
+
 echo '<section class="volunteers">';
 echo '<h1 style="text-align: center; font-size: 2rem;">Meet Our Volunteers</h1>';
 echo '<div class="volunteer-grid">';
 foreach ($volunteers as $i => $v) {
     switch (count($v)) {
         case 3:
-            $name =$v[0];
+            $name = $v[0];
             $image = VOLUNTEER_IMAGE_DIR . $v[1];
             $bio = $v[2];
             $firstName = explode(' ', $v[0])[0];
