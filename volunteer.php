@@ -7,8 +7,11 @@ if (!isset($_SESSION['username'])) {
 }
 
 
+
 include 'includes/header.php';
 include 'includes/footer.php';
+
+
 
 showHeader();
 ?>
@@ -27,12 +30,12 @@ showHeader();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
-     input[readonly] {
-   background-color: #f0f0f0;
-   color: #555;
-   cursor: not-allowed;
- }
- </style>
+        input[readonly] {
+  background-color: #f0f0f0;
+  color: #555;
+  cursor: not-allowed;
+}
+    </style>
 </head>
     <body>
    
@@ -210,62 +213,6 @@ echo '</section>';
  include 'get_events.php';
  ?>
 </section>
-<section>
-<?php
-$errors = [];
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    $fullName = trim($_POST['name'] ?? '');
-    if (empty($fullName)) {
-        $errors[] = "Full Name is required!";
-    } elseif (!preg_match("/^[a-zA-Z ]+$/", $fullName)) {
-        $errors[] = "Full Name must contain only letters and spaces!";
-    }
-
-    $email = trim($_POST['email'] ?? '');
-    if (empty($email)) {
-        $errors[] = "Email is required!";
-    } elseif (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email)) {
-        $errors[] = "Invalid email format!"; 
-    }
-
-    $gender = $_POST['gender'] ?? '';
-    if (empty($gender)) {
-        $errors[] = "Gender is required!";
-    }
-    $dob = $_POST['dob'] ?? '';
-    if (empty($dob)) {
-        $errors[] = "Date of Birth is required!";
-    } elseif (!preg_match("/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/", $dob)) {
-        $errors[] = "Date of Birth must be in dd/mm/yyyy format!";
-    } else {
-       
-        list($day, $month, $year) = explode('/', $dob);
-        $birthDate = new DateTime("$year-$month-$day");
-        $currentDate = new DateTime();
-        $age = $currentDate->diff($birthDate)->y;
-
-        if ($age < 18 || $age > 99) {
-            $errors[] = "Age must be between 18 and 99!";
-        }
-    }
-  
-
-    $password = $_POST['password'] ?? '';
-    if (empty($password)) {
-        $errors[] = "Password is required!";
-    } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/", $password)) {
-        $errors[] = "Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol!";
-    }
-
-    $confirmPassword = $_POST['confirmPassword'] ?? '';
-    if ($password !== $confirmPassword) {
-        $errors[] = "Passwords do not match!";
-    }
-}
-?>
-
 
 <section style="background-color:rgb(26, 163, 62);">
   <div class="join-section" id="join-section">
@@ -275,52 +222,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <form id="joinForm" method="post">
         <div class="form-group">
           <label for="name">Full Name</label>
-<input type="text" name="name" value="<?= $_SESSION['name'] ?? '' ?>" readonly>        </div>
+          <input type="text" name="name" value="<?= htmlspecialchars($_SESSION['name'] ?? '') ?>" readonly>
+        </div>
         <div class="form-group">
           <label for="email">Email</label>
-<input type="email" name="email" value="<?= $_SESSION['email'] ?? '' ?>" readonly>        </div>
+          <input type="email" name="email" value="<?= htmlspecialchars($_SESSION['email'] ?? '') ?>" readonly>
+        </div>
         <div class="form-group">
           <label for="gender">Choose Gender</label>
           <div class="gender-options">
-            <label><input type="radio" name="gender" value="Female" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Female') ? 'checked' : ''; ?> required> Female</label>
-            <label><input type="radio" name="gender" value="Male" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Male') ? 'checked' : ''; ?> required> Male</label>
-            <label><input type="radio" name="gender" value="Other" <?php echo (isset($_POST['gender']) && $_POST['gender'] == 'Other') ? 'checked' : ''; ?> required> Other</label>
+            <label><input type="radio" name="gender" value="Female" <?= (isset($_POST['gender']) && $_POST['gender'] == 'Female') ? 'checked' : '' ?>> Female</label>
+            <label><input type="radio" name="gender" value="Male" <?= (isset($_POST['gender']) && $_POST['gender'] == 'Male') ? 'checked' : '' ?>> Male</label>
+            <label><input type="radio" name="gender" value="Other" <?= (isset($_POST['gender']) && $_POST['gender'] == 'Other') ? 'checked' : '' ?>> Other</label>
           </div>
         </div>
-        
         <div class="form-group">
-        <label for="dob">Date of Birth:</label>
-        <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" value="<?php echo isset($_POST['dob']) ? $_POST['dob'] : ''; ?>" required>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Choose a Password" required>
+          <label for="dob">Date of Birth:</label>
+          <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" value="<?= htmlspecialchars($_POST['dob'] ?? '') ?>" required>
         </div>
         <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Your Password" required>
+          <label for="reason">Why would you like to join?</label>
+          <textarea name="reason" placeholder="Share your motivation here..." rows="4" required><?= htmlspecialchars($_POST['reason'] ?? '') ?></textarea>
         </div>
         <input type="submit" value="Join Now">
-        <input type="reset" value="Reset">
+        
       </form>
 
-    
-      <?php 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (!empty($errors)) { ?>
+      <?php if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($errors)): ?>
         <div class="error-box">
           <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
           <h4>Please fix the following errors:</h4>
           <ul>
             <?php foreach ($errors as $error): ?>
-              <li><?php echo $error; ?></li>
+              <li><?= htmlspecialchars($error) ?></li>
             <?php endforeach; ?>
           </ul>
         </div>
-    <?php } else {
-        echo "<div class='success-box'>Registration successful!</div>";
-    }
-}
-?>
+      <?php endif; ?>
 
     </div>
   </div>
@@ -328,67 +266,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-
-
-
-<script>
-document.getElementById("joinForm").addEventListener("submit", function(event) {
-    let errors = [];
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const dob = document.getElementById("dob").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (!/^[a-zA-Z ]+$/.test(name)) {
-        errors.push("Full Name must contain only letters and spaces.");
-    }
-
-    if (!/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/.test(email)) {
-        errors.push("Invalid email format.");
-    }
-
-    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(dob)) {
-    errors.push("Date of Birth must be in dd/mm/yyyy format.");
-} else {
-    const [day, month, year] = dob.split('/');
-    const birthDate = new Date(year, month - 1, day);
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthDate.getFullYear();
-    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
-
-    if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())) {
-        age--; 
-    }
-
-    if (age < 18 || age > 99) {
-        errors.push("Age must be between 18 and 99.");
-    }
-}
-
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password)) {
-        errors.push("Password must be at least 8 characters and include uppercase, lowercase, number, and a symbol.");
-    }
-
-    if (password !== confirmPassword) {
-        errors.push("Passwords do not match.");
-    }
-
-    if (errors.length > 0) {
-        event.preventDefault(); 
-        alert("Please fix the following:\n\n" + errors.join("\n"));
-    }
-});
-
-
-</script>
-
 <?php showFooter(); ?>
   <audio id="click-sound" src="audio/click_sound.mp3" preload="auto"></audio>
+  <script>
+document.getElementById("joinForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch("join_form.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message); // mund ta zëvendësojmë me një div nëse do
+            form.reset();
+        } else if (data.errors) {
+            alert("Please fix the following:\n\n" + data.errors.join("\n"));
+        }
+    })
+    .catch(err => {
+        console.error("Fetch error:", err);
+        alert("Something went wrong. Please try again.");
+    });
+});
+</script>
+
     </body>
 </html>
 <script>
+    
 window.addEventListener('DOMContentLoaded', function () {
     const errorBox = document.querySelector('.error-box');
     const successBox = document.querySelector('.success-box');
