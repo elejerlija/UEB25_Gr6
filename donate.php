@@ -106,54 +106,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       $stmt->close();
     }
-
-
-    $to = 'charitywebsite25@gmail.com';
-    $subject = "New Donation Received from $fullname";
-
-    $message = "You have received a new donation.\n\n";
-$message .= "Details:\n";
-
-if ($isAnonymous) {
-  $message .= "Full Name: Anonymous Donor\n";
-  $message .= "Email: (not provided)\n";
-} else {
-  $message .= "Full Name: $fullname\n";
-  $message .= "Email: $email\n";
-}
-
-$message .= "Donation Amount: $" . htmlspecialchars($amount) . "\n";
-$message .= "Payment Method: $paymentMethod\n";
-
-
-    if ($paymentMethod === 'card') {
-      $message .= "Bank: $bankName\n";
-      $message .= "Card Number: **** **** **** " . $cardLast4 . "\n";
-      $message .= "Expiry Date: $expiryDate\n";
-      $message .= "CVV: ***\n";
-    } else {
-      $message .= "PayPal donation selected.\n";
-    }
-
-  $headers = "From: Charity Kosovo <charitywebsite25@gmail.com>\r\n";
-if (!$isAnonymous) {
-  $headers .= "Reply-To: $email\r\n";
-}
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-
-    if (!$isLocalhost) {
-      if (mail($to, $subject, $message, $headers)) {
-        $success_message = "Thank you for your donation, $fullname!";
-      } else {
-        $errors[] = "Failed to send confirmation email. Please try again later.";
-      }
-    } else {
-      $success_message = "Thank you for your donation, $fullname! (Mail sending disabled on localhost)";
-      header("Location: " . $_SERVER['PHP_SELF']);
+$_SESSION['success_message'] = "Thank you for your donation, $fullname!";
+header("Location: donate.php");
 exit;
-    }
+
   }
+    
+
+
+
+
+   
 }
 ?>
 
