@@ -31,8 +31,8 @@
         <label>Password</label>
         <input type="password" name="password" placeholder="Password"><br>
 
-        <label>Re Password</label>
-        <input type="password" name="re_password" placeholder="Re-enter Password"><br>
+        <label>Repeat Password</label>
+        <input type="password" name="re_password" placeholder="Repeat Password"><br>
 
         <button type="submit">Sign Up</button>
         <a href="signin.php" class="ca">Already have an account?</a>

@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #111827;
+    color: white;
+    padding: 20px;
+}
+
+.content-wrapper {
+    padding: 30px;
+}
+
+.section {
+    background-color: #1f2937;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.message {
+    border-bottom: 1px solid #374151;
+    padding: 15px 0;
+}
+
+.message:last-child {
+    border-bottom: none;
+}
+
+.message h4 {
+    margin: 0 0 5px;
+    color: #10b981;
+}
+
+.message small {
+    color: #9ca3af;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    color: #10b981;
+}
+
+.delete-form {
+    margin-left: 10px;
+}
+
+.delete-form button {
+    background-color: #ef4444;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-form button:hover {
+    background-color: #dc2626;
+}

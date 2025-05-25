@@ -3,6 +3,7 @@ echo '<p style="background-color: #fff3cd; color: #856404; padding: 10px; border
        Please log in to access the full content.
     </p>';
 
+
 ?>
 
 <!DOCTYPE html>
