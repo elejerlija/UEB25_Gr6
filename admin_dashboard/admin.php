@@ -8,6 +8,21 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 $msg_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM contact_messages");
 $msg_row = mysqli_fetch_assoc($msg_result);
 $totalMessages = $msg_row['total'];
+
+$donate_result = mysqli_query($conn, "SELECT COUNT(*) AS donateTotali FROM donations");
+$donate_row = mysqli_fetch_assoc($donate_result);
+$totalDonations = $donate_row['donateTotali'];
+
+
+$totalQuery = "SELECT SUM(amount) AS total_donations FROM donations";
+$totalResult = $conn->query($totalQuery);
+$totalAmount = 0;
+
+if ($totalResult && $row = $totalResult->fetch_assoc()) {
+    $totalAmount = $row['total_donations'];
+}
+
+
 ?>
 
 
@@ -25,7 +40,7 @@ $totalMessages = $msg_row['total'];
   <div class="sidebar">
     <h2>HelpSomeone</h2>
     <a href="#">Overview</a>
-    <a href="#">Manage Donations</a>
+    <a href="/UEB24_Gr26/admin_dashboard/manage_donations.php">View Donations</a>
     <a href="#">Manage Volunteers</a>
     <a href="/UEB24_Gr26/admin_dashboard/event_planner.php">Event Planner</a>
     <a href="/UEB24_Gr26/admin_dashboard/contact_messages.php">Contact Form Messages</a>
@@ -42,8 +57,12 @@ $totalMessages = $msg_row['total'];
   
     <div class="cards">
       <div class="card">
-        <h3>Total Donations</h3>
-        <p>1,860</p>
+        <h3>Total Amount Raised</h3>
+        <p><?php echo $totalAmount ?> </p>
+      </div>
+       <div class="card">
+        <h3>Total Number of Donations</h3>
+        <p><?php echo $totalDonations ?> </p>
       </div>
       <div class="card">
         <h3>Active Volunteers</h3>
