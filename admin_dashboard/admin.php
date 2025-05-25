@@ -13,6 +13,10 @@ $donate_result = mysqli_query($conn, "SELECT COUNT(*) AS donateTotali FROM donat
 $donate_row = mysqli_fetch_assoc($donate_result);
 $totalDonations = $donate_row['donateTotali'];
 
+$active_volunteers = mysqli_query($conn, "SELECT COUNT(*) AS active FROM volunteers WHERE status = 1");
+$volunteers_row = mysqli_fetch_assoc($active_volunteers);
+$totalactive = $volunteers_row['active'];
+
 
 $totalQuery = "SELECT SUM(amount) AS total_donations FROM donations";
 $totalResult = $conn->query($totalQuery);
@@ -21,6 +25,7 @@ $totalAmount = 0;
 if ($totalResult && $row = $totalResult->fetch_assoc()) {
     $totalAmount = $row['total_donations'];
 }
+
 
 
 ?>
@@ -41,7 +46,7 @@ if ($totalResult && $row = $totalResult->fetch_assoc()) {
     <h2>HelpSomeone</h2>
     <a href="#">Overview</a>
     <a href="/UEB24_Gr26/admin_dashboard/manage_donations.php">View Donations</a>
-    <a href="#">Manage Volunteers</a>
+    <a href="/UEB24_Gr26/admin_dashboard/admin_volunteers.php">Manage Volunteers</a>
     <a href="/UEB24_Gr26/admin_dashboard/event_planner.php">Event Planner</a>
     <a href="/UEB24_Gr26/admin_dashboard/contact_messages.php">Contact Form Messages</a>
   <a href="/UEB24_Gr26/admin_dashboard/user_management.php">User Management</a>
@@ -66,7 +71,7 @@ if ($totalResult && $row = $totalResult->fetch_assoc()) {
       </div>
       <div class="card">
         <h3>Active Volunteers</h3>
-        <p>328</p>
+        <p><?php echo $totalactive ?></p>
       </div>
 
       <div class="card">
@@ -75,17 +80,7 @@ if ($totalResult && $row = $totalResult->fetch_assoc()) {
       </div>
     </div>
 
-    <div class="content">
-      <div class="section">
-        <h4>Recent Donation Activity</h4>
-        <p>[Chart will go here]</p>
-      </div>
-
-      <div class="section">
-        <h4>Latest Volunteer Applications</h4>
-        <p>[Volunteer list with Approve/Deny buttons]</p>
-      </div>
-    </div>
+    
   </div>
 </body>
 </html>
