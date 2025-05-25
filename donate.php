@@ -150,6 +150,8 @@ $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
       }
     } else {
       $success_message = "Thank you for your donation, $fullname! (Mail sending disabled on localhost)";
+      header("Location: " . $_SERVER['PHP_SELF']);
+exit;
     }
   }
 }
@@ -200,13 +202,13 @@ $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
       </div>
     <?php endif; ?>
 
-    <?php if (!empty($success_message)): ?>
-      <div
-        class="success-box"
-        style="color: green; background: #e6ffe6; padding: 10px; border-radius: 5px;">
-        <?= htmlspecialchars($success_message) ?>
-      </div>
-    <?php endif; ?>
+    <?php if (isset($_SESSION['success_message'])): ?>
+  <div class="success-box">
+    <?= htmlspecialchars($_SESSION['success_message']) ?>
+  </div>
+  <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+
 
     <form id="donationForm" method="POST" action="">
       <div class="donation-group">
