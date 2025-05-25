@@ -10,7 +10,7 @@ showHeader();
 <?php
 
 
-$query = "SELECT name, surname, email, comment, case_name, created_at FROM comments ORDER BY created_at DESC";
+$query = "SELECT name, email, comment, case_name, created_at FROM comments ORDER BY created_at DESC";
 $result = $conn->query($query);
 
 $commentsByCase = [];
@@ -166,20 +166,18 @@ $cases = [
         "A safe and secure home is more than just a roof over one’s head—it’s a foundation for a better life. This project builds affordable housing for families living in extreme poverty, giving them hope and a place to call their own. Help us lay the bricks of compassion and care."
     )
 ];
+
 $success = "";
 $error = "";
 
 if (isset($_POST['submit-general-comment'])) {
-    $name = trim($_POST['name']);
-    $surname = trim($_POST['surname']);
+    $name = trim($_POST['name']); // e merr nga session ose inputi si "full name"
     $email = trim($_POST['email']);
     $comment = trim($_POST['comment']);
     $selected_case = trim($_POST['selected_case']);
 
-    if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $name)) {
-        $error = "The name must contain only letters and be between 2-30 characters.";
-    } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,30}$/", $surname)) {
-        $error = "The surname must contain only letters and be between 2-30 characters.";
+    if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,50}$/", name)) {
+        $error = "The name must contain only letters and be between 2-50 characters.";
     } elseif (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "The email address is not valid.";
     } elseif (strlen($comment) < 5) {
@@ -187,8 +185,8 @@ if (isset($_POST['submit-general-comment'])) {
     } elseif (empty($selected_case)) {
         $error = "Please select a case.";
     } else {
-        $stmt = $conn->prepare("INSERT INTO comments (name, surname, email, comment, case_name) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $name, $surname, $email, $comment, $selected_case);
+        $stmt = $conn->prepare("INSERT INTO comments (name, email, comment, case_name) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $name, $email, $comment, $selected_case);
         $stmt->execute();
         $stmt->close();
 
@@ -621,7 +619,7 @@ if ($commentsQuery = $conn->query("SELECT * FROM comments ORDER BY created_at DE
                                 <ul>
                                     <?php foreach ($allComments[$caseName] as $c): ?>
                                         <li>
-                                            <strong><?= htmlspecialchars($c['name']) ?> <?= htmlspecialchars($c['surname']) ?>:</strong>
+                                            <strong><?= htmlspecialchars($c['name']) ?> :</strong>
                                             <?= htmlspecialchars($c['comment']) ?>
                                             <br><em><?= date("d M Y", strtotime($c['created_at'])) ?></em>
                                         </li>
@@ -685,11 +683,9 @@ if ($commentsQuery = $conn->query("SELECT * FROM comments ORDER BY created_at DE
 
 
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
-                    <input type="text" name="surname" placeholder="Surname" value="<?= htmlspecialchars($_POST['surname'] ?? '') ?>">
-                </div>
+                    <input type="text" name="name" value="<?= $_SESSION['name'] ?? '' ?>" readonly>                </div>
 
-                <input type="email" name="email" placeholder="Email (optional)" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                <input type="email" name="email" value="<?= $_SESSION['email']  ?? '' ?>" readonly>
 
                 <select name="selected_case">
                     <option value="">Choose a Case...
@@ -793,8 +789,7 @@ if ($commentsQuery = $conn->query("SELECT * FROM comments ORDER BY created_at DE
 
                 const d = data.data;
                 const comment = `
-            <li><strong>${d.name} ${d.surname}:</strong> ${d.comment}<br><em>${d.created_at}</em></li>
-        `;
+            <li><strong>${d.name}:</strong> ${d.comment}<br><em>${d.created_at}</em></li> `;
                 document.querySelectorAll("details").forEach(detail => {
                     if (detail.dataset.case === d.case_name) {
                         let ul = detail.querySelector("ul");
