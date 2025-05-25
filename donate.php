@@ -1,14 +1,17 @@
 <?php
-
-include  'includes/db_conn.php';
+session_start();
+include 'includes/db_conn.php';
 include 'includes/header.php';
 include 'includes/footer.php';
 
 showHeader();
 
-?>
 
-<?php
+
+$currentUser = isset($_SESSION['id']) && isset($_SESSION['name']) && isset($_SESSION['email']);
+$user_id = $_SESSION['id'] ?? null;
+$fullname = $_SESSION['name'] ?? '';
+$email = $_SESSION['email']?? '';
 
 $isLocalhost = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']);
 
@@ -19,10 +22,9 @@ function sanitize_input($data)
 
 $errors = [];
 $success_message = "";
-
+$isAnonymous = isset($_POST['anonymous']) && $_POST['anonymous'] === 'on';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
   $amount = $_POST['amount'] ?? '';
   if ($amount === 'custom') {
     $customAmount = filter_var($_POST['customAmount'] ?? '', FILTER_SANITIZE_NUMBER_INT);
@@ -35,14 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = "Invalid donation amount selected.";
   }
 
-  $fullname = sanitize_input($_POST['fullname'] ?? '');
-  if (empty($fullname)) {
-    $errors[] = "Full name is required.";
-  }
+  if (!$isAnonymous) {
+    $fullname = sanitize_input($_POST['fullname'] ?? '');
+    if (empty($fullname)) {
+      $errors[] = "Full name is required.";
+    }
 
-  $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Please enter a valid email address.";
+    $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errors[] = "Please enter a valid email address.";
+    }
+  } else {
+    $fullname = "Anonymous";
+    $email = "anonymous@charity.com";
   }
 
   $paymentMethod = $_POST['paymentMethod'] ?? '';
@@ -52,6 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $bank = '';
   $otherBank = '';
+  $cardNumber = '';
+  $cardLast4 = '';
+  $expiryDate = '';
+  $cvv = '';
+
   if ($paymentMethod === 'card') {
     $bank = $_POST['bank'] ?? '';
     if (empty($bank)) {
@@ -69,6 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $errors[] = "Please enter a valid card number (13-19 digits).";
     }
 
+    $cardLast4 = substr($cardNumber, -4);
+
     $expiryDate = $_POST['expiryDate'] ?? '';
     if (!preg_match('/^(0[1-9]|1[0-2])\/?([0-9]{2})$/', $expiryDate)) {
       $errors[] = "Please enter expiry date in MM/YY format.";
@@ -81,29 +95,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (count($errors) === 0) {
+    $bankName = ($bank === 'other') ? $otherBank : $bank;
+
+    if ($user_id) {
+      $stmt = $conn->prepare("INSERT INTO donations (user_id, fullname, email, amount, payment_method, bank_name, card_last4, anonymous)
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("issdsssi", $user_id, $fullname, $email, $amount, $paymentMethod, $bankName, $cardLast4, $isAnonymous);
+      if (!$stmt->execute()) {
+        $errors[] = "Failed to save donation to database.";
+      }
+      $stmt->close();
+    }
+
+
     $to = 'charitywebsite25@gmail.com';
     $subject = "New Donation Received from $fullname";
 
     $message = "You have received a new donation.\n\n";
-    $message .= "Details:\n";
-    $message .= "Full Name: $fullname\n";
-    $message .= "Email: $email\n";
-    $message .= "Donation Amount: $" . htmlspecialchars($amount) . "\n";
-    $message .= "Payment Method: $paymentMethod\n";
+$message .= "Details:\n";
+
+if ($isAnonymous) {
+  $message .= "Full Name: Anonymous Donor\n";
+  $message .= "Email: (not provided)\n";
+} else {
+  $message .= "Full Name: $fullname\n";
+  $message .= "Email: $email\n";
+}
+
+$message .= "Donation Amount: $" . htmlspecialchars($amount) . "\n";
+$message .= "Payment Method: $paymentMethod\n";
+
 
     if ($paymentMethod === 'card') {
-      $bankName = ($bank === 'other') ? $otherBank : $bank;
       $message .= "Bank: $bankName\n";
-      $message .= "Card Number: **** **** **** " . substr($cardNumber, -4) . "\n";
+      $message .= "Card Number: **** **** **** " . $cardLast4 . "\n";
       $message .= "Expiry Date: $expiryDate\n";
       $message .= "CVV: ***\n";
     } else {
       $message .= "PayPal donation selected.\n";
     }
 
-    $headers = "From: Charity Kosovo <charitywebsite25@gmail.com>\r\n";
-    $headers .= "Reply-To: $email\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+  $headers = "From: Charity Kosovo <charitywebsite25@gmail.com>\r\n";
+if (!$isAnonymous) {
+  $headers .= "Reply-To: $email\r\n";
+}
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
 
     if (!$isLocalhost) {
       if (mail($to, $subject, $message, $headers)) {
@@ -112,7 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Failed to send confirmation email. Please try again later.";
       }
     } else {
-
       $success_message = "Thank you for your donation, $fullname! (Mail sending disabled on localhost)";
     }
   }
@@ -139,6 +175,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     #bankSelectionDiv {
       margin-top: 10px;
     }
+    input[readonly] {
+  background-color: #f0f0f0;
+  color: #555;
+  cursor: not-allowed;
+}
+
   </style>
 </head>
 
@@ -199,24 +241,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="donation-group">
         <label>Full Name</label>
         <input
-          type="text"
-          name="fullname"
-          class="donation-input"
-          required
-          autocomplete="name"
-          value="<?= isset($_POST['fullname']) ? htmlspecialchars($_POST['fullname']) : '' ?>" />
+  type="text"
+  name="fullname"
+  class="donation-input"
+  required
+  autocomplete="name"
+  value="<?= isset($_POST['fullname']) ? htmlspecialchars($_POST['fullname']) : ($currentUser ? htmlspecialchars($fullname) : '') ?>"
+  <?= ($currentUser || $isAnonymous) ? 'readonly' : '' ?> />
       </div>
 
       <div class="donation-group">
         <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          class="donation-input"
-          required
-          autocomplete="email"
-          value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" />
+     <input
+  type="email"
+  name="email"
+  class="donation-input"
+  required
+  autocomplete="email"
+  value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ($currentUser ? htmlspecialchars($email) : '') ?>"
+  <?= ($currentUser || $isAnonymous) ? 'readonly' : '' ?> />
+
       </div>
+
+<div class="donation-group">
+  <label>
+    <input type="checkbox" name="anonymous" <?= isset($_POST['anonymous']) ? 'checked' : '' ?> />
+    Donate anonymously
+  </label>
+</div>
 
       <div class="donation-group">
         <label>Payment Method</label>
@@ -371,6 +423,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       updatePaymentFields();
     });
+
+      document.addEventListener("DOMContentLoaded", function () {
+    const anonymousCheckbox = document.querySelector('input[name="anonymous"]');
+    const fullNameInput = document.querySelector('input[name="fullname"]');
+    const emailInput = document.querySelector('input[name="email"]');
+
+    function toggleAnonymousFields() {
+      if (anonymousCheckbox.checked) {
+        fullNameInput.value = "Anonymous";
+        emailInput.value = "anonymous@charity.com";
+        fullNameInput.readOnly = true;
+        emailInput.readOnly = true;
+      } else {
+        <?php if (!$currentUser): ?>
+        fullNameInput.value = "";
+        emailInput.value = "";
+        <?php else: ?>
+        fullNameInput.value = "<?= htmlspecialchars($fullname) ?>";
+        emailInput.value = "<?= htmlspecialchars($email) ?>";
+        <?php endif; ?>
+        fullNameInput.readOnly = <?= $currentUser ? 'true' : 'false' ?>;
+        emailInput.readOnly = <?= $currentUser ? 'true' : 'false' ?>;
+      }
+    }
+
+    if (anonymousCheckbox) {
+      anonymousCheckbox.addEventListener("change", toggleAnonymousFields);
+      toggleAnonymousFields(); // inicializimi fillestar
+    }
+  });
   </script>
 </body>
 
