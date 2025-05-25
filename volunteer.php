@@ -260,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 
-<section style="background-color: white;">
+<section style="background-color:rgb(26, 163, 62);">
   <div class="join-section" id="join-section">
     <div class="join-form">
       <h3>Join Us Today</h3>
