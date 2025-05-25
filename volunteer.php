@@ -6,6 +6,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+
 include 'includes/header.php';
 include 'includes/footer.php';
 
@@ -25,7 +26,13 @@ showHeader();
 <script src="script.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+<style>
+     input[readonly] {
+   background-color: #f0f0f0;
+   color: #555;
+   cursor: not-allowed;
+ }
+ </style>
 </head>
     <body>
    
@@ -268,12 +275,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <form id="joinForm" method="post">
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Full Name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>" required>
-        </div>
+<input type="text" name="name" value="<?= $_SESSION['name'] ?? '' ?>" readonly>        </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>" required>
-        </div>
+<input type="email" name="email" value="<?= $_SESSION['email'] ?? '' ?>" readonly>        </div>
         <div class="form-group">
           <label for="gender">Choose Gender</label>
           <div class="gender-options">
@@ -285,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         <div class="form-group">
         <label for="dob">Date of Birth:</label>
-        <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" required></div>
+        <input type="text" name="dob" id="dob" placeholder="dd/mm/yyyy" value="<?php echo isset($_POST['dob']) ? $_POST['dob'] : ''; ?>" required>
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Choose a Password" required>
