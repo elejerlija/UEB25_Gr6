@@ -13,7 +13,6 @@ $config = include 'config.php';
 
 header('Content-Type: application/json');
 
-// Kontrollo nëse përdoruesi është i loguar
 if (!isset($_SESSION['id'])) {
     echo json_encode(['success' => false, 'message' => 'You have to be logged in to leave a message.']);
     exit;
@@ -35,13 +34,11 @@ if (empty($selected_case)) {
     exit;
 }
 
-// Ruaj komentin në DB
 $stmt = $conn->prepare("INSERT INTO comments (user_id, name, email, comment, case_name, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
 $stmt->bind_param("issss", $user_id, $name, $email, $comment, $selected_case);
 $stmt->execute();
 $stmt->close();
 
-// Dërgo email për adminin
 $mail = new PHPMailer(true);
 
 try {
@@ -75,7 +72,6 @@ try {
     exit;
 }
 
-// Përgjigjja JSON për sukses
 $response = [
     'success' => true,
     'message' => "Faleminderit për mendimin tuaj për rastin: $selected_case",

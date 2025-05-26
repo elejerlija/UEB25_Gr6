@@ -174,12 +174,12 @@ $success = "";
 $error = "";
 
 if (isset($_POST['submit-general-comment'])) {
-    $name = trim($_POST['name']); 
+    $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $comment = trim($_POST['comment']);
     $selected_case = trim($_POST['selected_case']);
 
-    if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,50}$/", name)) {
+    if (!preg_match("/^[a-zA-ZÀ-ÿ\s'-]{2,50}$/", $name)) {
         $error = "The name must contain only letters and be between 2-50 characters.";
     } elseif (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "The email address is not valid.";
@@ -686,7 +686,8 @@ if ($commentsQuery = $conn->query("SELECT * FROM comments ORDER BY created_at DE
 
 
                 <div class="form-group">
-                    <input type="text" name="name" value="<?= $_SESSION['name'] ?? '' ?>" readonly>                </div>
+                    <input type="text" name="name" value="<?= $_SESSION['name'] ?? '' ?>" readonly>
+                </div>
 
                 <input type="email" name="email" value="<?= $_SESSION['email']  ?? '' ?>" readonly>
 

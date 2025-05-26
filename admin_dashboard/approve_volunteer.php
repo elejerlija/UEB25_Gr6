@@ -2,7 +2,6 @@
 session_start();
 require_once '../includes/db_conn.php';
 
-// Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -17,22 +16,25 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../PHPMailer-master\PHPMailer-master/src/PHPMailer.php';
-require '../PHPMailer-master\PHPMailer-master/src/SMTP.php';
-require '../PHPMailer-master\PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/PHPMailer-master/src/PHPMailer.php';
+require '../PHPMailer-master/PHPMailer-master/src/SMTP.php';
+require '../PHPMailer-master/PHPMailer-master/src/Exception.php';
 
-function sendApprovalEmail($toEmail, $volunteerName, $status) {
+$config = require '../config.php';
+
+function sendApprovalEmail($toEmail, $volunteerName, $status, $config)
+{
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'charitywebsite25@gmail.com';
-        $mail->Password = 'cstb losn zqyj psci'; 
+        $mail->Username = $config['email'];
+        $mail->Password = $config['password'];
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        $mail->setFrom('charitywebsite25@gmail.com', 'HelpSomeone');
+        $mail->setFrom($config['email'], 'HelpSomeone');
         $mail->addAddress($toEmail, $volunteerName);
         $mail->isHTML(true);
         $mail->Subject = 'Volunteer Application Status';
@@ -44,10 +46,10 @@ function sendApprovalEmail($toEmail, $volunteerName, $status) {
         $mail->Body = $body;
         $mail->send();
         return true;
-    }catch (Exception $e) {
-    error_log('PHPMailer Error: ' . $mail->ErrorInfo);
-    throw new Exception("Email sending failed for volunteer $volunteerName. Reason: " . $mail->ErrorInfo);
-}
+    } catch (Exception $e) {
+        error_log('PHPMailer Error: ' . $mail->ErrorInfo);
+        throw new Exception("Email sending failed for volunteer $volunteerName. Reason: " . $mail->ErrorInfo);
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['volunteer_id'], $_POST['action'])) {
@@ -65,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['volunteer_id'], $_POS
         $update->bind_param("sii", $action, $status, $id);
 
         if ($update->execute()) {
-            $emailSent = sendApprovalEmail($row['email'], $row['full_name'], $action);
+            $emailSent = sendApprovalEmail($row['email'], $row['full_name'], $action, $config);
             $msg = "Volunteer $action successfully.";
             if ($emailSent) {
                 $msg .= " Email notification sent.";
