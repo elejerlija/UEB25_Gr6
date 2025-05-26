@@ -1,9 +1,6 @@
 <?php
 session_start();
 include '../includes/db_conn.php';
-include '../includes/header.php';
-include '../includes/footer.php';
-
 
 
 
