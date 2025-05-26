@@ -9,6 +9,8 @@ require 'PHPMailer-master/PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/PHPMailer-master/src/SMTP.php';
 
+$config = include 'config.php';
+
 header('Content-Type: application/json');
 
 // Kontrollo nëse përdoruesi është i loguar
@@ -18,7 +20,7 @@ if (!isset($_SESSION['id'])) {
 }
 
 $user_id     = $_SESSION['id'];
-$name   = $_SESSION['name'] ?? '';
+$name        = $_SESSION['name'] ?? '';
 $email       = $_SESSION['email'] ?? '';
 $comment     = trim($_POST['comment'] ?? '');
 $selected_case = trim($_POST['selected_case'] ?? '');
@@ -46,13 +48,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'charitywebsite25@gmail.com';
-    $mail->Password   = 'cstb losn zqyj psci'; // APP PASSWORD
+    $mail->Username   = $config['email'];
+    $mail->Password   = $config['password'];
     $mail->SMTPSecure = 'tls';
     $mail->Port       = 587;
 
-    $mail->setFrom('charitywebsite25@gmail.com', 'Comment Notifier');
-    $mail->addAddress('charitywebsite25@gmail.com');
+    $mail->setFrom($config['email'], 'Comment Notifier');
+    $mail->addAddress($config['email']);
 
     $mail->isHTML(true);
     $mail->Subject = "Komenti i ri për rastin: $selected_case";
@@ -78,7 +80,7 @@ $response = [
     'success' => true,
     'message' => "Faleminderit për mendimin tuaj për rastin: $selected_case",
     'data' => [
-        'name'  => htmlspecialchars($name),
+        'name'       => htmlspecialchars($name),
         'email'      => htmlspecialchars($email),
         'comment'    => nl2br(htmlspecialchars($comment)),
         'case_name'  => htmlspecialchars($selected_case),
