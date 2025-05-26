@@ -109,13 +109,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       $stmt->close();
     }
-$_SESSION['success_message'] = "Thank you for your donation, $fullname!";
-header("Location: donate.php");
-exit;
+
+$to = "charitywebsite25@gmail.com";
+$subject = "New Donation Received";
+$message = "A new donation was made by: $fullname\n"
+         . "Email: $email\n"
+         . "Amount: $$amount\n"
+         . "Payment Method: $paymentMethod\n"
+         . "Date: " . date("d M Y H:i") . "\n";
+
+$headers = "From: no-reply@charitywebsite.com\r\n" .
+           "Reply-To: no-reply@charitywebsite.com\r\n" .
+           "X-Mailer: PHP/" . phpversion();
+
+
+
+if (!$isLocalhost) {
+    mail($to, $subject, $message, $headers);
+} else {
+    $_SESSION['email_info'] = "Email not sent (localhost mode).";
+}
 
   }
     
-
+$_SESSION['success_message'] = "Thank you for your donation, $fullname!";
+header("Location: donate.php");
+exit;
 
 
 
@@ -173,6 +192,12 @@ exit;
     <?= htmlspecialchars($_SESSION['success_message']) ?>
   </div>
   <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+<?php if (isset($_SESSION['email_info'])): ?>
+  <p style="color: orange; margin-top: 10px;">
+    <?= htmlspecialchars($_SESSION['email_info']) ?>
+  </p>
+  <?php unset($_SESSION['email_info']); ?>
 <?php endif; ?>
 
 

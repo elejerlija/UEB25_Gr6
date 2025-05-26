@@ -8,8 +8,7 @@ include '../includes/footer.php';
 
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    echo "<p style='color:red;'>Access denied. Admins only.</p>";
-    exit;
+    die("Access denied. Admins only.");
 }
 
 

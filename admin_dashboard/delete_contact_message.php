@@ -3,8 +3,7 @@ session_start();
 include '../includes/db_conn.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../signin.php");
-    exit();
+    die("Access denied. Admins only.");
 }
 
 if (isset($_POST['id'])) {

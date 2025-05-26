@@ -44,10 +44,10 @@ function sendApprovalEmail($toEmail, $volunteerName, $status) {
         $mail->Body = $body;
         $mail->send();
         return true;
-    } catch (Exception $e) {
-        error_log('PHPMailer Error: ' . $mail->ErrorInfo);
-        return false;
-    }
+    }catch (Exception $e) {
+    error_log('PHPMailer Error: ' . $mail->ErrorInfo);
+    throw new Exception("Email sending failed for volunteer $volunteerName. Reason: " . $mail->ErrorInfo);
+}
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['volunteer_id'], $_POST['action'])) {

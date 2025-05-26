@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../includes/db_conn.php';
+
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Access denied. Admins only.");
 }

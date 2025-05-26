@@ -3,8 +3,7 @@ session_start();
 include '../includes/db_conn.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../signin.php");
-    exit();
+    die("Access denied. Admins only.");
 }
 
 $result = mysqli_query($conn, "SELECT id, name, email, comment, submitted_at FROM contact_messages ORDER BY submitted_at DESC");
