@@ -1,16 +1,12 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Ruajtja e numrit të vizitave përmes SESSION
-if (!isset($_SESSION['visits'])) {
-  $_SESSION['visits'] = 1;
-} else {
-  $_SESSION['visits']++;
-}
+include 'includes/db_conn.php';
+include 'includes/count.php';
 
-// COOKIE për temën (default light nëse nuk ekziston)
+
 if (!isset($_COOKIE['theme'])) {
-  setcookie('theme', 'light', time() + (86400 * 30), "/"); // ruhet 30 ditë
+  setcookie('theme', 'light', time() + (86400 * 30), "/"); 
   $_COOKIE['theme'] = 'light';
 }
 

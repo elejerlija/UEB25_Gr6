@@ -174,7 +174,7 @@ $success = "";
 $error = "";
 
 if (isset($_POST['submit-general-comment'])) {
-    $name = trim($_POST['name']); // e merr nga session ose inputi si "full name"
+    $name = trim($_POST['name']); 
     $email = trim($_POST['email']);
     $comment = trim($_POST['comment']);
     $selected_case = trim($_POST['selected_case']);

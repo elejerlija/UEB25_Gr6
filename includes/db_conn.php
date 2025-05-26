@@ -9,7 +9,8 @@ $db_name = "charitywebsite";
 $conn = mysqli_connect($sname, $unmae, $password, $db_name);
 
 if (!$conn) {
-	echo "Connection failed!";
+    die("Gabim: Nuk u realizua lidhja me bazën e të dhënave.");
 }
+
 
 ?>

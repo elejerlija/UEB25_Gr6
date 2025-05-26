@@ -282,7 +282,7 @@ document.getElementById("joinForm").addEventListener("submit", function (e) {
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            alert(data.message); // mund ta zëvendësojmë me një div nëse do
+            alert(data.message); 
             form.reset();
         } else if (data.errors) {
             alert("Please fix the following:\n\n" + data.errors.join("\n"));
