@@ -3,9 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 
-if (!isset($conn)) {
-    include __DIR__ . 'includes/db_conn.php';
-}
+
 
 if (isset($_SESSION['id'])) {
     $user_id = $_SESSION['id'];
