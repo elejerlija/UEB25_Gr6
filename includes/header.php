@@ -70,7 +70,7 @@ function showHeader() {
         </a>
         <?php if (isset($_SESSION['username'])): ?>
           &nbsp;&nbsp;&nbsp;
-        <span id="welcome-msg">👋 Mirë se vjen, <b><?= htmlspecialchars($_SESSION['username']) ?></b>!</span>
+        <span id="welcome-msg">👋Welcome, <b><?= htmlspecialchars($_SESSION['username']) ?></b>!</span>
 
         <?php endif; ?>
       </div>

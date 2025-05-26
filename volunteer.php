@@ -2,7 +2,7 @@
 session_start(); 
 
 if (!isset($_SESSION['username'])) {
-    header("Location: signin.php?reason=protected");
+    header("Location: auth/signin.php?reason=protected");
     exit();
 }
 

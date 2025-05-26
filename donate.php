@@ -4,7 +4,7 @@ include 'includes/db_conn.php';
 include 'includes/header.php';
 include 'includes/footer.php';
 if (!isset($_SESSION['username'])) {
-    header("Location: signin.php?reason=protected");
+    header("Location: auth/signin.php?reason=protected");
     exit();
 }
 showHeader();
