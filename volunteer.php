@@ -99,7 +99,7 @@ function &findVolunteerByName(array &$list, string $searchName) {
 }
 
 
-addVolunteer($volunteers, 'Test Volunteer', 'test.jpg', 'Temporary volunteer.');
+addVolunteer($volunteers, 'Lina Hassan', 'vl5.jpg', 'Lina is passionate about helping communities through educational outreach and food distribution programs.');
 
 
 $foundVolunteer = &findVolunteerByName($volunteers, 'James Park');
@@ -109,7 +109,7 @@ if ($foundVolunteer !== null) {
 
 
 foreach ($volunteers as $key => &$v) {
-    if ($v[0] === 'Test Volunteer') {
+    if ($v[0] === 'Lina Hassan') {
         unset($volunteers[$key]); 
         break;
     }
